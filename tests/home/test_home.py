@@ -12,7 +12,7 @@ def test_menu_nuevo(abrir):
     assert hrefs(pg, ".cab-nav a") == ["tortas/", "decoradas/", "antojos/", "#nosotras"]
     assert pg.eval_on_selector_all(".cab-nav a", "as => as.map(a => a.textContent)") == \
         ["Nuestras tortas", "Decoradas", "Antojos", "Nosotras"]
-    assert hrefs(pg, ".menu nav a") == ["tortas/", "decoradas/", "antojos/", "#nosotras", "#madre", "#pedido"]
+    assert hrefs(pg, ".menu nav a") == ["tortas/", "decoradas/", "antojos/", "#nosotras", "#pedido"]
     assert pg.get_attribute(".cab [data-mi-pedido]", "href") == "tortas/#pedido"
     assert pg.locator(".cab-pedido").count() == 0
 
@@ -65,7 +65,14 @@ def test_como_pedir_tres_caminos(abrir):
 
 def test_el_pie_lleva_a_las_tres_partes(abrir):
     pg = abrir()
-    assert hrefs(pg, ".pie-links a")[:4] == ["tortas/", "decoradas/", "antojos/", "#madre"]
+    assert hrefs(pg, ".pie-links a")[:3] == ["tortas/", "decoradas/", "antojos/"]
+
+
+def test_la_home_no_lleva_el_dia_de_la_madre(abrir):
+    pg = abrir()
+    assert pg.locator("#madre, .madre, .hero .chip").count() == 0
+    assert pg.locator('a[href="#madre"]').count() == 0
+    assert "Madre" not in pg.text_content("body")
 
 
 def test_el_pie_no_lleva_el_sentida_gigante(abrir):

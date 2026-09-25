@@ -85,16 +85,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex="0"]:focus-
 }
 .enlace .ico{width:14px; height:14px}
 
-/* Chip con fecha: el celeste de marca como relleno chico, texto en marrón. */
-.chip{
-  display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 16px;
-  background:var(--celeste); color:var(--marron); border:1px solid transparent; border-radius:2px;
-  font-size:14px; transition:background-color .2s;
-}
-.chip:hover{background:var(--crema); color:var(--marron)}
-.chip strong{font-weight:600}
-.chip .ico{width:15px; height:15px}
-
 /* ------------------------------------------------------------
    Cabecera: opaca, para que no se agrise sobre la sección marrón
    ------------------------------------------------------------ */
@@ -197,25 +187,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex="0"]:focus-
 }
 
 /* ------------------------------------------------------------
-   Día de la Madre: la primera fecha comercial de la marca
-   ------------------------------------------------------------ */
-.madre{padding-block:clamp(40px,6vh,72px)}
-.madre-in{display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:clamp(28px,4vw,72px); align-items:center}
-.madre-txt{
-  display:flex; flex-direction:column; align-items:flex-start; gap:20px;
-  background:var(--crema); border-radius:2px; padding:clamp(28px,3.5vw,48px);
-}
-.fecha{background:var(--celeste); padding:6px 12px; border-radius:2px; font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase}
-.madre h2{font-size:clamp(2.5rem,4.4vw,4.25rem); line-height:.95; letter-spacing:-.025em}
-.madre-txt > p:not(.fecha){font-size:16px; line-height:1.6; color:var(--marron-medio); max-width:42ch}
-.madre-piezas{list-style:none; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(10px,1.4vw,20px)}
-.madre-piezas a{display:flex; flex-direction:column; gap:10px}
-.pieza{display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase}
-.pieza .ico{width:13px; height:13px}
-.mov .madre-piezas img,.mov .deco-mosaico img{transition:transform 1s cubic-bezier(.2,.7,.2,1)}
-.mov .madre-piezas a:hover img,.mov .deco-mosaico a:hover img{transform:scale(1.05)}
-
-/* ------------------------------------------------------------
    02 Manifiesto: con movimiento, las palabras se encienden de a una
    y terminan antes de que el texto llegue al tercio superior.
    ------------------------------------------------------------ */
@@ -307,6 +278,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex="0"]:focus-
 .deco-in{padding-block:clamp(112px,16vh,180px); display:flex; flex-direction:column; gap:clamp(48px,8vh,96px)}
 .deco h2{font-size:clamp(3.25rem,9vw,10.5rem); line-height:.88; letter-spacing:-.035em}
 .deco-mosaico{column-gap:clamp(10px,1.6vw,24px); row-gap:40px; align-items:start}
+.mov .deco-mosaico img{transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.mov .deco-mosaico a:hover img{transform:scale(1.05)}
 .foto{overflow:hidden; border-radius:2px}
 .foto img{width:100%; height:100%; object-fit:cover}
 .r45{aspect-ratio:4/5} .r34{aspect-ratio:3/4} .r11{aspect-ratio:1}
@@ -461,7 +434,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex="0"]:focus-
 
   .mano{display:flex; flex-direction:column; min-height:0}
   .mano-txt{align-self:stretch}
-  .madre-in{grid-template-columns:1fr}
   .mano-foto{min-height:0; aspect-ratio:4/3}
 
   .nos-a{grid-column:1 / span 7}
@@ -506,7 +478,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex="0"]:focus-
   .hero-txt{width:52%; margin-top:0; padding:16px var(--lateral); gap:14px}
   .hero h1{font-size:2.5rem}
   .hero-baja{font-size:1.125rem}
-  .hero .chip{font-size:13px}
   .hero-lugar{display:none}
   /* Con 390 px de alto, la barra fija se come demasiado: se esconde. */
   .barra-pedido{display:none}

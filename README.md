@@ -51,8 +51,9 @@ Propuesta para las dueñas: queda así hasta que ellas la revisen. Spec en
 - **La home** (`index.html`, `home.css`, `home.js`) es la v4. Su hero lleva a
   Decoradas y a Nuestras tortas; «Las de la casa» lleva a cada torta en la
   tienda; las fotos de decoradas abren la comanda con su referencia
-  (`?ref=`); «Cómo pedir» ofrece la tienda, Decoradas y WhatsApp directo. El
-  Día de la Madre y la barra de WhatsApp del celular siguen iguales.
+  (`?ref=`); «Cómo pedir» ofrece la tienda, Decoradas y WhatsApp directo. La
+  barra de WhatsApp del celular sigue igual. La home no lleva el Día de la
+  Madre (se sacó el 25/09/2026).
 - **El hero de la home** tiene el texto quieto y cinco fotos que se turnan
   (`hero.js`): Key Lime, cheesecake New York, carrot, la torta con letra y el
   cheesecake Marroc, a sangre y fundidas con el crema. Para cambiar una foto,
