@@ -35,6 +35,28 @@ El prefijo `54 9` es obligatorio para que WhatsApp resuelva móviles argentinos;
 - Varias fotos del banco llevan el sello de la marca anterior y dos tarjetas muestran un producto distinto al de su título (ver `QA.md`).
 - No hay definición sobre precios, detalle por producto ni zona de entrega.
 
+## v5: la home con tres puertas (25/09/2026)
+
+Rama `v5`. Pedido de la clienta: al entrar, elegir primero qué se busca. Spec en
+`docs/superpowers/specs/2026-09-25-v5-tres-puertas-design.md`.
+
+| Menú | Dirección | Qué hay |
+| --- | --- | --- |
+| Nuestras tortas | `/tortas/` | Las tortas de la casa, con carrito a WhatsApp |
+| Armá tu torta | `/arma-tu-torta/` | La comanda de la torta decorada; termina en WhatsApp |
+| Pastelería | `/pasteleria/` | Shots, cookies, alfajores, cupcakes y la mesa dulce |
+| Nosotras | `/nosotras/` | Quiénes son, el manifiesto y «Hecho a mano» |
+
+- **La home** (`index.html`, `home.css`) tiene el lema, las tres puertas a
+  sangre, una línea que lleva a Nosotras y «Cómo pedir» en tres pasos. Usa
+  `comun/base.css` como el resto del sitio.
+- **Direcciones viejas:** `/decoradas/`, `/antojos/` y `/comanda/` redirigen a
+  las nuevas y conservan `?ref=` y el `#`.
+- Lo que sigue: los rellenos de Armá tu torta con una sola lista, la venta por
+  media docena y docena en Pastelería, y el logo nuevo cuando esté en vector.
+
+La sección de abajo describe la v4.
+
 ## El sitio en tres partes (24/09/2026)
 
 Propuesta para las dueñas: queda así hasta que ellas la revisen. Spec en

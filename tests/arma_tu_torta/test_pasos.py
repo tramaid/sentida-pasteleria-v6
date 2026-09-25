@@ -122,7 +122,7 @@ def test_desde_el_dialogo_del_celular_se_salta_y_cierra(abrir):
 
 
 def test_entrar_con_un_paso_sin_los_anteriores_va_al_que_falta(abrir):
-    pg = abrir(pagina="decoradas/#paso-5")
+    pg = abrir(pagina="arma-tu-torta/#paso-5")
     assert visibles(pg) == [1]
     assert pg.url.endswith("#paso-1")
 
@@ -187,7 +187,7 @@ def test_atras_sin_haber_tocado_empezar_vuelve_al_paso_uno(abrir):
 
 
 def test_atras_despues_del_salto_a_la_comanda(abrir):
-    pg = abrir(pagina="decoradas/?ref=petalos")
+    pg = abrir(pagina="arma-tu-torta/?ref=petalos")
     pg.evaluate("location.hash = '#comanda'")  # como el enlace «Saltar a la comanda»
     pg.check("#sin-fecha")
     siguiente(pg)

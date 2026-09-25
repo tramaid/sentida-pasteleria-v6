@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 const require = createRequire(import.meta.url);
-const M = require('../../decoradas/mensaje.js');
+const M = require('../../arma-tu-torta/mensaje.js');
 
 const COMPLETO = {
   fecha: '2026-11-07', sinFecha: false, tamano: 'mediana', bizcochuelo: 'vainilla',

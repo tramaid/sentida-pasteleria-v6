@@ -1,4 +1,4 @@
-"""Genera las páginas de la tienda, tortas/index.html y antojos/index.html,
+"""Genera las páginas de la tienda, tortas/index.html y pasteleria/index.html,
 a partir de datos/catalogo.json.
 
 Uso, desde sentida-site/:
@@ -24,12 +24,12 @@ TAMANOS_MESA = "(max-width: 899px) 45vw, 18vw"
 
 MENU = [
     ("tortas", "Nuestras tortas", "../tortas/"),
-    ("decoradas", "Decoradas", "../decoradas/"),
-    ("antojos", "Antojos", "../antojos/"),
-    ("nosotras", "Nosotras", "../#nosotras"),
+    ("arma-tu-torta", "Armá tu torta", "../arma-tu-torta/"),
+    ("pasteleria", "Pastelería", "../pasteleria/"),
+    ("nosotras", "Nosotras", "../nosotras/"),
 ]
 
-# La mesa dulce de Antojos: (foto, epígrafe, texto alternativo).
+# La mesa dulce de Pastelería: (foto, epígrafe, texto alternativo).
 MESA = [
     ("vasitos-flores", "Vasitos con flores", "Vasitos de postre con crema y flores comestibles"),
     ("carrot-mini", "Carrot cake en cuadraditos", "Cuadraditos de carrot cake con rosetas de frosting"),
@@ -55,7 +55,7 @@ PANEL = """    <aside class="tienda-panel" id="pedido" aria-labelledby="pedido-t
           <ul class="carrito-lista" role="list" data-carrito-lista></ul>
           <p class="carrito-vacio" data-carrito-vacio>Para juntar todo en un solo pedido hace falta JavaScript. Mientras, pedí cada producto con su enlace de WhatsApp.</p>
           <p class="ticket-fijo">Precio y disponibilidad te los confirmamos por WhatsApp.</p>
-          <p class="ticket-pie"><a href="../decoradas/">¿Querés una torta decorada? Armala acá</a></p>
+          <p class="ticket-pie"><a href="../arma-tu-torta/">¿Querés una torta decorada? Armala acá</a></p>
         </div>
       </div>
       <button type="button" class="btn btn-1 tienda-terminar" data-carrito-abrir hidden>Terminar pedido</button>
@@ -70,9 +70,9 @@ PIE = """<footer class="pie">
     <nav class="pie-links" aria-label="Pie">
       <ul role="list">
         <li><a href="../tortas/">Nuestras tortas</a></li>
-        <li><a href="../decoradas/">Decoradas</a></li>
-        <li><a href="../antojos/">Antojos</a></li>
-        <li><a href="../#nosotras">Nosotras</a></li>
+        <li><a href="../arma-tu-torta/">Armá tu torta</a></li>
+        <li><a href="../pasteleria/">Pastelería</a></li>
+        <li><a href="../nosotras/">Nosotras</a></li>
       </ul>
       <ul role="list">
         <li><a href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener" aria-describedby="nueva-pestana">WhatsApp</a></li>
@@ -193,7 +193,7 @@ def pagina(clave, datos):
     sec = datos["secciones"][clave]
     productos = [p for p in datos["productos"] if p["seccion"] == clave and p.get("visible", True)]
     tarjetas = "\n".join(tarjeta(p, datos["tipos"]) for p in productos)
-    extra = mesa_dulce() if clave == "antojos" else ""
+    extra = mesa_dulce() if clave == "pasteleria" else ""
     return f"""<!doctype html>
 <!-- Generada por herramientas/generar_tienda.py desde datos/catalogo.json: no editar a mano. -->
 <html lang="es-AR" class="sin-js">
@@ -261,7 +261,7 @@ def pagina(clave, datos):
 
 def main():
     datos = json.loads((RAIZ / "datos" / "catalogo.json").read_text(encoding="utf-8"))
-    for clave in ("tortas", "antojos"):
+    for clave in ("tortas", "pasteleria"):
         destino = RAIZ / clave / "index.html"
         destino.parent.mkdir(exist_ok=True)
         destino.write_text(pagina(clave, datos), encoding="utf-8", newline="\n")

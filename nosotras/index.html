@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es-AR" class="sin-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Nosotras · SENTIDA Pastelería</title>
+<meta name="description" content="Somos Anto y Nadia, egresadas del IAG. Hacemos cada torta a mano y por encargo en Martínez, San Isidro.">
+<meta name="theme-color" content="#FEFAF8">
+<link rel="canonical" href="https://tramaid.github.io/sentida-pasteleria/nosotras/">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preload" href="../assets/fuentes/erode-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fuentes/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../comun/base.css">
+<link rel="stylesheet" href="../comun/ticket.css">
+<link rel="stylesheet" href="nosotras.css">
+<script>
+(function (r) {
+  r.classList.remove('sin-js'); r.classList.add('js');
+  if (!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) r.classList.add('mov');
+})(document.documentElement);
+</script>
+<script src="../comun/base.js" defer></script>
+<script src="../comun/menu.js" defer></script>
+<script src="../comun/pedido-mensaje.js" defer></script>
+<script src="../comun/carrito.js" data-raiz="../" defer></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-cerrar" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-bolsa" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12.5H6.2L5 8Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></symbol>
+  <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.13a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.17 8.17 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.46-.72-1.69-.8-.22-.09-.39-.13-.55.12-.17.25-.63.8-.78.96-.14.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.41-.55-.42h-.47c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.06s.89 2.39 1.01 2.56c.13.16 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.46-.6 1.67-1.18.2-.57.2-1.07.14-1.17-.06-.11-.22-.17-.47-.29Z"/></symbol>
+</svg>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<p id="nueva-pestana" hidden>Se abre WhatsApp o Instagram en otra pestaña.</p>
+
+<header class="cab">
+  <div class="cab-in">
+    <nav class="cab-nav" aria-label="Secciones">
+      <a href="../tortas/">Nuestras tortas</a><a href="../arma-tu-torta/">Armá tu torta</a><a href="../pasteleria/">Pastelería</a><a href="../nosotras/" aria-current="page" class="solo-ancho">Nosotras</a>
+    </nav>
+    <a class="cab-marca" href="../" aria-label="SENTIDA Pastelería, inicio"><img src="../assets/logo-sentida.svg" alt="SENTIDA Pastelería" width="116" height="44"></a>
+    <div class="cab-acc">
+      <a class="mi-pedido" href="../tortas/#pedido" data-mi-pedido><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bolsa"/></svg><span class="mi-pedido-t">Mi pedido</span><span class="mi-pedido-n" hidden>0</span></a>
+      <details class="menu">
+        <summary><span class="menu-abrir">Menú</span><span class="menu-cerrar">Cerrar</span><svg class="ico menu-i-abrir" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg><svg class="ico menu-i-cerrar" aria-hidden="true" focusable="false"><use href="#i-cerrar"/></svg></summary>
+        <nav aria-label="Menú">
+          <a href="../tortas/">Nuestras tortas</a>
+          <a href="../arma-tu-torta/">Armá tu torta</a>
+          <a href="../pasteleria/">Pastelería</a>
+          <a href="../nosotras/" aria-current="page">Nosotras</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+<section class="nos envoltorio" aria-labelledby="nos-t">
+  <h1 class="display" id="nos-t">Somos dos<span>, y hacemos todo nosotras.</span></h1>
+  <div class="nos-grilla">
+    <figure class="nos-foto nos-a">
+      <div class="foto"><img src="../assets/fotos/anto-torta-flores-800.webp" srcset="../assets/fotos/anto-torta-flores-480.webp 480w, ../assets/fotos/anto-torta-flores-800.webp 800w, ../assets/fotos/anto-torta-flores.webp 1000w" sizes="(max-width: 899px) 58vw, 36vw" width="1000" height="1333" alt="Anto sosteniendo una torta alta cubierta de pétalos"></div>
+      <figcaption><span>Antonella</span><a href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener" aria-describedby="nueva-pestana"><svg class="ico ico-wa" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>11&nbsp;5830&#8209;0787</a></figcaption>
+    </figure>
+    <figure class="nos-foto nos-b">
+      <div class="foto"><img src="../assets/fotos/nadia-flores.webp" srcset="../assets/fotos/nadia-flores-480.webp 480w, ../assets/fotos/nadia-flores.webp 720w" sizes="(max-width: 899px) 42vw, 30vw" width="720" height="960" alt="Nadia terminando una torta con flores naturales"></div>
+      <figcaption><span>Nadia</span><a href="https://wa.me/5491131459646?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener" aria-describedby="nueva-pestana"><svg class="ico ico-wa" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>11&nbsp;3145&#8209;9646</a></figcaption>
+    </figure>
+    <div class="nos-texto">
+      <p>Nos formamos en el Instituto Argentino de Gastronomía (IAG) y hacemos cada pedido de principio a fin, las dos.</p>
+      <p>Cuidamos el detalle hasta en la caja y la tarjeta.</p>
+      <img class="nos-etiqueta" src="../assets/fotos/etiqueta-sentida.webp" width="400" height="400" alt="Etiqueta de SENTIDA con cintas marrón y celeste, la que va en cada caja" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+
+<section class="manif" aria-label="Cómo trabajamos">
+  <div class="envoltorio">
+    <p class="display">Cada torta la pensamos como si fuera para nuestra propia familia: la diseñamos con vos, la hacemos a mano y la terminamos hasta el último pétalo.</p>
+  </div>
+</section>
+
+<section class="mano" aria-labelledby="mano-t">
+  <figure class="mano-foto"><img src="../assets/fotos/galletas-flores-proceso-800.webp" srcset="../assets/fotos/galletas-flores-proceso-480.webp 480w, ../assets/fotos/galletas-flores-proceso-800.webp 800w, ../assets/fotos/galletas-flores-proceso.webp 1000w" sizes="(max-width: 899px) 100vw, 50vw" width="1000" height="1333" alt="Masa de galletas estirada a mano, con pétalos de flores comestibles recién cortada" loading="lazy" decoding="async"></figure>
+  <div class="mano-txt">
+    <h2 class="display" id="mano-t">Hecho a mano, 100&nbsp;% artesanal.</h2>
+    <ul role="list">
+      <li><strong>Sin conservantes ni aditivos.</strong></li>
+      <li><strong>Por encargo, con cupo por día.</strong> Cuanto antes nos escribas, mejor.</li>
+      <li><strong>Retiro en Martínez o envío en Zona Norte.</strong></li>
+    </ul>
+  </div>
+</section>
+
+<section class="nos-cierre envoltorio" aria-labelledby="cierre-t">
+  <h2 class="display" id="cierre-t">¿Qué tenés ganas de pedir?</h2>
+  <ul class="nos-puertas" role="list">
+    <li><a class="enlace" href="../tortas/">Nuestras tortas <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></a></li>
+    <li><a class="enlace" href="../arma-tu-torta/">Armá tu torta <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></a></li>
+    <li><a class="enlace" href="../pasteleria/">Pastelería <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></a></li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="pie">
+  <div class="pie-in envoltorio">
+    <div class="pie-marca">
+      <img src="../assets/SENTIDASELLO.svg" alt="" width="88" height="88" loading="lazy">
+      <p class="display">Lo soñás,<br>lo creamos.</p>
+    </div>
+    <nav class="pie-links" aria-label="Pie">
+      <ul role="list">
+        <li><a href="../tortas/">Nuestras tortas</a></li>
+        <li><a href="../arma-tu-torta/">Armá tu torta</a></li>
+        <li><a href="../pasteleria/">Pastelería</a></li>
+        <li><a href="../nosotras/">Nosotras</a></li>
+      </ul>
+      <ul role="list">
+        <li><a href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener" aria-describedby="nueva-pestana">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/sentidapasteleria/" target="_blank" rel="noopener" aria-describedby="nueva-pestana">@sentidapasteleria</a></li>
+      </ul>
+      <p>Martínez, San Isidro<br>Solo por encargo</p>
+    </nav>
+  </div>
+  <div class="pie-fin envoltorio"><span>© 2026 SENTIDA Pastelería</span><span>Diseño TRAMA</span></div>
+</footer>
+</body>
+</html>

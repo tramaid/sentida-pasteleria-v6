@@ -35,7 +35,7 @@ def test_mi_pedido_vacio(abrir):
     assert pg.is_visible("#carrito-dialogo [data-carrito-vacio]")
     assert pg.is_hidden("#carrito-dialogo .carrito-form")
     assert pg.eval_on_selector_all("#carrito-dialogo [data-si-vacio] a",
-                                   "as => as.map(a => a.getAttribute('href'))") == ["../tortas/", "../antojos/"]
+                                   "as => as.map(a => a.getAttribute('href'))") == ["../tortas/", "../pasteleria/"]
     assert pg.evaluate("document.activeElement.id") == "carrito-t"
     pg.keyboard.press("Escape")
     assert pg.evaluate("document.activeElement.hasAttribute('data-mi-pedido')")
@@ -48,7 +48,7 @@ def test_mi_pedido_con_un_producto(abrir):
     abrir_pedido(pg)
     assert pg.text_content("#carrito-dialogo .carrito-nombre") == "Key Lime Pie"
     assert pg.is_visible("#carrito-dialogo .carrito-form")
-    assert pg.get_attribute("#carrito-dialogo .carrito-decorada a", "href") == "../decoradas/"
+    assert pg.get_attribute("#carrito-dialogo .carrito-decorada a", "href") == "../arma-tu-torta/"
 
 
 def test_sumar_y_restar_desde_el_ticket(abrir):
@@ -110,7 +110,7 @@ def test_lo_escrito_queda_guardado(abrir, sitio):
     abrir_pedido(pg)
     pg.fill("#carrito-nombre", "Laura")
     pg.check("#carrito-dialogo input[name=entrega][value=envio]")
-    pg.goto(sitio + "decoradas/")
+    pg.goto(sitio + "arma-tu-torta/")
     pg.wait_for_load_state("networkidle")
     abrir_pedido(pg)
     assert pg.input_value("#carrito-nombre") == "Laura"
@@ -171,7 +171,7 @@ def test_guardado_roto_no_rompe(abrir):
 def test_dos_pestanas_se_sincronizan(abrir, sitio):
     pg = abrir()
     otra = pg.context.new_page()
-    otra.goto(sitio + "decoradas/")
+    otra.goto(sitio + "arma-tu-torta/")
     otra.wait_for_load_state("networkidle")
     pg.evaluate("Carrito.cambiar('marquise', 'Marquise', 2)")
     otra.wait_for_function("document.querySelector('.cab .mi-pedido-n').textContent === '2'")

@@ -4,7 +4,7 @@ import subprocess
 import sys
 
 RAIZ = pathlib.Path(__file__).resolve().parents[2]
-PAGINAS = [RAIZ / "tortas" / "index.html", RAIZ / "antojos" / "index.html"]
+PAGINAS = [RAIZ / "tortas" / "index.html", RAIZ / "pasteleria" / "index.html"]
 
 
 def test_el_html_generado_esta_al_dia():
@@ -16,7 +16,7 @@ def test_el_html_generado_esta_al_dia():
 
 def test_cada_producto_visible_aparece_una_vez():
     datos = json.loads((RAIZ / "datos" / "catalogo.json").read_text(encoding="utf-8"))
-    for seccion, pagina in (("tortas", PAGINAS[0]), ("antojos", PAGINAS[1])):
+    for seccion, pagina in (("tortas", PAGINAS[0]), ("pasteleria", PAGINAS[1])):
         html = pagina.read_text(encoding="utf-8")
         for p in datos["productos"]:
             veces = html.count(f'data-producto="{p["slug"]}"')

@@ -22,9 +22,9 @@ def test_las_tortas_de_la_casa(abrir):
     assert pg.errores == []
 
 
-def test_los_antojos_y_la_mesa_dulce(abrir):
-    pg = abrir(pagina="antojos/")
-    assert pg.text_content("h1") == "Antojos."
+def test_la_pasteleria_y_la_mesa_dulce(abrir):
+    pg = abrir(pagina="pasteleria/")
+    assert pg.text_content("h1") == "Pastelería."
     assert pg.locator("[data-producto]").count() == 7
     assert pg.text_content('[data-producto="shots"] .producto-tipo') == "Shots"
     assert pg.text_content('[data-producto="shots"] h3') == "Shots"
@@ -63,10 +63,10 @@ def test_sumar_y_restar_hasta_sacar(abrir):
     assert pg.is_hidden(".tienda-panel .tienda-terminar")
 
 
-def test_el_pedido_pasa_de_tortas_a_antojos(abrir, sitio):
+def test_el_pedido_pasa_de_tortas_a_pasteleria(abrir, sitio):
     pg = abrir()
     pg.click(KEY + " .producto-agregar")
-    pg.goto(sitio + "antojos/")
+    pg.goto(sitio + "pasteleria/")
     pg.wait_for_load_state("networkidle")
     pg.click('[data-producto="alfajores-maicena"] .producto-agregar')
     assert pg.locator(".tienda-panel .carrito-item").count() == 2
@@ -76,7 +76,7 @@ def test_el_pedido_pasa_de_tortas_a_antojos(abrir, sitio):
 def test_mi_pedido_en_todas_las_paginas(abrir, sitio):
     pg = abrir()
     pg.click(KEY + " .producto-agregar")
-    for ruta in ("", "decoradas/", "antojos/", "tortas/"):
+    for ruta in ("", "arma-tu-torta/", "pasteleria/", "tortas/"):
         pg.goto(sitio + ruta)
         pg.wait_for_load_state("networkidle")
         assert pg.text_content(".cab [data-mi-pedido] .mi-pedido-n") == "1", ruta
@@ -90,7 +90,7 @@ def test_mi_pedido_en_todas_las_paginas(abrir, sitio):
 def test_el_mensaje_sale_como_la_especificacion(abrir, sitio):
     pg = abrir()
     pg.click(KEY + " .producto-agregar")
-    pg.goto(sitio + "antojos/")
+    pg.goto(sitio + "pasteleria/")
     pg.wait_for_load_state("networkidle")
     t = '[data-producto="alfajores-maicena"]'
     pg.click(t + " .producto-agregar")

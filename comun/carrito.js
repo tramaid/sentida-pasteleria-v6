@@ -48,7 +48,7 @@
       '</div></div>' +
       '<p class="carrito-ir botones" data-si-vacio>' +
         '<a class="btn btn-2" href="' + raiz + 'tortas/">Nuestras tortas</a>' +
-        '<a class="btn btn-2" href="' + raiz + 'antojos/">Antojos</a>' +
+        '<a class="btn btn-2" href="' + raiz + 'pasteleria/">Pastelería</a>' +
       '</p>' +
       '<form class="carrito-form" novalidate>' +
         '<div class="cf"><label class="cf-t" for="carrito-fecha">¿Para cuándo?</label>' +
@@ -70,7 +70,7 @@
         '<p class="botones"><button type="button" class="btn btn-1" data-vaciar>Vaciar el pedido</button>' +
         '<button type="button" class="btn btn-2" data-todavia>Todavía no</button></p>' +
       '</div>' +
-      '<p class="carrito-decorada"><a href="' + raiz + 'decoradas/">¿Querés una torta decorada? Armala acá</a></p>' +
+      '<p class="carrito-decorada"><a href="' + raiz + 'arma-tu-torta/">¿Querés una torta decorada? Armala acá</a></p>' +
     '</div>';
   document.body.appendChild(dialogo);
 

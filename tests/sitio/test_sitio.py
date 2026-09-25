@@ -2,7 +2,7 @@ import pytest
 
 from reglas import CEL, CELESTE_EN_TEXTO, CONTRASTE, ITALICAS, TAMANOS, TEXTO_CHICO
 
-PAGINAS = ["", "decoradas/", "tortas/", "antojos/"]
+PAGINAS = ["", "arma-tu-torta/", "tortas/", "pasteleria/", "nosotras/"]
 VISIBLE = """(() => {
     const e = document.activeElement;
     if (e === document.body) return null;
@@ -42,9 +42,9 @@ def test_sin_javascript_se_ve_y_no_desborda(abrir, pagina):
 def test_la_misma_cabecera(abrir, sitio, pagina):
     pg = abrir(pagina=pagina)
     assert pg.eval_on_selector_all(".cab-nav a", "as => as.map(a => a.href)") == \
-        [sitio + "tortas/", sitio + "decoradas/", sitio + "antojos/", sitio + "#nosotras"]
+        [sitio + "tortas/", sitio + "arma-tu-torta/", sitio + "pasteleria/", sitio + "nosotras/"]
     assert pg.eval_on_selector_all(".cab-nav a", "as => as.map(a => a.textContent)") == \
-        ["Nuestras tortas", "Decoradas", "Antojos", "Nosotras"]
+        ["Nuestras tortas", "Armá tu torta", "Pastelería", "Nosotras"]
     assert pg.locator(".cab [data-mi-pedido]").count() == 1
 
 
@@ -74,7 +74,7 @@ def test_en_angosto_entran_el_logo_mi_pedido_y_el_menu(abrir, pagina, w, h):
         assert b and b["x"] >= 0 and b["x"] + b["width"] <= w, sel
 
 
-@pytest.mark.parametrize("pagina", ["tortas/", "antojos/"])
+@pytest.mark.parametrize("pagina", ["tortas/", "pasteleria/"])
 def test_teclado_en_la_tienda(abrir, pagina):
     pg = abrir(pagina=pagina, reduced_motion="reduce")
     visitados = 0

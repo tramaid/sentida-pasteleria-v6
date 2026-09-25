@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="es-AR" class="sin-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex">
+<title>Armá tu torta · SENTIDA Pastelería</title>
+<meta name="description" content="Armá tu torta decorada paso a paso: fecha, tamaño, bizcochuelo, rellenos y decoración. Te la cotizamos por WhatsApp.">
+<meta name="theme-color" content="#F8EADE">
+<link rel="canonical" href="https://tramaid.github.io/sentida-pasteleria/arma-tu-torta/">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preload" href="../assets/fuentes/erode-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fuentes/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../comun/base.css">
+<link rel="stylesheet" href="../comun/ticket.css">
+<link rel="stylesheet" href="decoradas.css">
+<script>
+/* Sin JavaScript la página se ve completa y quieta: los seis pasos, uno
+   abajo del otro. «js» habilita la tira del celular y los controles;
+   «mov», el movimiento (si no se pidió reducirlo). */
+(function (r) {
+  r.classList.remove('sin-js'); r.classList.add('js');
+  if (!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) r.classList.add('mov');
+})(document.documentElement);
+</script>
+<script src="../comun/base.js" defer></script>
+<script src="../comun/menu.js" defer></script>
+<script src="mensaje.js" defer></script>
+<script src="comanda.js" defer></script>
+<script src="borrador.js" defer></script>
+<script src="pasos.js" defer></script>
+<script src="panel.js" defer></script>
+<script src="movimiento.js" defer></script>
+<script src="../comun/pedido-mensaje.js" defer></script>
+<script src="../comun/carrito.js" data-raiz="../" defer></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"/></symbol>
+  <symbol id="i-izq" viewBox="0 0 24 24"><path d="M20 12H5M10.5 6.5 5 12l5.5 5.5"/></symbol>
+  <symbol id="i-diagonal" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-cerrar" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-bolsa" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12.5H6.2L5 8Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></symbol>
+  <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.13a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.17 8.17 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.46-.72-1.69-.8-.22-.09-.39-.13-.55.12-.17.25-.63.8-.78.96-.14.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.41-.55-.42h-.47c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.06s.89 2.39 1.01 2.56c.13.16 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.46-.6 1.67-1.18.2-.57.2-1.07.14-1.17-.06-.11-.22-.17-.47-.29Z"/></symbol>
+</svg>
+<a class="saltar" href="#comanda">Saltar a la comanda</a>
+<p id="nueva-pestana" hidden>Se abre WhatsApp o Instagram en otra pestaña.</p>
+<p class="sr" id="anuncio" aria-live="polite"></p>
+
+<header class="cab">
+  <div class="cab-in">
+    <nav class="cab-nav" aria-label="Secciones">
+      <a href="../tortas/">Nuestras tortas</a><a href="../arma-tu-torta/" aria-current="page">Armá tu torta</a><a href="../pasteleria/">Pastelería</a><a href="../nosotras/" class="solo-ancho">Nosotras</a>
+    </nav>
+    <a class="cab-marca" href="../" aria-label="SENTIDA Pastelería, inicio"><img src="../assets/logo-sentida.svg" alt="SENTIDA Pastelería" width="116" height="44"></a>
+    <div class="cab-acc">
+      <a class="mi-pedido" href="../tortas/#pedido" data-mi-pedido><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bolsa"/></svg><span class="mi-pedido-t">Mi pedido</span><span class="mi-pedido-n" hidden>0</span></a>
+      <details class="menu">
+        <summary><span class="menu-abrir">Menú</span><span class="menu-cerrar">Cerrar</span><svg class="ico menu-i-abrir" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg><svg class="ico menu-i-cerrar" aria-hidden="true" focusable="false"><use href="#i-cerrar"/></svg></summary>
+        <nav aria-label="Menú">
+          <a href="../tortas/">Nuestras tortas</a>
+          <a href="../arma-tu-torta/" aria-current="page">Armá tu torta</a>
+          <a href="../pasteleria/">Pastelería</a>
+          <a href="../nosotras/">Nosotras</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<div class="tira" id="tira" hidden>
+  <span class="tira-t display">Tu torta</span>
+  <span class="tira-linea" id="tira-linea"><span class="tira-et">Paso 1</span><span class="tira-val">Empezá por la fecha</span></span>
+  <button type="button" class="tira-ver" aria-label="Ver comanda" aria-haspopup="dialog" aria-controls="comanda-dialogo" aria-expanded="false">Ver</button>
+</div>
+
+<main id="contenido">
+
+<section class="portada" id="inicio" aria-labelledby="portada-t">
+  <figure class="portada-foto portada-foto-a"><img src="../assets/fotos/numero-15.webp" srcset="../assets/fotos/numero-15-480.webp 480w, ../assets/fotos/numero-15.webp 766w" sizes="(max-width: 899px) 45vw, 22vw" width="766" height="766" alt="Torta número 15 con macarons, merenguitos y rosas"></figure>
+  <div class="ticket ticket-portada">
+    <div class="papel">
+      <div class="ticket-cab"><span>SENTIDA · Pastelería</span><span>Comanda nº&nbsp;—</span></div>
+      <h1 class="display" id="portada-t">Armá <span>tu torta.</span></h1>
+      <p class="portada-sub">En seis pasos, y te la cotizamos por WhatsApp.</p>
+      <dl class="ticket-lineas">
+        <div><dt>Fecha</dt><dd class="vacio">…</dd></div>
+        <div><dt>Tamaño</dt><dd class="vacio">…</dd></div>
+        <div><dt>Bizcochuelo</dt><dd class="vacio">…</dd></div>
+        <div><dt>Rellenos</dt><dd class="vacio">…</dd></div>
+        <div><dt>Decoración</dt><dd class="vacio">…</dd></div>
+      </dl>
+      <div class="botones">
+        <a class="btn btn-1" href="#comanda" id="empezar">Empezar mi comanda</a>
+        <a class="btn btn-2" href="../tortas/">Ver nuestras tortas</a>
+      </div>
+    </div>
+  </div>
+  <figure class="portada-foto portada-foto-b"><img src="../assets/fotos/letra-f.webp" srcset="../assets/fotos/letra-f-480.webp 480w, ../assets/fotos/letra-f-800.webp 800w, ../assets/fotos/letra-f.webp 1000w" sizes="(max-width: 899px) 45vw, 20vw" width="1000" height="1333" alt="Torta con forma de letra F, con macarons, rosas y chocolate blanco"></figure>
+  <p class="portada-baja">Tortas decoradas hechas a mano por Anto y Nadia en Martínez, San Isidro.</p>
+</section>
+
+<section class="comanda" id="comanda" aria-labelledby="comanda-t">
+  <div class="comanda-in">
+    <div class="pasos-col">
+      <h2 class="display pasos-t" id="comanda-t">Armá tu torta, paso a paso.</h2>
+      <div class="avance" id="avance" aria-hidden="true" hidden><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <form class="pasos" id="armado" action="#cierre">
+
+        <section class="paso" id="paso-1" data-n="1" aria-labelledby="paso-1-t">
+          <p class="paso-n">Paso 1 de 6</p>
+          <h3 class="paso-t display" id="paso-1-t" tabindex="-1">¿Para cuándo?</h3>
+          <div class="campo">
+            <label class="campo-t" for="fecha">Fecha</label>
+            <input type="date" id="fecha" name="fecha">
+          </div>
+          <label class="check"><input type="checkbox" id="sin-fecha" name="sin-fecha" value="1"> Todavía no sé</label>
+          <p class="paso-ayuda">Trabajamos con cupo por día: te confirmamos si la fecha está libre.</p>
+          <figure class="paso-foto"><img src="../assets/fotos/hero-flores-640.webp" width="1220" height="1600" alt="Torta alta con rombos pintados a mano y una corona de flores naturales" loading="lazy" decoding="async"><figcaption>Hecha por nosotras · torta con flores naturales</figcaption></figure>
+        </section>
+
+        <section class="paso" id="paso-2" data-n="2" aria-labelledby="paso-2-t">
+          <p class="paso-n">Paso 2 de 6</p>
+          <h3 class="paso-t display" id="paso-2-t" tabindex="-1">¿Para cuántos?</h3>
+          <div class="opciones" role="radiogroup" aria-labelledby="paso-2-t">
+            <label class="opcion"><input type="radio" name="tamano" value="chica"><span>Chica <small>10 a 12 porciones</small></span></label>
+            <label class="opcion"><input type="radio" name="tamano" value="mediana"><span>Mediana <small>15 a 25 porciones</small></span></label>
+            <label class="opcion"><input type="radio" name="tamano" value="grande"><span>Grande <small>20 a 30 porciones</small></span></label>
+          </div>
+          <figure class="paso-foto"><img src="../assets/fotos/dos-pisos-480.webp" width="931" height="932" alt="Torta de dos pisos turquesa con una cascada de flores naturales" loading="lazy" decoding="async"><figcaption>Hecha por nosotras · torta de dos pisos</figcaption></figure>
+        </section>
+
+        <section class="paso" id="paso-3" data-n="3" aria-labelledby="paso-3-t">
+          <p class="paso-n">Paso 3 de 6</p>
+          <h3 class="paso-t display" id="paso-3-t" tabindex="-1">¿Qué bizcochuelo?</h3>
+          <div class="opciones" role="radiogroup" aria-labelledby="paso-3-t">
+            <label class="opcion"><input type="radio" name="bizcochuelo" value="vainilla"><span>Vainilla</span></label>
+            <label class="opcion"><input type="radio" name="bizcochuelo" value="chocolate"><span>Chocolate</span></label>
+          </div>
+          <figure class="paso-foto"><img src="../assets/fotos/carrot-cake-480.webp" width="1000" height="1250" alt="Carrot cake de tres capas con frosting" loading="lazy" decoding="async"><figcaption>Hecha por nosotras · carrot cake</figcaption></figure>
+        </section>
+
+        <section class="paso" id="paso-4" data-n="4" aria-labelledby="paso-4-t">
+          <p class="paso-n">Paso 4 de 6</p>
+          <h3 class="paso-t display" id="paso-4-t" tabindex="-1">¿Con qué la rellenamos?</h3>
+          <div class="opciones" role="radiogroup" aria-labelledby="paso-4-t">
+            <label class="opcion"><input type="radio" name="relleno" value="ddl"><span>Dulce de leche</span></label>
+            <label class="opcion"><input type="radio" name="relleno" value="butter-choco"><span>Butter choco</span></label>
+          </div>
+          <p class="paso-sub" id="agregados-t">Agregados, si querés</p>
+          <div class="opciones" role="group" aria-labelledby="agregados-t">
+            <label class="opcion opcion-chica"><input type="checkbox" name="agregado" value="bombon"><span>Bombón</span></label>
+            <label class="opcion opcion-chica"><input type="checkbox" name="agregado" value="merenguitos"><span>Merenguitos</span></label>
+            <label class="opcion opcion-chica"><input type="checkbox" name="agregado" value="chips"><span>Chips</span></label>
+            <label class="opcion opcion-chica"><input type="checkbox" name="agregado" value="nuez"><span>Nuez</span></label>
+            <label class="opcion opcion-chica"><input type="checkbox" name="agregado" value="mani"><span>Maní</span></label>
+          </div>
+          <figure class="paso-foto"><img src="../assets/fotos/marquise-480.webp" width="1000" height="960" alt="Marquise con dulce de leche, crema y frutillas" loading="lazy" decoding="async"><figcaption>Hecha por nosotras · marquise</figcaption></figure>
+        </section>
+
+        <section class="paso" id="paso-5" data-n="5" aria-labelledby="paso-5-t">
+          <p class="paso-n">Paso 5 de 6</p>
+          <h3 class="paso-t display" id="paso-5-t" tabindex="-1">¿Y el segundo relleno?</h3>
+          <div class="opciones" role="radiogroup" aria-labelledby="paso-5-t">
+            <label class="opcion"><input type="radio" name="relleno2" value="frutos-rojos"><span>Frutos rojos</span></label>
+            <label class="opcion"><input type="radio" name="relleno2" value="oreo"><span>Crema Oreo</span></label>
+            <label class="opcion"><input type="radio" name="relleno2" value="bonobon"><span>Crema Bon o Bon</span></label>
+            <label class="opcion"><input type="radio" name="relleno2" value="chocotorta"><span>Crema Chocotorta</span></label>
+            <label class="opcion"><input type="radio" name="relleno2" value="kinder"><span>Crema Kinder</span></label>
+          </div>
+          <figure class="paso-foto"><img src="../assets/fotos/sablee-ddl-480.webp" width="900" height="1200" alt="Tarta sablée con dulce de leche, crema y frutos rojos" loading="lazy" decoding="async"><figcaption>Hecha por nosotras · sablée con frutos rojos</figcaption></figure>
+        </section>
+
+        <section class="paso" id="paso-6" data-n="6" aria-labelledby="paso-6-t">
+          <p class="paso-n">Paso 6 de 6</p>
+          <h3 class="paso-t display" id="paso-6-t" tabindex="-1">¿Cómo la imaginás?</h3>
+          <div class="campo">
+            <label class="campo-t" for="idea">Tu idea</label>
+            <p class="campo-ayuda" id="idea-ayuda">Temática, colores, lo que se te ocurra.</p>
+            <textarea id="idea" name="idea" rows="3" aria-describedby="idea-ayuda"></textarea>
+          </div>
+          <p class="paso-sub" id="referencia-t">Una referencia, si querés</p>
+          <div class="referencias" role="radiogroup" aria-labelledby="referencia-t">
+            <label class="referencia"><input type="radio" name="referencia" value="petalos"><span><img src="../assets/fotos/torta-petalos-480.webp" width="960" height="1280" alt="" loading="lazy" decoding="async"><span class="ref-t">Pétalos</span></span></label>
+            <label class="referencia"><input type="radio" name="referencia" value="flores"><span><img src="../assets/fotos/hero-flores-640.webp" width="1220" height="1600" alt="" loading="lazy" decoding="async"><span class="ref-t">Flores naturales</span></span></label>
+            <label class="referencia"><input type="radio" name="referencia" value="letras"><span><img src="../assets/fotos/letra-f-480.webp" width="1000" height="1333" alt="" loading="lazy" decoding="async"><span class="ref-t">Letras y números</span></span></label>
+            <label class="referencia"><input type="radio" name="referencia" value="mensaje"><span><img src="../assets/fotos/hello-30-480.webp" width="731" height="1300" alt="" loading="lazy" decoding="async"><span class="ref-t">Con mensaje</span></span></label>
+            <label class="referencia"><input type="radio" name="referencia" value="" checked><span><span class="ref-vacia" aria-hidden="true"></span><span class="ref-t">Sin referencia</span></span></label>
+          </div>
+          <div class="campos-dos">
+            <div class="campo">
+              <label class="campo-t" for="nombre-torta">Nombre en la torta</label>
+              <input type="text" id="nombre-torta" name="nombre-torta" autocomplete="off">
+            </div>
+            <div class="campo">
+              <label class="campo-t" for="numero">Número o edad</label>
+              <input type="text" id="numero" name="numero" inputmode="numeric" maxlength="3" autocomplete="off">
+            </div>
+          </div>
+          <p class="paso-ayuda">Incluye nombre, número en chocolate, decoraciones básicas, velita y detalles en buttercream. Flores naturales y figuras especiales se cotizan aparte.</p>
+          <p class="solo-sin-js"><a class="btn btn-1" href="#cierre">Ver mi comanda</a></p>
+          <figure class="paso-foto"><img src="../assets/fotos/torta-petalos-480.webp" width="960" height="1280" alt="Torta alta cubierta de pétalos de flores comestibles" loading="lazy" decoding="async"><figcaption>Hecha por nosotras · torta de pétalos</figcaption></figure>
+        </section>
+      </form>
+
+      <div class="cierre" id="cierre" data-n="7">
+        <h2 class="display cierre-t" id="cierre-t" tabindex="-1">Tu comanda está lista.</h2>
+        <p class="cierre-baja">Revisala y mandala. En WhatsApp todavía la podés corregir antes de enviar. Te respondemos con precio y disponibilidad.</p>
+        <div class="campo campo-ademas" id="campo-ademas" hidden>
+          <label class="campo-t" for="ademas">¿Algo más que tengamos que saber?</label>
+          <p class="campo-ayuda" id="ademas-ayuda">Un sabor que no estaba, una alergia, un detalle que no querés que se nos pase.</p>
+          <textarea id="ademas" name="ademas" form="armado" rows="3" aria-describedby="ademas-ayuda"></textarea>
+        </div>
+        <form id="envio" action="https://wa.me/5491158300787" method="get" target="_blank" data-numero="5491158300787">
+          <label class="campo-t" for="mensaje">Tu mensaje</label>
+          <textarea id="mensaje" name="text" rows="11">Hola SENTIDA, les paso mi comanda:
+Fecha: 
+Tamaño: 
+Bizcochuelo: 
+Relleno: 
+Segundo relleno: 
+Decoración: </textarea>
+          <p class="reescribir-p"><button type="button" class="enlace-btn" id="reescribir" hidden>Volver a escribirla con mis elecciones</button></p>
+          <div class="botones">
+            <button class="btn btn-1" type="submit"><svg class="ico ico-wa" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>Mandar por WhatsApp a Anto</button>
+            <button class="btn btn-2" type="button" id="reiniciar" hidden>Empezar de nuevo</button>
+          </div>
+          <p class="cierre-nadia"><a href="https://wa.me/5491131459646?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener" aria-describedby="nueva-pestana">¿Preferís escribirle a Nadia? 11&nbsp;3145&#8209;9646</a></p>
+        </form>
+      </div>
+
+      <div class="pasos-nav" id="pasos-nav" hidden>
+        <p class="pasos-falta" id="pasos-falta" aria-live="polite"></p>
+        <button type="button" class="btn btn-2" id="volver"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-izq"/></svg>Volver</button>
+        <button type="button" class="btn btn-1" id="siguiente" aria-describedby="pasos-falta"><span id="siguiente-t">Siguiente</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></button>
+      </div>
+    </div>
+
+    <aside class="panel" aria-label="Tu comanda">
+      <figure class="panel-foto" data-activo="1">
+        <img data-foto="1" data-pie="torta con flores naturales" src="../assets/fotos/hero-flores-960.webp" srcset="../assets/fotos/hero-flores-640.webp 640w, ../assets/fotos/hero-flores-960.webp 960w, ../assets/fotos/hero-flores-1220.webp 1220w" sizes="50vw" width="1220" height="1600" alt="" loading="lazy" decoding="async">
+        <img data-foto="2" data-pie="torta de dos pisos" src="../assets/fotos/dos-pisos.webp" srcset="../assets/fotos/dos-pisos-480.webp 480w, ../assets/fotos/dos-pisos-800.webp 800w, ../assets/fotos/dos-pisos.webp 931w" sizes="50vw" width="931" height="932" alt="" loading="lazy" decoding="async">
+        <img data-foto="3" data-pie="carrot cake" src="../assets/fotos/carrot-cake.webp" srcset="../assets/fotos/carrot-cake-480.webp 480w, ../assets/fotos/carrot-cake-800.webp 800w, ../assets/fotos/carrot-cake.webp 1000w" sizes="50vw" width="1000" height="1250" alt="" loading="lazy" decoding="async">
+        <img data-foto="4" data-pie="marquise" src="../assets/fotos/marquise.webp" srcset="../assets/fotos/marquise-480.webp 480w, ../assets/fotos/marquise-800.webp 800w, ../assets/fotos/marquise.webp 1000w" sizes="50vw" width="1000" height="960" alt="" loading="lazy" decoding="async">
+        <img data-foto="5" data-pie="sablée con frutos rojos" src="../assets/fotos/sablee-ddl.webp" srcset="../assets/fotos/sablee-ddl-480.webp 480w, ../assets/fotos/sablee-ddl-800.webp 800w, ../assets/fotos/sablee-ddl.webp 900w" sizes="50vw" width="900" height="1200" alt="" loading="lazy" decoding="async">
+        <img data-foto="6" data-pie="torta de pétalos" src="../assets/fotos/torta-petalos.webp" srcset="../assets/fotos/torta-petalos-480.webp 480w, ../assets/fotos/torta-petalos-800.webp 800w, ../assets/fotos/torta-petalos.webp 960w" sizes="50vw" width="960" height="1280" alt="" loading="lazy" decoding="async">
+        <img data-foto="7" data-pie="Anto con una torta de pétalos" src="../assets/fotos/anto-torta-flores.webp" srcset="../assets/fotos/anto-torta-flores-480.webp 480w, ../assets/fotos/anto-torta-flores-800.webp 800w, ../assets/fotos/anto-torta-flores.webp 1000w" sizes="50vw" width="1000" height="1333" alt="" loading="lazy" decoding="async">
+        <figcaption id="panel-pie">Hecha por nosotras · torta con flores naturales</figcaption>
+      </figure>
+      <div class="panel-lugar">
+        <div class="ticket" data-ticket>
+          <div class="papel">
+            <div class="ticket-cab"><span>SENTIDA · Pastelería</span><span>Comanda nº&nbsp;—</span></div>
+            <p class="ticket-t display">Tu torta</p>
+            <dl class="ticket-lineas">
+              <div data-clave="fecha"><dt>Fecha</dt><dd class="vacio">…</dd></div>
+              <div data-clave="tamano"><dt>Tamaño</dt><dd class="vacio">…</dd></div>
+              <div data-clave="bizcochuelo"><dt>Bizcochuelo</dt><dd class="vacio">…</dd></div>
+              <div data-clave="relleno"><dt>Relleno</dt><dd class="vacio">…</dd></div>
+              <div data-clave="relleno2"><dt>Segundo relleno</dt><dd class="vacio">…</dd></div>
+              <div data-clave="decoracion"><dt>Decoración</dt><dd class="vacio">…</dd></div>
+            </dl>
+            <p class="ticket-fijo"><strong>Cobertura:</strong> buttercream de vainilla</p>
+            <p class="ticket-fijo"><strong>Incluye:</strong> nombre, número en chocolate, decoraciones básicas, velita y detalles en buttercream.</p>
+            <p class="ticket-fijo">Flores naturales y figuras especiales se cotizan aparte.</p>
+            <p class="ticket-pie">Sin conservantes · Por encargo · Retiro en Martínez o envío en Zona Norte</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+</main>
+
+<footer class="pie">
+  <div class="pie-in envoltorio">
+    <div class="pie-marca">
+      <img src="../assets/SENTIDASELLO.svg" alt="" width="88" height="88" loading="lazy">
+      <p class="display">Lo soñás,<br>lo creamos.</p>
+    </div>
+    <nav class="pie-links" aria-label="Pie">
+      <ul role="list">
+        <li><a href="../tortas/">Nuestras tortas</a></li>
+        <li><a href="../arma-tu-torta/">Armá tu torta</a></li>
+        <li><a href="../pasteleria/">Pastelería</a></li>
+        <li><a href="../nosotras/">Nosotras</a></li>
+      </ul>
+      <ul role="list">
+        <li><a href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener" aria-describedby="nueva-pestana">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/sentidapasteleria/" target="_blank" rel="noopener" aria-describedby="nueva-pestana">@sentidapasteleria</a></li>
+      </ul>
+      <p>Martínez, San Isidro<br>Solo por encargo</p>
+    </nav>
+  </div>
+  <div class="pie-fin envoltorio"><span>© 2026 SENTIDA Pastelería</span><span>Propuesta de TRAMA</span></div>
+</footer>
+
+<dialog class="comanda-dialogo" id="comanda-dialogo" aria-labelledby="dialogo-t">
+  <div class="dialogo-in">
+    <p class="dialogo-t display" id="dialogo-t">Tu comanda</p>
+    <div class="ticket" data-ticket>
+      <div class="papel">
+        <dl class="ticket-lineas"></dl>
+        <p class="ticket-fijo"><strong>Cobertura:</strong> buttercream de vainilla</p>
+        <p class="ticket-fijo"><strong>Incluye:</strong> nombre, número en chocolate, decoraciones básicas, velita y detalles en buttercream.</p>
+      </div>
+    </div>
+    <p class="dialogo-editado">Editaste el mensaje a mano, así que se manda tu versión. Revisalo antes de enviar.</p>
+    <div class="botones">
+      <button class="btn btn-1 dialogo-enviar" type="submit" form="envio"><svg class="ico ico-wa" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>Mandar por WhatsApp a Anto</button>
+      <a class="btn btn-1 dialogo-revisar" href="#cierre">Revisar mi mensaje</a>
+      <button class="btn btn-2" type="button" id="dialogo-cerrar">Seguir armando</button>
+    </div>
+  </div>
+</dialog>
+</body>
+</html>

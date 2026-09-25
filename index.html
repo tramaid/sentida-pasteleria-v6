@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>SENTIDA Pastelería · Lo soñás, lo creamos</title>
-<meta name="description" content="Pastelería artesanal por encargo en Martínez, San Isidro. Tortas hechas a mano por Anto y Nadia: nuestras tortas, decoradas a pedido y antojos. Armá tu pedido y mandalo por WhatsApp.">
+<meta name="description" content="Pastelería artesanal por encargo en Martínez, San Isidro. Tortas hechas a mano por Anto y Nadia: nuestras tortas, armá tu torta y pastelería. Armá tu pedido y mandalo por WhatsApp.">
 <meta name="theme-color" content="#FEFAF8">
 <link rel="canonical" href="https://tramaid.github.io/sentida-pasteleria/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -23,26 +23,21 @@
 <meta property="og:locale" content="es_AR">
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- Fuentes alojadas en el sitio: Erode (Fontshare, licencia libre para uso
-     comercial) y Montserrat (OFL). Sin hojas de terceros que bloqueen el render. -->
 <link rel="preload" href="assets/fuentes/erode-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fuentes/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="assets/fotos/hero-key-lime-1400.webp" imagesrcset="assets/fotos/hero-key-lime-800.webp 800w, assets/fotos/hero-key-lime-1400.webp 1400w, assets/fotos/hero-key-lime-2048.webp 2048w" imagesizes="(max-width: 899px) and (orientation: landscape) and (max-height: 560px) 60vw, (max-width: 899px) 100vw, 62vw" fetchpriority="high">
-<link rel="stylesheet" href="home.css">
+<link rel="stylesheet" href="comun/base.css">
 <link rel="stylesheet" href="comun/ticket.css">
+<link rel="stylesheet" href="home.css">
 <script>
-/* Sin JavaScript la página se ve completa y quieta. Con JavaScript se marca
-   «js», y solo si la persona no pidió reducir el movimiento, «mov». Los
-   estados de movimiento que esconden algo esperan además a «listo», que
-   pone home.js: si ese archivo no carga, nada queda a medio mostrar. */
+/* Sin JavaScript la página se ve completa: las puertas son enlaces comunes.
+   «js» habilita «Mi pedido»; «mov», el movimiento. */
 (function (r) {
   r.classList.remove('sin-js'); r.classList.add('js');
   if (!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) r.classList.add('mov');
 })(document.documentElement);
 </script>
-<script src="home.js" defer></script>
-<script src="hero.js" defer></script>
 <script src="comun/base.js" defer></script>
+<script src="comun/menu.js" defer></script>
 <script src="comun/pedido-mensaje.js" defer></script>
 <script src="comun/carrito.js" data-raiz="" defer></script>
 
@@ -70,15 +65,9 @@
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"/></symbol>
-  <symbol id="i-izq" viewBox="0 0 24 24"><path d="M20 12H5M10.5 6.5 5 12l5.5 5.5"/></symbol>
-  <symbol id="i-abajo" viewBox="0 0 24 24"><path d="M12 4v15M6.5 13.5 12 19l5.5-5.5"/></symbol>
-  <symbol id="i-pausa" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol>
-  <symbol id="i-seguir" viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5-10-6.5Z"/></symbol>
-  <symbol id="i-diagonal" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
   <symbol id="i-cerrar" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
   <symbol id="i-bolsa" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12.5H6.2L5 8Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></symbol>
-  <symbol id="i-whatsapp" viewBox="0 0 24 24"><path class="relleno" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.13a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.17 8.17 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.46-.72-1.69-.8-.22-.09-.39-.13-.55.12-.17.25-.63.8-.78.96-.14.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.41-.55-.42h-.47c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.06s.89 2.39 1.01 2.56c.13.16 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.46-.6 1.67-1.18.2-.57.2-1.07.14-1.17-.06-.11-.22-.17-.47-.29Z"/></symbol>
 </svg>
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <p id="nueva-pestana" hidden>Se abre WhatsApp o Instagram en otra pestaña.</p>
@@ -86,19 +75,18 @@
 <header class="cab">
   <div class="cab-in">
     <nav class="cab-nav" aria-label="Secciones">
-      <a href="tortas/">Nuestras tortas</a><a href="decoradas/">Decoradas</a><a href="antojos/">Antojos</a><a href="#nosotras" class="solo-ancho">Nosotras</a>
+      <a href="tortas/">Nuestras tortas</a><a href="arma-tu-torta/">Armá tu torta</a><a href="pasteleria/">Pastelería</a><a href="nosotras/" class="solo-ancho">Nosotras</a>
     </nav>
-    <a class="cab-marca" href="#inicio" aria-label="SENTIDA Pastelería, inicio"><img src="assets/logo-sentida.svg" alt="SENTIDA Pastelería" width="116" height="44"></a>
+    <a class="cab-marca" href="./" aria-label="SENTIDA Pastelería, inicio"><img src="assets/logo-sentida.svg" alt="SENTIDA Pastelería" width="116" height="44"></a>
     <div class="cab-acc">
       <a class="mi-pedido" href="tortas/#pedido" data-mi-pedido><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bolsa"/></svg><span class="mi-pedido-t">Mi pedido</span><span class="mi-pedido-n" hidden>0</span></a>
       <details class="menu">
         <summary><span class="menu-abrir">Menú</span><span class="menu-cerrar">Cerrar</span><svg class="ico menu-i-abrir" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg><svg class="ico menu-i-cerrar" aria-hidden="true" focusable="false"><use href="#i-cerrar"/></svg></summary>
         <nav aria-label="Menú">
           <a href="tortas/">Nuestras tortas</a>
-          <a href="decoradas/">Decoradas</a>
-          <a href="antojos/">Antojos</a>
-          <a href="#nosotras">Nosotras</a>
-          <a href="#pedido">Cómo pedir</a>
+          <a href="arma-tu-torta/">Armá tu torta</a>
+          <a href="pasteleria/">Pastelería</a>
+          <a href="nosotras/">Nosotras</a>
         </nav>
       </details>
     </div>
@@ -107,281 +95,58 @@
 
 <main id="contenido">
 
-<section class="hero" id="inicio" aria-labelledby="hero-t">
-  <div class="hero-txt">
-    <h1 class="display" id="hero-t">Lo soñás, <span>lo creamos.</span></h1>
-    <p class="hero-baja">Tortas hechas a mano por Anto y Nadia, para esos días que se sienten.</p>
-    <div class="botones">
-      <a class="btn btn-1" href="decoradas/">Armá tu torta<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></a>
-      <a class="btn btn-2" href="tortas/">Ver nuestras tortas</a>
-    </div>
-    <p class="hero-lugar">Pastelería artesanal por encargo · Martínez, San Isidro</p>
+<section class="entrada" aria-labelledby="entrada-t">
+  <div class="lema">
+    <h1 class="display" id="entrada-t">Lo soñás, lo creamos.</h1>
+    <p>Pastelería artesanal por encargo · Martínez, San Isidro</p>
   </div>
-  <figure class="hero-foto">
-    <img class="activa" src="assets/fotos/hero-key-lime-1400.webp" srcset="assets/fotos/hero-key-lime-800.webp 800w, assets/fotos/hero-key-lime-1400.webp 1400w, assets/fotos/hero-key-lime-2048.webp 2048w" sizes="(max-width: 899px) and (orientation: landscape) and (max-height: 560px) 60vw, (max-width: 899px) 100vw, 62vw" width="2048" height="3072" alt="Key Lime Pie con rosetas de crema y rodajas de lima" fetchpriority="high" data-nombre="Key Lime Pie" data-ir="Ver en la tienda" data-href="tortas/#key-lime-pie" style="--pos:50% 50%; --pos-m:50% 50%">
-    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset="assets/fotos/hero-cheesecake-800.webp 800w, assets/fotos/hero-cheesecake-1400.webp 1400w, assets/fotos/hero-cheesecake-2048.webp 2048w" sizes="(max-width: 899px) and (orientation: landscape) and (max-height: 560px) 60vw, (max-width: 899px) 100vw, 62vw" width="2048" height="3072" alt="Cheesecake estilo New York cubierto de frutillas y frutos rojos" aria-hidden="true" decoding="async" data-nombre="Cheesecake estilo New York" data-ir="Ver en la tienda" data-href="tortas/#cheesecake-new-york" style="--pos:50% 50%; --pos-m:50% 50%">
-    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset="assets/fotos/hero-carrot-800.webp 800w, assets/fotos/hero-carrot-1400.webp 1400w, assets/fotos/hero-carrot-2048.webp 2048w" sizes="(max-width: 899px) and (orientation: landscape) and (max-height: 560px) 60vw, (max-width: 899px) 100vw, 62vw" width="2048" height="3072" alt="Carrot cake de tres capas con rosetas de frosting" aria-hidden="true" decoding="async" data-nombre="Carrot cake" data-ir="Ver en la tienda" data-href="tortas/#carrot-cake" style="--pos:50% 42%; --pos-m:50% 45%">
-    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset="assets/fotos/hero-letra-f-800.webp 800w, assets/fotos/hero-letra-f-1400.webp 1400w, assets/fotos/hero-letra-f-2048.webp 2048w" sizes="(max-width: 899px) and (orientation: landscape) and (max-height: 560px) 60vw, (max-width: 899px) 100vw, 62vw" width="2048" height="3072" alt="Torta con forma de letra F, con macarons, rosas y una gerbera" aria-hidden="true" decoding="async" data-nombre="Torta con letra" data-ir="Armá la tuya" data-href="decoradas/?ref=letras" style="--pos:50% 30%; --pos-m:50% 0%">
-    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset="assets/fotos/hero-marroc-800.webp 800w, assets/fotos/hero-marroc-1400.webp 1400w, assets/fotos/hero-marroc-2048.webp 2048w" sizes="(max-width: 899px) and (orientation: landscape) and (max-height: 560px) 60vw, (max-width: 899px) 100vw, 62vw" width="2048" height="3072" alt="Cheesecake Marroc con cobertura de chocolate y trozos de Marroc" aria-hidden="true" decoding="async" data-nombre="Cheesecake Marroc" data-ir="Ver en la tienda" data-href="tortas/#cheesecake-marroc" style="--pos:50% 50%; --pos-m:50% 25%">
-    <figcaption class="hero-pie">
-      <a class="hero-etiqueta" href="tortas/#key-lime-pie"><span class="hero-etiqueta-n">Key Lime Pie</span> · <span class="hero-etiqueta-ir">Ver en la tienda</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></a>
-      <div class="hero-avance" hidden>
-        <button type="button" data-foto="0" aria-label="Foto 1 de 5: Key Lime Pie"><span class="hero-barra"><span></span></span></button>
-        <button type="button" data-foto="1" aria-label="Foto 2 de 5: Cheesecake estilo New York"><span class="hero-barra"><span></span></span></button>
-        <button type="button" data-foto="2" aria-label="Foto 3 de 5: Carrot cake"><span class="hero-barra"><span></span></span></button>
-        <button type="button" data-foto="3" aria-label="Foto 4 de 5: Torta con letra"><span class="hero-barra"><span></span></span></button>
-        <button type="button" data-foto="4" aria-label="Foto 5 de 5: Cheesecake Marroc"><span class="hero-barra"><span></span></span></button>
-        <button type="button" class="hero-pausa" aria-label="Pausar las fotos"><svg class="ico ico-pausa" aria-hidden="true" focusable="false"><use href="#i-pausa"/></svg><svg class="ico ico-seguir" aria-hidden="true" focusable="false"><use href="#i-seguir"/></svg></button>
-      </div>
-    </figcaption>
-  </figure>
+  <ul class="puertas" role="list">
+    <li>
+      <a class="puerta" href="tortas/">
+        <img src="assets/fotos/hero-cheesecake-800.webp" srcset="assets/fotos/hero-cheesecake-800.webp 800w, assets/fotos/hero-cheesecake-1400.webp 1400w, assets/fotos/hero-cheesecake-2048.webp 2048w" sizes="(max-width: 899px) 100vw, 34vw" width="2048" height="3072" alt="" fetchpriority="high" style="--pos:50% 50%">
+        <div class="puerta-txt">
+          <h2 class="display">Nuestras tortas</h2>
+          <span class="puerta-baja">Las de la casa, tal cual las hacemos.</span>
+          <span class="puerta-ir">Ver las tortas <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a class="puerta" href="arma-tu-torta/">
+        <img src="assets/fotos/hero-letra-f-800.webp" srcset="assets/fotos/hero-letra-f-800.webp 800w, assets/fotos/hero-letra-f-1400.webp 1400w, assets/fotos/hero-letra-f-2048.webp 2048w" sizes="(max-width: 899px) 100vw, 34vw" width="2048" height="3072" alt="" fetchpriority="high" style="--pos:50% 40%">
+        <div class="puerta-txt">
+          <h2 class="display">Armá tu torta</h2>
+          <span class="puerta-baja">Elegís el bizcochuelo, los rellenos y la decoración.</span>
+          <span class="puerta-ir">Armar la mía <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a class="puerta" href="pasteleria/">
+        <img src="assets/fotos/galletas-te-amo-800.webp" srcset="assets/fotos/galletas-te-amo-480.webp 480w, assets/fotos/galletas-te-amo-800.webp 800w, assets/fotos/galletas-te-amo.webp 900w" sizes="(max-width: 899px) 100vw, 34vw" width="900" height="1200" alt="" loading="lazy" decoding="async" style="--pos:50% 50%">
+        <div class="puerta-txt">
+          <h2 class="display">Pastelería</h2>
+          <span class="puerta-baja">Shots, cookies, alfajores y cupcakes.</span>
+          <span class="puerta-ir">Ver la pastelería <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
+        </div>
+      </a>
+    </li>
+  </ul>
 </section>
 
-<section class="manif envoltorio" aria-label="Cómo trabajamos">
-  <p class="manif-texto display"><span>Cada</span> <span>torta</span> <span>la</span> <span>pensamos</span> <span>como</span> <span>si</span> <span>fuera</span> <span>para</span> <span>nuestra</span> <span>propia</span> <span>familia:</span> <span>la</span> <span>diseñamos</span> <span>con</span> <span>vos,</span> <span>la</span> <span>hacemos</span> <span>a</span> <span>mano</span> <span>y</span> <span>la</span> <span>terminamos</span> <span>hasta</span> <span>el</span> <span>último</span> <span>pétalo.</span></p>
-  <div class="manif-pie">
-    <p class="display firma">Anto &amp; Nadia</p>
-    <a class="enlace" href="#nosotras">Conocernos <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></a>
-  </div>
+<section class="nos-linea envoltorio" aria-label="Quiénes somos">
+  <p class="display">Somos Anto y Nadia. Hacemos cada pedido a mano, de principio a fin, en Martínez.</p>
+  <a class="enlace" href="nosotras/">Conocernos <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></a>
 </section>
 
-<section class="carta" id="carta" aria-labelledby="carta-t">
-  <div class="carta-fijo">
-    <div class="carta-cab envoltorio">
-      <h2 class="display" id="carta-t">Las de<br>la casa.</h2>
-      <p class="baja">Siete tortas de nuestro cuaderno, que hacemos por encargo. Precio y disponibilidad, a consultar.</p>
-      <p class="carta-guia" aria-hidden="true">Deslizá para ver las siete <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></p>
-    </div>
-    <div class="carta-vista" id="fila-carta" role="region" aria-label="Nuestras tortas" tabindex="0">
-      <ul class="carta-fila" role="list">
-        <li class="carta-intro" aria-hidden="true">
-          <p class="display carta-intro-t">Las de<br>la casa.</p>
-          <p class="baja">Siete tortas de nuestro cuaderno, que hacemos por encargo. Precio y disponibilidad, a consultar.</p>
-          <p class="carta-guia">Seguí bajando <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-abajo"/></svg></p>
-        </li>
-        <li class="plato" style="--off:0vh">
-          <a href="tortas/#key-lime-pie">
-            <span class="plato-foto"><img src="assets/fotos/key-lime-pie.webp" srcset="assets/fotos/key-lime-pie-480.webp 480w, assets/fotos/key-lime-pie.webp 675w" sizes="(max-width: 899px) 72vw, 400px" width="675" height="1200" alt="" loading="lazy" decoding="async"></span>
-            <h3 class="display">Key Lime Pie</h3>
-            <span class="plato-desc">Base crocante de galletitas, curd de lima y crema chantilly.</span>
-            <span class="plato-cta">Ver en la tienda <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-          </a>
-        </li>
-        <li class="plato" style="--off:6vh">
-          <a href="tortas/#cheesecake-new-york">
-            <span class="plato-foto"><img src="assets/fotos/cheesecake-ny.webp" srcset="assets/fotos/cheesecake-ny-480.webp 480w, assets/fotos/cheesecake-ny-800.webp 800w, assets/fotos/cheesecake-ny.webp 960w" sizes="(max-width: 899px) 72vw, 400px" width="960" height="1200" alt="" loading="lazy" decoding="async"></span>
-            <h3 class="display">Cheesecake estilo New York</h3>
-            <span class="plato-desc">Base de galletitas de vainilla, salsa de frutos rojos y crema chantilly.</span>
-            <span class="plato-cta">Ver en la tienda <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-          </a>
-        </li>
-        <li class="plato" style="--off:2vh">
-          <a href="tortas/#marquise">
-            <span class="plato-foto"><img src="assets/fotos/marquise.webp" srcset="assets/fotos/marquise-480.webp 480w, assets/fotos/marquise-800.webp 800w, assets/fotos/marquise.webp 1000w" sizes="(max-width: 899px) 72vw, 400px" width="1000" height="960" alt="" loading="lazy" decoding="async"></span>
-            <h3 class="display">Marquise</h3>
-            <span class="plato-desc">Con dulce de leche y frutos rojos.</span>
-            <span class="plato-cta">Ver en la tienda <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-          </a>
-        </li>
-        <li class="plato" style="--off:8vh">
-          <a href="tortas/#frutillas-con-crema">
-            <span class="plato-foto"><img src="assets/fotos/frutillas-con-crema.webp" srcset="assets/fotos/frutillas-con-crema-480.webp 480w, assets/fotos/frutillas-con-crema.webp 675w" sizes="(max-width: 899px) 72vw, 400px" width="675" height="1200" alt="" loading="lazy" decoding="async"></span>
-            <h3 class="display">Frutillas con crema</h3>
-            <span class="plato-desc">Frutillas frescas sobre crema, en base sablée de vainilla.</span>
-            <span class="plato-cta">Ver en la tienda <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-          </a>
-        </li>
-        <li class="plato" style="--off:1vh">
-          <a href="tortas/#sablee">
-            <span class="plato-foto"><img src="assets/fotos/sablee-ddl.webp" srcset="assets/fotos/sablee-ddl-480.webp 480w, assets/fotos/sablee-ddl-800.webp 800w, assets/fotos/sablee-ddl.webp 900w" sizes="(max-width: 899px) 72vw, 400px" width="900" height="1200" alt="" loading="lazy" decoding="async"></span>
-            <h3 class="display">Sablée</h3>
-            <span class="plato-desc">Con dulce de leche, crema y frutos rojos.</span>
-            <span class="plato-cta">Ver en la tienda <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-          </a>
-        </li>
-        <li class="plato" style="--off:5vh">
-          <a href="tortas/#pavlova-lima">
-            <span class="plato-foto"><img src="assets/fotos/pavlova.webp" srcset="assets/fotos/pavlova-480.webp 480w, assets/fotos/pavlova.webp 582w" sizes="(max-width: 899px) 72vw, 400px" width="582" height="728" alt="" loading="lazy" decoding="async"></span>
-            <h3 class="display">Pavlova</h3>
-            <span class="plato-desc">Con crema, curd de lima y frutas de estación.</span>
-            <span class="plato-cta">Ver en la tienda <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-          </a>
-        </li>
-        <li class="plato" style="--off:3vh">
-          <a href="tortas/#choco-oreo">
-            <span class="plato-foto"><img src="assets/fotos/choco-oreo.webp" srcset="assets/fotos/choco-oreo-480.webp 480w, assets/fotos/choco-oreo.webp 774w" sizes="(max-width: 899px) 72vw, 400px" width="774" height="1032" alt="" loading="lazy" decoding="async"></span>
-            <h3 class="display">Choco Oreo</h3>
-            <span class="plato-desc">Base de galletitas Oreo, dulce de leche y crema chantilly.</span>
-            <span class="plato-cta">Ver en la tienda <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-          </a>
-        </li>
-        <li class="carta-otra">
-          <a href="tortas/"><span class="display">Ver todas nuestras tortas.</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></a>
-        </li>
-      </ul>
-    </div>
-    <div class="carta-pie envoltorio">
-      <div class="carta-barra" aria-hidden="true"><div></div></div>
-      <div class="fila-ctrl" hidden>
-          <button type="button" data-fila="fila-carta" data-dir="-1" aria-controls="fila-carta" aria-label="Tortas anteriores"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-izq"/></svg></button>
-          <button type="button" data-fila="fila-carta" data-dir="1" aria-controls="fila-carta" aria-label="Tortas siguientes"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></button>
-        </div>
-    </div>
-  </div>
-</section>
-
-<section class="deco" id="decoradas" aria-labelledby="deco-t">
-  <div class="deco-in envoltorio">
-    <h2 class="display" id="deco-t">Una torta<br>para cada historia.</h2>
-    <div class="deco-mosaico grilla">
-      <div class="deco-petalos">
-          <a href="decoradas/?ref=petalos">
-            <span class="foto r45"><img src="assets/fotos/torta-petalos.webp" srcset="assets/fotos/torta-petalos-480.webp 480w, assets/fotos/torta-petalos-800.webp 800w, assets/fotos/torta-petalos.webp 960w" sizes="(max-width: 759px) 100vw, 40vw" width="960" height="1280" alt="Torta alta de buttercream cubierta de pétalos de flores comestibles" loading="lazy" decoding="async"></span>
-            <span class="deco-cap">Pétalos <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-          </a>
-        </div>
-      <div class="deco-der">
-        <div class="deco-texto">
-          <p>Letras y números con macarons, flores naturales, pétalos o un mensaje. Nos contás qué imaginás y la diseñamos con vos: tamaño, bizcochuelo, rellenos y decoración.</p>
-          <a class="btn btn-claro" href="decoradas/">Armá tu torta<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></a>
-        </div>
-        <div class="deco-par">
-          <div class="deco-letra">
-          <a href="decoradas/?ref=letras">
-            <span class="foto r34"><img src="assets/fotos/letra-f.webp" srcset="assets/fotos/letra-f-480.webp 480w, assets/fotos/letra-f-800.webp 800w, assets/fotos/letra-f.webp 1000w" sizes="(max-width: 759px) 50vw, 30vw" width="1000" height="1333" alt="Torta con forma de letra F, con macarons, rosas y chocolate blanco" loading="lazy" decoding="async"></span>
-            <span class="deco-cap">Letras <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-          </a>
-        </div>
-          <div class="deco-15">
-          <a href="decoradas/?ref=letras">
-            <span class="foto r45"><img src="assets/fotos/numero-15.webp" srcset="assets/fotos/numero-15-480.webp 480w, assets/fotos/numero-15.webp 766w" sizes="(max-width: 759px) 50vw, 25vw" width="766" height="766" alt="Torta número 15 con macarons, merenguitos y rosas" loading="lazy" decoding="async"></span>
-            <span class="deco-cap">Macarons y rosas <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-          </a>
-        </div>
-        </div>
-      </div>
-      <div class="deco-mensaje">
-          <a href="decoradas/?ref=mensaje">
-            <span class="foto r11"><img src="assets/fotos/hello-30.webp" srcset="assets/fotos/hello-30-480.webp 480w, assets/fotos/hello-30.webp 731w" sizes="(max-width: 759px) 50vw, 25vw" width="731" height="1300" alt="Torta de cumpleaños mitad negra con «RIP 20s» y mitad blanca con «hello 30s» y flores" loading="lazy" decoding="async"></span>
-            <span class="deco-cap">Con mensaje <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-          </a>
-        </div>
-      <div class="deco-pisos">
-          <a href="decoradas/">
-            <span class="foto r45"><img src="assets/fotos/dos-pisos.webp" srcset="assets/fotos/dos-pisos-480.webp 480w, assets/fotos/dos-pisos-800.webp 800w, assets/fotos/dos-pisos.webp 931w" sizes="(max-width: 759px) 50vw, 33vw" width="931" height="932" alt="Torta de dos pisos turquesa con una cascada de flores naturales" loading="lazy" decoding="async"></span>
-            <span class="deco-cap">Dos pisos <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-          </a>
-        </div>
-      <div class="deco-celeste">
-          <a href="decoradas/?ref=letras">
-            <span class="foto r34"><img src="assets/fotos/numero-celeste.webp" srcset="assets/fotos/numero-celeste-480.webp 480w, assets/fotos/numero-celeste.webp 768w" sizes="(max-width: 759px) 62vw, 25vw" width="768" height="1024" alt="Torta número 16 en tonos celestes, con merengues y flores blancas" loading="lazy" decoding="async"></span>
-            <span class="deco-cap">Tonos celestes <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-          </a>
-        </div>
-    </div>
-    <div class="deco-info">
-      <dl class="deco-tamanos">
-        <div><dt>Chica</dt><dd>10 a 12 porciones</dd></div>
-        <div><dt>Mediana</dt><dd>15 a 25 porciones</dd></div>
-        <div><dt>Grande</dt><dd>20 a 30 porciones</dd></div>
-      </dl>
-      <p class="deco-incluye">Incluye nombre, número en chocolate, decoraciones básicas, velita y detalles en buttercream. Flores naturales y figuras especiales, como adicional.</p>
-    </div>
-  </div>
-</section>
-
-<section class="mano" aria-labelledby="mano-t">
-  <figure class="mano-foto"><img src="assets/fotos/galletas-flores-proceso.webp" srcset="assets/fotos/galletas-flores-proceso-480.webp 480w, assets/fotos/galletas-flores-proceso-800.webp 800w, assets/fotos/galletas-flores-proceso.webp 1000w" sizes="(max-width: 899px) 100vw, 50vw" width="1000" height="1333" alt="Masa de galletas estirada a mano, con pétalos de flores comestibles recién cortada" loading="lazy" decoding="async"></figure>
-  <div class="mano-txt">
-    <h2 class="display" id="mano-t">Hecho a mano,<br>100 % artesanal.</h2>
-    <ul>
-      <li><strong>Sin conservantes</strong><span>ni aditivos</span></li>
-      <li><strong>Por encargo</strong><span>con cupo por día</span></li>
-      <li><strong>Retiro o envío</strong><span>Martínez · Zona Norte</span></li>
-    </ul>
-  </div>
-</section>
-
-<section class="nos envoltorio grilla" id="nosotras" aria-labelledby="nos-t">
-  <h2 class="display" id="nos-t">Somos dos<span>, y hacemos<br>todo nosotras.</span></h2>
-  <figure class="nos-a">
-    <div class="foto r34"><img src="assets/fotos/anto-torta-flores.webp" srcset="assets/fotos/anto-torta-flores-480.webp 480w, assets/fotos/anto-torta-flores-800.webp 800w, assets/fotos/anto-torta-flores.webp 1000w" sizes="(max-width: 899px) 58vw, 40vw" width="1000" height="1333" alt="Anto sosteniendo una torta alta cubierta de pétalos" loading="lazy" decoding="async"></div>
-    <figcaption><span>Antonella</span><a href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido.%0AFecha%3A%0APorciones%3A%0ATorta%3A" target="_blank" rel="noopener" aria-describedby="nueva-pestana"><svg class="ico ico-wa" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>11&nbsp;5830&#8209;0787</a></figcaption>
-  </figure>
-  <figure class="nos-b">
-    <div class="foto r34"><img src="assets/fotos/nadia-flores.webp" srcset="assets/fotos/nadia-flores-480.webp 480w, assets/fotos/nadia-flores.webp 720w" sizes="(max-width: 899px) 42vw, 33vw" width="720" height="960" alt="Nadia terminando una torta con flores naturales" loading="lazy" decoding="async"></div>
-    <figcaption><span>Nadia</span><a href="https://wa.me/5491131459646?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido.%0AFecha%3A%0APorciones%3A%0ATorta%3A" target="_blank" rel="noopener" aria-describedby="nueva-pestana"><svg class="ico ico-wa" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>11&nbsp;3145&#8209;9646</a></figcaption>
-  </figure>
-  <div class="nos-texto">
-    <img class="nos-etiqueta" src="assets/fotos/etiqueta-sentida.webp" width="400" height="400" alt="Etiqueta de SENTIDA con cintas marrón y celeste, la que va en cada caja" loading="lazy" decoding="async">
-    <p>Nos formamos en el Instituto Argentino de Gastronomía (IAG) y hacemos cada pedido de principio a fin, las dos.</p>
-    <p>Cuidamos el detalle hasta en la caja y la tarjeta.</p>
-  </div>
-</section>
-
-<section class="mesas" id="antojos" aria-labelledby="mesas-t">
-  <div class="mesas-cab envoltorio">
-    <h2 class="display" id="mesas-t">Antojos,<br>para compartir.</h2>
-    <div>
-      <p>Alfajores, galletas con tu mensaje, cupcakes y shots. Y si es para una mesa dulce, la armamos con vos según los invitados.</p>
-      <a class="enlace" href="antojos/">Ver los antojos <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></a>
-      <a class="enlace" href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20consultar%20por%20una%20mesa%20dulce.%0AFecha%3A%0AInvitados%3A" target="_blank" rel="noopener" aria-describedby="nueva-pestana">Consultar por una mesa dulce <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg></a>
-      <div class="fila-ctrl" hidden>
-          <button type="button" data-fila="fila-mesas" data-dir="-1" aria-controls="fila-mesas" aria-label="Fotos anteriores"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-izq"/></svg></button>
-          <button type="button" data-fila="fila-mesas" data-dir="1" aria-controls="fila-mesas" aria-label="Fotos siguientes"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></button>
-        </div>
-    </div>
-  </div>
-  <div class="mesas-vista" id="fila-mesas" role="region" aria-label="Antojos y mesa dulce" tabindex="0">
-    <ul class="mesas-fila" role="list">
-      <li style="--ar:4/5"><figure><div class="foto"><img src="assets/fotos/vasitos-flores.webp" srcset="assets/fotos/vasitos-flores-480.webp 480w, assets/fotos/vasitos-flores-800.webp 800w, assets/fotos/vasitos-flores.webp 1000w" sizes="(max-height: 600px) 260px, (max-width: 899px) 70vw, 400px" width="1000" height="1333" alt="Vasitos de postre con crema y flores comestibles" loading="lazy" decoding="async"></div><figcaption>Vasitos con flores</figcaption></figure></li>
-      <li style="--ar:1/1"><figure><div class="foto"><img src="assets/fotos/carrot-mini.webp" srcset="assets/fotos/carrot-mini-480.webp 480w, assets/fotos/carrot-mini-800.webp 800w, assets/fotos/carrot-mini.webp 879w" sizes="(max-height: 600px) 260px, (max-width: 899px) 70vw, 400px" width="879" height="1200" alt="Cuadraditos de carrot cake con rosetas de frosting" loading="lazy" decoding="async"></div><figcaption>Carrot cake</figcaption></figure></li>
-      <li style="--ar:4/5"><figure><div class="foto"><img src="assets/fotos/galletas-te-amo.webp" srcset="assets/fotos/galletas-te-amo-480.webp 480w, assets/fotos/galletas-te-amo-800.webp 800w, assets/fotos/galletas-te-amo.webp 900w" sizes="(max-height: 600px) 260px, (max-width: 899px) 70vw, 400px" width="900" height="1200" alt="Galletas corazón con la frase «Te amo» escrita a mano" loading="lazy" decoding="async"></div><figcaption>Galletas con mensaje</figcaption></figure></li>
-      <li style="--ar:1/1"><figure><div class="foto"><img src="assets/fotos/alfajores.webp" srcset="assets/fotos/alfajores-480.webp 480w, assets/fotos/alfajores.webp 675w" sizes="(max-height: 600px) 260px, (max-width: 899px) 70vw, 400px" width="675" height="1200" alt="Alfajores de dulce de leche" loading="lazy" decoding="async"></div><figcaption>Alfajores</figcaption></figure></li>
-      <li style="--ar:4/5"><figure><div class="foto"><img src="assets/fotos/vasitos-frutillas.webp" srcset="assets/fotos/vasitos-frutillas-480.webp 480w, assets/fotos/vasitos-frutillas-800.webp 800w, assets/fotos/vasitos-frutillas.webp 898w" sizes="(max-height: 600px) 260px, (max-width: 899px) 70vw, 400px" width="898" height="1200" alt="Vasitos con frutillas, crema y merengue" loading="lazy" decoding="async"></div><figcaption>Vasitos de frutillas</figcaption></figure></li>
-      <li style="--ar:4/5"><figure><div class="foto"><img src="assets/fotos/vasitos-maracuya.webp" srcset="assets/fotos/vasitos-maracuya-480.webp 480w, assets/fotos/vasitos-maracuya-800.webp 800w, assets/fotos/vasitos-maracuya.webp 900w" sizes="(max-height: 600px) 260px, (max-width: 899px) 70vw, 400px" width="900" height="1125" alt="Vasitos de maracuyá con chocolate blanco" loading="lazy" decoding="async"></div><figcaption>Vasitos de maracuyá</figcaption></figure></li>
-      <li style="--ar:4/5"><figure><div class="foto"><img src="assets/fotos/vasitos-ddl.webp" srcset="assets/fotos/vasitos-ddl-480.webp 480w, assets/fotos/vasitos-ddl.webp 675w" sizes="(max-height: 600px) 260px, (max-width: 899px) 70vw, 400px" width="675" height="1200" alt="Vasitos de dulce de leche con merengue" loading="lazy" decoding="async"></div><figcaption>Vasitos de dulce de leche</figcaption></figure></li>
-    </ul>
-  </div>
-</section>
-
-<section class="pedido" id="pedido" aria-labelledby="pedido-t">
-  <div class="pedido-in envoltorio">
-    <div class="pedido-cab dos">
-      <h2 class="display" id="pedido-t">¿Tenés una fecha en mente?</h2>
-      <p>Escribinos y la reservamos. Trabajamos por agenda y con cupo por día: cuanto antes, mejor.</p>
-    </div>
-    <ol class="pasos">
-      <li><span class="paso-n">01</span><strong class="display">Elegís</strong><span>De nuestras tortas y antojos, o armás tu torta decorada.</span></li>
-      <li><span class="paso-n">02</span><strong class="display">Nos lo mandás</strong><span>Por WhatsApp, con la fecha: el mensaje sale armado.</span></li>
-      <li><span class="paso-n">03</span><strong class="display">Te cotizamos</strong><span>Precio y disponibilidad de la fecha.</span></li>
-      <li><span class="paso-n">04</span><strong class="display">Reservás</strong><span>La fecha queda confirmada con la seña.</span></li>
-      <li><span class="paso-n">05</span><strong class="display">La retirás</strong><span>En Martínez, o te la llevamos en Zona Norte.</span></li>
+<section class="como-pedir" aria-labelledby="como-t">
+  <div class="como-in envoltorio">
+    <h2 class="display" id="como-t">Cómo pedir</h2>
+    <ol role="list">
+      <li><span class="paso-n">1</span><strong class="display">Elegís</strong><span>Una de nuestras tortas, algo de pastelería o la torta que armás vos.</span></li>
+      <li><span class="paso-n">2</span><strong class="display">Nos lo mandás</strong><span>Por WhatsApp, con la fecha: el mensaje sale armado.</span></li>
+      <li><span class="paso-n">3</span><strong class="display">Te confirmamos</strong><span>Precio y disponibilidad. Lo retirás en Martínez o te lo llevamos en Zona Norte.</span></li>
     </ol>
-    <div class="caminos">
-      <div class="camino">
-        <span class="camino-eti">La tienda</span>
-        <strong class="display">Nuestras tortas y antojos</strong>
-        <p>Elegís, lo sumás al pedido y sale en un solo WhatsApp. Te confirmamos precio y disponibilidad.</p>
-        <p class="botones"><a class="btn btn-1" href="tortas/">Nuestras tortas</a><a class="btn btn-2" href="antojos/">Antojos</a></p>
-      </div>
-      <div class="camino">
-        <span class="camino-eti">Decoradas</span>
-        <strong class="display">Armá tu torta</strong>
-        <p>En seis pasos: fecha, tamaño, bizcochuelo, rellenos y decoración. Te la cotizamos y la reservás con seña.</p>
-        <p class="botones"><a class="btn btn-1" href="decoradas/">Armá tu torta</a></p>
-      </div>
-      <div class="camino camino-wa">
-        <span class="camino-eti">WhatsApp directo</span>
-        <strong class="display">Escribinos</strong>
-        <p>Si preferís contarnos con tus palabras.</p>
-        <ul role="list">
-          <li><a href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener" aria-describedby="nueva-pestana"><svg class="ico ico-wa" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span>Anto · <span class="tel">11&nbsp;5830&#8209;0787</span></span></a></li>
-          <li><a href="https://wa.me/5491131459646?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener" aria-describedby="nueva-pestana"><svg class="ico ico-wa" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg><span>Nadia · <span class="tel">11&nbsp;3145&#8209;9646</span></span></a></li>
-          <li><a href="https://www.instagram.com/sentidapasteleria/" target="_blank" rel="noopener" aria-describedby="nueva-pestana"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg><span>Instagram: @sentidapasteleria</span></a></li>
-        </ul>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -391,18 +156,17 @@
   <div class="pie-in envoltorio">
     <div class="pie-marca">
       <img src="assets/SENTIDASELLO.svg" alt="" width="88" height="88" loading="lazy">
-      <p>Lo soñás,<br>lo creamos.</p>
+      <p class="display">Lo soñás,<br>lo creamos.</p>
     </div>
     <nav class="pie-links" aria-label="Pie">
       <ul role="list">
         <li><a href="tortas/">Nuestras tortas</a></li>
-        <li><a href="decoradas/">Decoradas</a></li>
-        <li><a href="antojos/">Antojos</a></li>
+        <li><a href="arma-tu-torta/">Armá tu torta</a></li>
+        <li><a href="pasteleria/">Pastelería</a></li>
+        <li><a href="nosotras/">Nosotras</a></li>
       </ul>
       <ul role="list">
-        <li><a href="#nosotras">Nosotras</a></li>
-        <li><a href="#pedido">Cómo pedir</a></li>
-        <li><a href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido.%0AFecha%3A%0APorciones%3A%0ATorta%3A" target="_blank" rel="noopener" aria-describedby="nueva-pestana">WhatsApp</a></li>
+        <li><a href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener" aria-describedby="nueva-pestana">WhatsApp</a></li>
         <li><a href="https://www.instagram.com/sentidapasteleria/" target="_blank" rel="noopener" aria-describedby="nueva-pestana">@sentidapasteleria</a></li>
       </ul>
       <p>Martínez, San Isidro<br>Solo por encargo</p>
@@ -410,7 +174,5 @@
   </div>
   <div class="pie-fin envoltorio"><span>© 2026 SENTIDA Pastelería</span><span>Diseño TRAMA</span></div>
 </footer>
-
-<a class="barra-pedido" href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido.%0AFecha%3A%0APorciones%3A%0ATorta%3A" target="_blank" rel="noopener" aria-describedby="nueva-pestana"><svg class="ico ico-wa" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>Hacer un pedido por WhatsApp</a>
 </body>
 </html>

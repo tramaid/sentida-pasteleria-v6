@@ -1,12 +1,12 @@
-MENU = ["Nuestras tortas", "Decoradas", "Antojos", "Nosotras"]
+MENU = ["Nuestras tortas", "Armá tu torta", "Pastelería", "Nosotras"]
 
 
 def test_cabecera_del_sitio(abrir, sitio):
     pg = abrir()
     nav = pg.eval_on_selector_all(".cab-nav a", "as => as.map(a => [a.textContent, a.href])")
-    assert nav == [["Nuestras tortas", sitio + "tortas/"], ["Decoradas", sitio + "decoradas/"],
-                   ["Antojos", sitio + "antojos/"], ["Nosotras", sitio + "#nosotras"]]
-    assert pg.get_attribute('.cab-nav a[aria-current="page"]', "href") == "../decoradas/"
+    assert nav == [["Nuestras tortas", sitio + "tortas/"], ["Armá tu torta", sitio + "arma-tu-torta/"],
+                   ["Pastelería", sitio + "pasteleria/"], ["Nosotras", sitio + "nosotras/"]]
+    assert pg.get_attribute('.cab-nav a[aria-current="page"]', "href") == "../arma-tu-torta/"
     assert pg.get_attribute(".cab-marca", "href") == "../"
     assert pg.get_attribute(".cab [data-mi-pedido]", "href") == "../tortas/#pedido"
     assert pg.eval_on_selector_all(".menu nav a", "as => as.map(a => a.textContent)") == MENU
@@ -21,7 +21,7 @@ def test_la_pagina_es_solo_la_comanda(abrir):
     assert pg.get_attribute(".ticket-portada .btn-2", "href") == "../tortas/"
     assert pg.text_content(".ticket-portada .btn-2") == "Ver nuestras tortas"
     assert pg.eval_on_selector_all(".pie-links a[href^='../']", "as => as.map(a => a.getAttribute('href'))") == \
-        ["../tortas/", "../decoradas/", "../antojos/", "../#nosotras"]
+        ["../tortas/", "../arma-tu-torta/", "../pasteleria/", "../nosotras/"]
 
 
 def test_los_pasos_tienen_su_ancla_y_titulo_enfocable(abrir):

@@ -3,4 +3,4 @@ import pytest
 
 @pytest.fixture
 def ruta():
-    return "decoradas/"
+    return "arma-tu-torta/"
