@@ -15,7 +15,7 @@
 .producto-foto img{width:100%; height:100%; object-fit:cover}
 .mov .producto-foto img{transition:transform .4s}
 .mov .producto:hover .producto-foto img{transform:scale(1.035)}
-.sin-foto{display:flex; align-items:flex-end; padding:clamp(14px,1.6vw,22px)}
+.sin-foto{display:flex; align-items:flex-end; padding:clamp(14px,1.6vw,22px) 70px clamp(14px,1.6vw,22px) clamp(14px,1.6vw,22px)}
 .sin-foto span{font-size:clamp(22px,2.2vw,32px); line-height:1.05; letter-spacing:-.02em; color:var(--marron)}
 .producto-agregar{position:absolute; right:14px; bottom:14px; width:44px; height:44px; display:grid; place-items:center; border:0; border-radius:50%; background:var(--blanco); color:var(--marron); font-family:var(--ui); font-size:26px; font-weight:300; line-height:1; cursor:pointer; transition:background-color .2s, color .2s}
 .producto-agregar:hover{background:var(--marron); color:var(--blanco)}

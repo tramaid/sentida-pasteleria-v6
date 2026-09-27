@@ -35,6 +35,19 @@ El prefijo `54 9` es obligatorio para que WhatsApp resuelva móviles argentinos;
 - Varias fotos del banco llevan el sello de la marca anterior y dos tarjetas muestran un producto distinto al de su título (ver `QA.md`).
 - No hay definición sobre precios, detalle por producto ni zona de entrega.
 
+## v6: el estilo de sentida-v2 (27/09/2026)
+
+Rama `v6`. La cara de la propuesta `tramaid/sentida-v2`, que les gustó a las
+dueñas, sobre el sitio que funciona de la v5. Spec en
+`docs/superpowers/specs/2026-09-26-v6-estilo-v2-design.md`; plan en
+`docs/superpowers/plans/2026-09-26-v6-estilo-v2.md`.
+
+- `herramientas/generar_tienda.py` ahora arma también la cabecera, la marquesina
+  y el pie de `index.html`, `nosotras/` y `arma-tu-torta/`, y el bloque «Lo que
+  más nos piden» de la home (productos con `"destacado": true`). Después de
+  tocar el catálogo o esas partes, correrlo.
+- El pedido se abre como panel lateral. Los títulos van en Erode 400.
+
 ## v5: la home con tres puertas (25/09/2026)
 
 Rama `v5`. Pedido de la clienta: al entrar, elegir primero qué se busca. Spec en
