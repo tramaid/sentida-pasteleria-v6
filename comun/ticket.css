@@ -57,9 +57,12 @@
 .mov .carrito-item.nueva{animation:imprimir .3s cubic-bezier(.16,1,.3,1)}
 .carrito-vacio{padding:10px 0; font-size:14px; line-height:1.5; color:var(--marron-medio)}
 
-.carrito-dialogo{border:0; padding:0; background:transparent; color:var(--marron); font-family:var(--ui); width:min(460px, calc(100vw - 24px)); max-height:calc(100dvh - 24px)}
+/* El pedido: un panel que entra desde la derecha, como el de sentida-v2. */
+.carrito-dialogo{position:fixed; inset:0 0 0 auto; margin:0; width:min(480px,100vw); height:100vh; height:100dvh; max-width:none; max-height:none; border:0; padding:0; background:var(--blanco); color:var(--marron); font-family:var(--ui); box-shadow:-8px 0 30px rgba(33,24,19,.19)}
 .carrito-dialogo::backdrop{background:var(--velo, rgba(64,45,33,.45))}
-.carrito-in{position:relative; display:flex; flex-direction:column; gap:16px; padding:60px 16px 16px; max-height:inherit; overflow:auto; background:var(--crema); border-radius:2px}
+.carrito-in{position:relative; display:flex; flex-direction:column; gap:16px; height:100%; padding:72px 24px 24px; overflow:auto; overscroll-behavior:contain; background:var(--blanco)}
+.mov .carrito-dialogo[open]{animation:cajon .3s cubic-bezier(.2,.7,.2,1)}
+@keyframes cajon{from{transform:translateX(100%)}}
 .carrito-cerrar{position:absolute; top:8px; right:8px; z-index:1; width:44px; height:44px; display:grid; place-items:center; background:var(--blanco); color:var(--marron); border:1px solid var(--beige); border-radius:2px; cursor:pointer}
 .carrito-cerrar .ico{width:18px; height:18px}
 .carrito-form{display:flex; flex-direction:column; align-items:flex-start; gap:14px}
@@ -79,4 +82,4 @@
 /* En la home no hay base.css: los botones del diálogo traen su tipografía y sus colores. */
 .carrito-dialogo .btn{font-family:var(--ui); cursor:pointer}
 .carrito-dialogo .btn-2{background:transparent; color:var(--marron); border-color:var(--marron)}
-.carrito-dialogo .btn-2:hover{background:var(--blanco); color:var(--marron)}
+.carrito-dialogo .btn-2:hover{background:var(--crema); color:var(--marron)}

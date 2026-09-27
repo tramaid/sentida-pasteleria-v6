@@ -212,3 +212,23 @@ def test_una_fecha_pasada_no_se_manda(abrir):
     assert pg.text_content("#carrito-dialogo [data-falta]") == "Elegí una fecha de hoy en adelante."
     assert pg.evaluate("document.activeElement.id") == "carrito-fecha"
     assert len(pg.context.pages) == 1
+
+
+def test_el_pedido_es_un_panel_a_la_derecha(abrir):
+    pg = abrir(init=UNO)
+    abrir_pedido(pg)
+    # Espera a que termine la entrada desde la derecha.
+    pg.wait_for_function("document.getElementById('carrito-dialogo').getAnimations().every(a => a.playState === 'finished')")
+    r = pg.evaluate("(() => { const b = document.getElementById('carrito-dialogo').getBoundingClientRect();"
+                    " return [Math.round(b.right), Math.round(b.top), Math.round(b.height), Math.round(b.width)]; })()")
+    assert r == [1440, 0, 900, 480]
+
+
+def test_en_el_celular_acostado_se_llega_a_mandar(abrir):
+    pg = abrir(844, 390, init=UNO, is_mobile=True, has_touch=True)
+    abrir_pedido(pg)
+    enviar = pg.locator("#carrito-dialogo [type=submit]")
+    enviar.scroll_into_view_if_needed()
+    assert enviar.is_visible()
+    caja = enviar.bounding_box()
+    assert caja["y"] >= 0 and caja["y"] + caja["height"] <= 390
