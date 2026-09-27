@@ -34,12 +34,62 @@
 .mov .puerta .circulo img{transition:transform .3s}
 .mov .puerta:hover .circulo img{transform:scale(1.04)}
 
+/* Todo empieza con una idea */
+.idea{background:var(--crema)}
+.idea-in{display:grid; grid-template-columns:47% 53%; align-items:center}
+.idea-txt{padding-right:70px; align-self:start}
+.idea-txt .eti{margin-bottom:24px}
+.idea-txt h2{font-size:clamp(2.9375rem,5vw,4.5rem); line-height:1.1; letter-spacing:-.045em; margin-bottom:25px}
+.idea-txt > p:not(.eti){max-width:410px; margin-bottom:32px; font-size:16px; line-height:1.8; color:var(--marron-medio)}
+.idea-foto{height:525px; overflow:hidden}
+.idea-foto img{width:100%; height:100%; object-fit:cover; object-position:center 40%}
+.idea-pasos{grid-column:2; list-style:none; margin:44px 0 0; padding:0}
+.idea-pasos li{display:grid; grid-template-columns:55px 1fr; column-gap:10px; padding:19px 0; border-top:1px solid var(--beige)}
+.idea-n{grid-row:span 2; font-size:24px; line-height:1.2; color:var(--celeste-profundo)}
+.idea-pasos h3{font-size:24px; line-height:1.1}
+.idea-pasos p{margin-top:5px; font-size:14px; line-height:1.6; color:var(--marron-medio)}
+
+/* Somos Anto y Nadia */
+.anto-nadia{display:grid; grid-template-columns:54% 40%; gap:6%; align-items:center}
+.an-fotos{position:relative; height:640px}
+.an-grande{position:absolute; left:0; top:0; width:68%; height:77%; object-fit:cover; object-position:center 35%}
+.an-chica{position:absolute; right:0; bottom:0; width:51%; height:51%; object-fit:cover; border:10px solid var(--blanco)}
+.an-marca{position:absolute; right:5%; top:6%; font-size:35px; letter-spacing:.12em; color:var(--celeste-profundo)}
+.an-txt .eti{margin-bottom:26px}
+.an-txt h2{font-size:clamp(3rem,5vw,4.6875rem); line-height:1.05; letter-spacing:-.045em; margin-bottom:30px}
+.an-txt > p:not(.eti){max-width:390px; margin-bottom:18px; font-size:15px; line-height:1.9; color:var(--marron-medio)}
+
+/* Banda celeste */
+.banda{display:grid; grid-template-columns:1fr 1fr; height:490px; background:var(--celeste)}
+.banda-foto{overflow:hidden}
+.banda-foto img{width:100%; height:100%; object-fit:cover; object-position:center 52%}
+.banda-txt{display:flex; flex-direction:column; justify-content:center; padding:8vw}
+.banda-frase{margin:35px 0; font-size:clamp(2.625rem,4.4vw,4.0625rem); line-height:1.13; letter-spacing:-.04em; color:var(--marron)}
+.banda-linea{display:block; width:85px; height:2px; background:var(--celeste-filete)}
+
+/* Cierre */
+.cierre{display:flex; flex-direction:column; align-items:center; text-align:center; padding-block:clamp(95px,15vh,140px)}
+.cierre-sello{width:90px; height:90px; margin-bottom:25px; border-radius:50%}
+.cierre .eti{margin-bottom:20px}
+.cierre h2{font-size:clamp(3.4375rem,6vw,5.625rem); line-height:1.05; letter-spacing:-.045em}
+.cierre > p:not(.eti):not(.botones){max-width:430px; margin:26px auto 32px; font-size:15px; color:var(--marron-medio)}
+.cierre .botones{justify-content:center}
+
 @media (max-width:1080px){
   .circulo-grande{right:-7%}
   .circulo-chico{width:180px}
   .puerta{padding:25px 15px}
 }
 @media (max-width:899px){
+  .idea-in{display:flex; flex-direction:column; align-items:stretch}
+  .idea-txt{padding:0}
+  .idea-foto{height:430px; margin-top:42px}
+  .idea-pasos{margin-top:20px}
+  .anto-nadia{display:flex; flex-direction:column; gap:44px}
+  .an-fotos{width:100%; height:440px}
+  .banda{grid-template-columns:1fr; height:auto}
+  .banda-foto{height:350px}
+  .banda-txt{padding:70px 25px}
   .hero-in{display:flex; flex-direction:column-reverse; min-height:0; padding-block:25px 55px}
   .hero-arte{position:relative; left:auto; right:auto; width:100%; height:335px}
   .circulo-grande{width:min(78vw,310px); top:0; right:3%; border-width:6px}
