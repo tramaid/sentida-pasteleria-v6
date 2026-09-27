@@ -4,7 +4,6 @@
    «Hecho a mano». Cierra con las tres puertas.
    ============================================================ */
 
-main{padding-top:var(--cab)}
 .foto{overflow:hidden; border-radius:2px}
 .foto img{width:100%; height:100%; object-fit:cover}
 

@@ -9,7 +9,7 @@
    Portada: la comanda en blanco, al centro
    ------------------------------------------------------------ */
 .portada{
-  margin-top:var(--cab); min-height:calc(100svh - var(--cab)); background:var(--crema);
+  min-height:calc(100svh - var(--cab)); background:var(--crema);
   display:grid; grid-template-columns:minmax(0,1fr) minmax(320px,500px) minmax(0,1fr);
   grid-template-areas:"a t b" "baja baja baja"; align-items:center;
   column-gap:clamp(20px,4vw,64px); row-gap:28px; padding:clamp(32px,6vh,72px) var(--lateral) clamp(28px,5vh,56px);
@@ -147,8 +147,8 @@
    ------------------------------------------------------------ */
 @media (max-width:899px){
   .portada{grid-template-columns:1fr 1fr; grid-template-areas:"a b" "t t" "baja baja"; min-height:0; row-gap:20px}
-  /* Fotos más bajas que anchas: con la línea «En seis pasos…» el botón tiene que entrar en el primer frame. */
-  .portada-foto-a,.portada-foto-b{width:100%; margin:0; aspect-ratio:5/4; justify-self:stretch}
+  /* Fotos bien apaisadas: con la marquesina y la línea «En seis pasos…», el botón tiene que entrar en el primer frame. */
+  .portada-foto-a,.portada-foto-b{width:100%; margin:0; aspect-ratio:16/10; justify-self:stretch}
   .portada-baja{text-align:left; justify-self:start}
 
   .comanda-in{display:block}

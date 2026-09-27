@@ -9,7 +9,7 @@ def test_empezar_lleva_al_paso_y_enfoca_su_titulo(abrir):
     margen = pg.evaluate("parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)")
     assert abs(pg.evaluate("document.getElementById('comanda').getBoundingClientRect().top") - margen) < 2
     pg.wait_for_timeout(900)
-    assert pg.evaluate("document.getAnimations().filter(a => a.playState === 'running').length") == 0
+    assert pg.evaluate("document.getAnimations().filter(a => a.playState === 'running' && a.animationName !== 'marquesina').length") == 0
 
 
 def test_doble_toque_una_sola_animacion(abrir):

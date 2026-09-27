@@ -3,7 +3,6 @@
    Grilla de productos y, al costado, el ticket «Tu pedido». Sin
    JavaScript, cada tarjeta se pide con su enlace de WhatsApp.
    ============================================================ */
-.tienda{margin-top:var(--cab)}
 .tienda-in{max-width:var(--ancho); margin:0 auto; padding:clamp(40px,7vh,80px) var(--lateral) clamp(72px,12vh,120px); display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:clamp(24px,4vw,64px); align-items:start}
 .tienda-cab{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:16px 40px; margin-bottom:clamp(28px,5vh,48px)}
 .tienda-cab h1{font-size:clamp(3rem,6vw,5.5rem); line-height:.9; letter-spacing:-.03em}

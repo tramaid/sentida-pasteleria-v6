@@ -4,7 +4,8 @@ import subprocess
 import sys
 
 RAIZ = pathlib.Path(__file__).resolve().parents[2]
-PAGINAS = [RAIZ / "tortas" / "index.html", RAIZ / "pasteleria" / "index.html"]
+PAGINAS = [RAIZ / "tortas" / "index.html", RAIZ / "pasteleria" / "index.html",
+           RAIZ / "index.html", RAIZ / "nosotras" / "index.html", RAIZ / "arma-tu-torta" / "index.html"]
 
 
 def test_el_html_generado_esta_al_dia():

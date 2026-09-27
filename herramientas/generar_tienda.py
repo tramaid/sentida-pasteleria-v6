@@ -1,5 +1,6 @@
 """Genera las páginas de la tienda, tortas/index.html y pasteleria/index.html,
-a partir de datos/catalogo.json.
+a partir de datos/catalogo.json, y la cabecera y el pie de las páginas escritas
+a mano (index, nosotras, arma-tu-torta).
 
 Uso, desde sentida-site/:
     python herramientas/generar_tienda.py
@@ -9,6 +10,7 @@ build. Esas páginas no se editan a mano: se cambia el catálogo (o se suma
 una foto con preparar_foto.py) y se vuelve a correr esto.
 """
 import html
+import re
 import json
 import pathlib
 from urllib.parse import quote
@@ -23,11 +25,12 @@ TAMANOS_TARJETA = "(max-width: 1099px) 45vw, 24vw"
 TAMANOS_MESA = "(max-width: 899px) 45vw, 18vw"
 
 MENU = [
-    ("tortas", "Nuestras tortas", "../tortas/"),
-    ("arma-tu-torta", "Armá tu torta", "../arma-tu-torta/"),
-    ("pasteleria", "Pastelería", "../pasteleria/"),
-    ("nosotras", "Nosotras", "../nosotras/"),
+    ("tortas", "Nuestras tortas", "tortas/"),
+    ("arma-tu-torta", "Armá tu torta", "arma-tu-torta/"),
+    ("pasteleria", "Pastelería", "pasteleria/"),
+    ("nosotras", "Nosotras", "nosotras/"),
 ]
+MARQUESINA_TEXTO = ["Lo soñás, lo creamos", "Pastelería artesanal", "Tortas a medida", "Hecho a mano"]
 
 # La mesa dulce de Pastelería: (foto, epígrafe, texto alternativo).
 MESA = [
@@ -61,29 +64,6 @@ PANEL = """    <aside class="tienda-panel" id="pedido" aria-labelledby="pedido-t
       <button type="button" class="btn btn-1 tienda-terminar" data-carrito-abrir hidden>Terminar pedido</button>
     </aside>"""
 
-PIE = """<footer class="pie">
-  <div class="pie-in envoltorio">
-    <div class="pie-marca">
-      <img src="../assets/SENTIDASELLO.svg" alt="" width="88" height="88" loading="lazy">
-      <p class="display">Lo soñás,<br>lo creamos.</p>
-    </div>
-    <nav class="pie-links" aria-label="Pie">
-      <ul role="list">
-        <li><a href="../tortas/">Nuestras tortas</a></li>
-        <li><a href="../arma-tu-torta/">Armá tu torta</a></li>
-        <li><a href="../pasteleria/">Pastelería</a></li>
-        <li><a href="../nosotras/">Nosotras</a></li>
-      </ul>
-      <ul role="list">
-        <li><a href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener" aria-describedby="nueva-pestana">WhatsApp</a></li>
-        <li><a href="https://www.instagram.com/sentidapasteleria/" target="_blank" rel="noopener" aria-describedby="nueva-pestana">@sentidapasteleria</a></li>
-      </ul>
-      <p>Martínez, San Isidro<br>Solo por encargo</p>
-    </nav>
-  </div>
-  <div class="pie-fin envoltorio"><span>© 2026 SENTIDA Pastelería</span><span>Propuesta de TRAMA</span></div>
-</footer>"""
-
 TIRA = """<div class="tira-pedido" hidden>
   <span class="tira-pedido-t">Tu pedido</span>
   <span class="tira-pedido-n">0 productos</span>
@@ -114,27 +94,34 @@ def img(nombre, alt, sizes):
             f'width="{ancho}" height="{alto}" alt="{esc(alt)}" loading="lazy" decoding="async">')
 
 
-def enlaces(actual, ancho):
+def enlaces(actual, ancho, raiz):
     out = []
     for clave, texto, href in MENU:
         extra = ' aria-current="page"' if clave == actual else ""
         if ancho and clave == "nosotras":
             extra += ' class="solo-ancho"'
-        out.append(f'<a href="{href}"{extra}>{texto}</a>')
+        out.append(f'<a href="{raiz}{href}"{extra}>{texto}</a>')
     return out
 
 
-def cabecera(actual):
-    nav = "".join(enlaces(actual, ancho=True))
-    menu = "\n          ".join(enlaces(actual, ancho=False))
+def marquesina():
+    tramo = " <i></i> ".join(MARQUESINA_TEXTO) + " <i></i>"
+    return (f'<div class="marquesina" aria-hidden="true"><div class="marquesina-pista">'
+            f'<span>{tramo}</span><span>{tramo}</span></div></div><!-- /marquesina -->')
+
+
+def cabecera(actual, raiz="../"):
+    nav = "".join(enlaces(actual, True, raiz))
+    menu = "\n          ".join(enlaces(actual, False, raiz))
+    inicio = raiz or "./"
     return f"""<header class="cab">
   <div class="cab-in">
+    <a class="cab-marca" href="{inicio}" aria-label="SENTIDA Pastelería, inicio"><span class="marca-texto">SENTIDA<span class="marca-punto" aria-hidden="true">.</span></span></a>
     <nav class="cab-nav" aria-label="Secciones">
       {nav}
     </nav>
-    <a class="cab-marca" href="../" aria-label="SENTIDA Pastelería, inicio"><img src="../assets/logo-sentida.svg" alt="SENTIDA Pastelería" width="116" height="44"></a>
     <div class="cab-acc">
-      <a class="mi-pedido" href="../tortas/#pedido" data-mi-pedido><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bolsa"/></svg><span class="mi-pedido-t">Mi pedido</span><span class="mi-pedido-n" hidden>0</span></a>
+      <a class="mi-pedido" href="{raiz}tortas/#pedido" data-mi-pedido><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bolsa"/></svg><span class="mi-pedido-t">Mi pedido</span><span class="mi-pedido-n" hidden>0</span></a>
       <details class="menu">
         <summary><span class="menu-abrir">Menú</span><span class="menu-cerrar">Cerrar</span><svg class="ico menu-i-abrir" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg><svg class="ico menu-i-cerrar" aria-hidden="true" focusable="false"><use href="#i-cerrar"/></svg></summary>
         <nav aria-label="Menú">
@@ -143,7 +130,53 @@ def cabecera(actual):
       </details>
     </div>
   </div>
-</header>"""
+</header>
+{marquesina()}"""
+
+
+def pie(raiz="../"):
+    wa_anto = wa("Hola SENTIDA, quiero hacer un pedido.")
+    wa_nadia = f"https://wa.me/5491131459646?text={quote('Hola SENTIDA, quiero hacer un pedido.', safe='')}"
+    secciones = "\n".join(f'          <li><a href="{raiz}{href}">{texto}</a></li>' for _, texto, href in MENU)
+    return f"""<footer class="pie">
+  <div class="pie-in envoltorio">
+    <div class="pie-marca">
+      <p class="pie-nombre">SENTIDA<span aria-hidden="true">.</span></p>
+      <p class="pie-lema display">Lo soñás, lo creamos.</p>
+    </div>
+    <nav class="pie-links" aria-label="Pie">
+      <div>
+        <p class="pie-eti">Explorá</p>
+        <ul role="list">
+{secciones}
+        </ul>
+      </div>
+      <div>
+        <p class="pie-eti">Escribinos</p>
+        <ul role="list">
+          <li><a href="{wa_anto}" target="_blank" rel="noopener" aria-describedby="nueva-pestana">WhatsApp de Anto</a></li>
+          <li><a href="{wa_nadia}" target="_blank" rel="noopener" aria-describedby="nueva-pestana">WhatsApp de Nadia</a></li>
+          <li><a href="https://www.instagram.com/sentidapasteleria/" target="_blank" rel="noopener" aria-describedby="nueva-pestana">@sentidapasteleria</a></li>
+        </ul>
+        <p>Martínez, San Isidro<br>Solo por encargo</p>
+      </div>
+    </nav>
+    <img class="pie-sello" src="{raiz}assets/SENTIDASELLO.svg" alt="" width="105" height="105" loading="lazy">
+  </div>
+  <div class="pie-fin envoltorio"><span>© 2026 SENTIDA Pastelería · Hecho a mano</span><span>Diseño TRAMA</span></div>
+</footer>"""
+
+
+BLOQUE_CAB = re.compile(r'<header class="cab">.*?</header>(?:\n<div class="marquesina".*?<!-- /marquesina -->)?', re.S)
+BLOQUE_PIE = re.compile(r'<footer class="pie">.*?</footer>', re.S)
+A_MANO = [("index.html", None, ""), ("nosotras/index.html", "nosotras", "../"),
+          ("arma-tu-torta/index.html", "arma-tu-torta", "../")]
+
+
+def comunes(html_pagina, actual, raiz):
+    assert BLOQUE_CAB.search(html_pagina) and BLOQUE_PIE.search(html_pagina), "falta la cabecera o el pie"
+    html_pagina = BLOQUE_CAB.sub(lambda m: cabecera(actual, raiz), html_pagina, count=1)
+    return BLOQUE_PIE.sub(lambda m: pie(raiz), html_pagina, count=1)
 
 
 def tarjeta(p, tipos):
@@ -232,7 +265,7 @@ def pagina(clave, datos):
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <p id="nueva-pestana" hidden>Se abre WhatsApp o Instagram en otra pestaña.</p>
 
-{cabecera(clave)}
+{cabecera(clave, "../")}
 
 <main id="contenido">
 <section class="tienda" aria-labelledby="tienda-t">
@@ -251,7 +284,7 @@ def pagina(clave, datos):
 </section>
 </main>
 
-{PIE}
+{pie("../")}
 
 {TIRA}
 </body>
@@ -266,6 +299,10 @@ def main():
         destino.parent.mkdir(exist_ok=True)
         destino.write_text(pagina(clave, datos), encoding="utf-8", newline="\n")
         print(destino.relative_to(RAIZ).as_posix())
+    for ruta, actual, raiz in A_MANO:
+        destino = RAIZ / ruta
+        destino.write_text(comunes(destino.read_text(encoding="utf-8"), actual, raiz), encoding="utf-8", newline="\n")
+        print(ruta)
 
 
 if __name__ == "__main__":

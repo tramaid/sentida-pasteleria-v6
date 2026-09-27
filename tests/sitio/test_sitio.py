@@ -49,19 +49,49 @@ def test_la_misma_cabecera(abrir, sitio, pagina):
 
 
 @pytest.mark.parametrize("pagina", PAGINAS)
-@pytest.mark.parametrize("w", [1100, 1280, 1440, 1920])
+@pytest.mark.parametrize("w", [1100, 1180, 1280, 1440, 1920])
 def test_la_cabecera_no_se_pisa(abrir, pagina, w):
     pg = abrir(w, 900, pagina=pagina)
     r = pg.evaluate("""(() => {
         const vis = [...document.querySelectorAll('.cab-nav a')].filter(a => a.getClientRects().length);
         const m = document.querySelector('.cab-marca').getBoundingClientRect();
         const p = document.querySelector('.cab [data-mi-pedido]').getBoundingClientRect();
-        return {n: vis.length, der: Math.max(...vis.map(a => a.getBoundingClientRect().right)),
-                marcaIzq: m.left, marcaDer: m.right, pedidoIzq: p.left};
+        return {n: vis.length, izq: Math.min(...vis.map(a => a.getBoundingClientRect().left)),
+                der: Math.max(...vis.map(a => a.getBoundingClientRect().right)),
+                marcaDer: m.right, pedidoIzq: p.left};
     })()""")
     assert r["n"] == (4 if w >= 1280 else 3)
-    assert r["der"] < r["marcaIzq"]
-    assert r["marcaDer"] < r["pedidoIzq"]
+    assert r["marcaDer"] < r["izq"]
+    assert r["der"] < r["pedidoIzq"]
+
+
+@pytest.mark.parametrize("pagina", PAGINAS)
+def test_la_marca_en_texto(abrir, pagina):
+    pg = abrir(pagina=pagina)
+    assert pg.text_content(".cab-marca").strip() == "SENTIDA."
+    assert pg.get_attribute(".cab-marca", "aria-label") == "SENTIDA Pastelería, inicio"
+    assert pg.get_attribute(".marca-punto", "aria-hidden") == "true"
+
+
+@pytest.mark.parametrize("pagina", PAGINAS)
+def test_la_marquesina(abrir, pagina):
+    pg = abrir(pagina=pagina)
+    m = pg.locator(".marquesina")
+    assert m.count() == 1
+    assert m.get_attribute("aria-hidden") == "true"
+    assert pg.evaluate("document.querySelector('.cab').nextElementSibling.classList.contains('marquesina')")
+    assert pg.evaluate("getComputedStyle(document.querySelector('.marquesina-pista')).animationName") == "marquesina"
+    quieta = abrir(pagina=pagina, reduced_motion="reduce")
+    assert quieta.evaluate("getComputedStyle(document.querySelector('.marquesina-pista')).animationName") == "none"
+
+
+@pytest.mark.parametrize("pagina", PAGINAS)
+def test_el_pie_nuevo(abrir, sitio, pagina):
+    pg = abrir(pagina=pagina)
+    assert pg.eval_on_selector_all(".pie-links a", "as => as.map(a => a.href)")[:4] ==         [sitio + "tortas/", sitio + "arma-tu-torta/", sitio + "pasteleria/", sitio + "nosotras/"]
+    wa = pg.eval_on_selector_all(".pie-links a[href^='https://wa.me/']", "as => as.map(a => a.href)")
+    assert [w.split("?")[0] for w in wa] == ["https://wa.me/5491158300787", "https://wa.me/5491131459646"]
+    assert pg.text_content(".pie-nombre").strip() == "SENTIDA."
 
 
 @pytest.mark.parametrize("pagina", PAGINAS)
