@@ -50,3 +50,14 @@ def test_el_generador_saltea_los_ocultos_y_resuelve_la_falta_de_foto():
 def test_con_destacados_reemplaza_solo_entre_marcadores():
     base = "a<!-- destacados:inicio -->viejo<!-- destacados:fin -->z"
     assert G.con_destacados(base, "nuevo") == "a<!-- destacados:inicio -->\nnuevo\n<!-- destacados:fin -->z"
+
+
+def test_en_el_celular_las_tarjetas_quedan_prolijas(abrir):
+    pg = abrir(360, 740, is_mobile=True, has_touch=True)
+    # El número «01 / 06» no se parte en dos renglones.
+    assert pg.eval_on_selector_all("#destacados .producto-meta span:last-child",
+                                   "ss => ss.every(s => s.getClientRects().length === 1)")
+    # Con JavaScript, sin nada en el pedido, no queda una franja vacía debajo de cada tarjeta.
+    assert pg.eval_on_selector_all("#destacados .producto-acc", "as => Math.max(...as.map(a => a.offsetHeight))") < 12
+    # Los botones de «¿Tenés otra idea?» van centrados como el texto.
+    assert pg.evaluate("getComputedStyle(document.querySelector('.destacados-pie .botones')).justifyContent") == "center"

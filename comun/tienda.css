@@ -24,6 +24,9 @@
 .producto-desc{margin-top:4px; font-size:14px; line-height:1.5; color:var(--marron-medio)}
 .producto-precio{margin-top:6px; font-size:12px; font-weight:600}
 .producto-acc{margin-top:auto; padding-top:10px; display:flex; align-items:center; min-height:52px}
+.producto-meta span:last-child{white-space:nowrap}
+/* Con JavaScript el enlace de WhatsApp se esconde: sin nada en el pedido, no queda franja vacía. */
+.js .producto:not(.en-pedido) .producto-acc{min-height:0; padding-top:0}
 .producto.en-pedido .producto-foto{outline-color:var(--beige)}
 .producto.marcada .producto-foto{outline-color:var(--marron)}
 
@@ -43,6 +46,7 @@
 
 .productos-destacados{grid-template-columns:repeat(3,minmax(0,1fr))}
 .destacados{background:#F9F3EE}
+.destacados-pie .botones{justify-content:center}
 .destacados-pie{margin-top:clamp(50px,8vh,75px); display:flex; flex-direction:column; align-items:center; gap:18px; text-align:center; color:var(--marron-medio)}
 
 @media (max-width:1099px){
