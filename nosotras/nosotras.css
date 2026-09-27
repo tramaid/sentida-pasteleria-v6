@@ -1,5 +1,5 @@
 /* ============================================================
-   SENTIDA · Nosotras (v5)
+   SENTIDA · Nosotras (v6, estilo sentida-v2)
    Lo que antes estaba en la home: quiénes son, el manifiesto y
    «Hecho a mano». Cierra con las tres puertas.
    ============================================================ */
@@ -9,12 +9,12 @@
 
 /* Quiénes somos */
 .nos{padding-block:clamp(64px,12vh,140px) clamp(72px,12vh,140px); display:flex; flex-direction:column; gap:clamp(32px,6vh,72px)}
-.nos h1{font-size:clamp(2.75rem,7vw,7.5rem); line-height:.9; letter-spacing:-.035em; text-wrap:balance}
-.nos h1 span{color:var(--marron-medio)}
+.nos h1{font-size:clamp(2.75rem,6vw,5.5rem); line-height:1.02; letter-spacing:-.045em; text-wrap:balance}
+.nos .eti{margin-bottom:-12px}
 .nos-grilla{display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:clamp(12px,2vw,28px); align-items:start}
 .nos-a{grid-column:1 / span 5}
 .nos-b{grid-column:6 / span 4; margin-top:clamp(40px,16vh,180px)}
-.nos-a .foto,.nos-b .foto{aspect-ratio:3/4}
+.nos-a .foto,.nos-b .foto{aspect-ratio:3/4; border:8px solid var(--crema); box-shadow:0 0 0 1px var(--celeste-filete)}
 .nos-foto figcaption{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:4px 12px; padding-top:12px; font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase}
 .nos-foto figcaption a{display:inline-flex; align-items:center; gap:8px; min-height:44px}
 .nos-texto{grid-column:10 / span 3; display:flex; flex-direction:column; gap:16px}
@@ -22,13 +22,14 @@
 .nos-etiqueta{width:120px; height:120px; border-radius:50%; margin-top:8px}
 
 /* El manifiesto, quieto */
-.manif{background:var(--crema)}
+.manif{background:var(--celeste)}
+.manif p{color:var(--marron)}
 .manif .envoltorio{padding-block:clamp(72px,14vh,160px)}
 .manif p{font-size:clamp(1.75rem,3.6vw,3.5rem); line-height:1.12; letter-spacing:-.012em; max-width:24em; text-wrap:pretty}
 
 /* Hecho a mano */
 .mano{display:grid; grid-template-columns:1fr 1fr; background:var(--blanco)}
-.mano-foto{min-height:560px}
+.mano-foto{min-height:560px; border:8px solid var(--crema); box-shadow:0 0 0 1px var(--celeste-filete)}
 .mano-foto img{width:100%; height:100%; object-fit:cover}
 .mano-txt{align-self:center; padding:clamp(48px,8vh,96px) var(--lateral); display:flex; flex-direction:column; gap:28px; max-width:640px}
 .mano h2{font-size:clamp(2.25rem,4.4vw,4.5rem); line-height:.98; letter-spacing:-.025em; text-wrap:balance}

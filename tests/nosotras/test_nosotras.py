@@ -21,3 +21,10 @@ def test_cierra_con_las_tres_puertas(abrir):
     pg = abrir()
     assert pg.eval_on_selector_all(".nos-puertas a", "as => as.map(a => a.getAttribute('href'))") == \
         ["../tortas/", "../arma-tu-torta/", "../pasteleria/"]
+
+
+def test_nosotras_con_el_estilo_nuevo(abrir):
+    pg = abrir()
+    assert pg.text_content(".nos .eti") == "De nuestras manos a tu mesa"
+    assert pg.locator(".nos h1 .acento").count() == 1
+    assert pg.evaluate("getComputedStyle(document.querySelector('.manif')).backgroundColor") == "rgb(221, 230, 237)"
