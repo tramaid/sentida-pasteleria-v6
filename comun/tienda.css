@@ -5,20 +5,25 @@
    ============================================================ */
 .tienda-in{max-width:var(--ancho); margin:0 auto; padding:clamp(40px,7vh,80px) var(--lateral) clamp(72px,12vh,120px); display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:clamp(24px,4vw,64px); align-items:start}
 .tienda-cab{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:16px 40px; margin-bottom:clamp(28px,5vh,48px)}
-.tienda-cab h1{font-size:clamp(3rem,6vw,5.5rem); line-height:.9; letter-spacing:-.03em}
+.tienda-cab h1{font-size:clamp(3rem,5.4vw,4.75rem); line-height:1; letter-spacing:-.045em}
+.tienda-cab .eti{margin-bottom:18px}
 .tienda-cab p{font-size:16px; line-height:1.6; color:var(--marron-medio); max-width:44ch}
 
-.productos{list-style:none; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(28px,3vw,40px) clamp(14px,1.6vw,24px)}
-.producto{display:flex; flex-direction:column; gap:8px}
-.producto-foto{aspect-ratio:4/5; overflow:hidden; border-radius:2px; background:var(--crema); outline:2px solid transparent; outline-offset:4px; transition:outline-color .3s}
+.productos{list-style:none; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(32px,5vh,60px) clamp(12px,1.8vw,26px)}
+.producto{display:flex; flex-direction:column}
+.producto-foto{position:relative; aspect-ratio:4/4.5; overflow:hidden; background:var(--crema); outline:2px solid transparent; outline-offset:4px; transition:outline-color .3s}
 .producto-foto img{width:100%; height:100%; object-fit:cover}
+.mov .producto-foto img{transition:transform .4s}
+.mov .producto:hover .producto-foto img{transform:scale(1.035)}
 .sin-foto{display:flex; align-items:flex-end; padding:clamp(14px,1.6vw,22px)}
-.sin-foto span{font-size:clamp(22px,2.2vw,32px); line-height:1.05; letter-spacing:-.01em; color:var(--marron)}
-.producto-tipo{margin-top:6px; font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--celeste-profundo)}
-.producto h3{margin-top:4px; font-size:clamp(20px,1.7vw,24px); line-height:1.1}
-.producto-desc{font-size:14px; line-height:1.5; color:var(--marron-medio)}
-.producto-acc{margin-top:auto; padding-top:8px; display:flex; align-items:center; min-height:56px}
-.producto-agregar{width:100%; height:auto; padding:8px 12px; line-height:1.3; text-align:center}
+.sin-foto span{font-size:clamp(22px,2.2vw,32px); line-height:1.05; letter-spacing:-.02em; color:var(--marron)}
+.producto-agregar{position:absolute; right:14px; bottom:14px; width:44px; height:44px; display:grid; place-items:center; border:0; border-radius:50%; background:var(--blanco); color:var(--marron); font-family:var(--ui); font-size:26px; font-weight:300; line-height:1; cursor:pointer; transition:background-color .2s, color .2s}
+.producto-agregar:hover{background:var(--marron); color:var(--blanco)}
+.producto-meta{display:flex; justify-content:space-between; gap:12px; margin:18px 0 6px; font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--celeste-profundo)}
+.producto h3{font-size:clamp(22px,1.9vw,27px); line-height:1.2; letter-spacing:-.03em}
+.producto-desc{margin-top:4px; font-size:14px; line-height:1.5; color:var(--marron-medio)}
+.producto-precio{margin-top:6px; font-size:12px; font-weight:600}
+.producto-acc{margin-top:auto; padding-top:10px; display:flex; align-items:center; min-height:52px}
 .producto.en-pedido .producto-foto{outline-color:var(--beige)}
 .producto.marcada .producto-foto{outline-color:var(--marron)}
 
@@ -36,11 +41,17 @@
 
 .tira-pedido{display:none}
 
+.productos-destacados{grid-template-columns:repeat(3,minmax(0,1fr))}
+.destacados{background:#F9F3EE}
+.destacados-pie{margin-top:clamp(50px,8vh,75px); display:flex; flex-direction:column; align-items:center; gap:18px; text-align:center; color:var(--marron-medio)}
+
 @media (max-width:1099px){
   .tienda-in{grid-template-columns:minmax(0,1fr) 300px}
   .productos{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:899px){
+  .productos-destacados{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .producto-desc{display:none}
   .tienda-in{grid-template-columns:minmax(0,1fr); padding-bottom:120px}
   .tienda-panel{position:static; max-width:440px}
   .mesa-dulce{grid-template-columns:minmax(0,1fr); align-items:start}

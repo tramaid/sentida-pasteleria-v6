@@ -27,6 +27,7 @@
 <link rel="preload" href="assets/fuentes/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="comun/base.css">
 <link rel="stylesheet" href="comun/ticket.css">
+<link rel="stylesheet" href="comun/tienda.css">
 <link rel="stylesheet" href="home.css">
 <script>
 /* Sin JavaScript la página se ve completa: las puertas son enlaces comunes.
@@ -40,6 +41,7 @@
 <script src="comun/menu.js" defer></script>
 <script src="comun/pedido-mensaje.js" defer></script>
 <script src="comun/carrito.js" data-raiz="" defer></script>
+<script src="comun/tienda.js" defer></script>
 
 <script type="application/ld+json">
 {
@@ -128,6 +130,87 @@
     <li><a class="puerta" href="tortas/"><span class="circulo"><img src="assets/fotos/key-lime-pie-480.webp" width="675" height="1200" alt="" loading="lazy" decoding="async"></span><span class="puerta-n">02 / Las de la casa</span><h3 class="display">Nuestras tortas</h3><span class="puerta-ir">Ver las tortas <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg></span></a></li>
     <li><a class="puerta" href="pasteleria/"><span class="circulo"><img src="assets/fotos/galletas-te-amo-480.webp" width="900" height="1200" alt="" loading="lazy" decoding="async"></span><span class="puerta-n">03 / Para regalar y compartir</span><h3 class="display">Pastelería</h3><span class="puerta-ir">Ver la pastelería <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg></span></a></li>
   </ul>
+</section>
+
+<section class="destacados seccion" id="destacados" aria-labelledby="destacados-t">
+  <div class="envoltorio">
+    <div class="titulo-seccion">
+      <div><p class="eti con-linea">Hechos con intención</p><h2 class="display" id="destacados-t">Lo que más <span class="acento">nos piden.</span></h2></div>
+      <p>Cada creación tiene su momento. Estas son algunas de las que vuelven a elegir.</p>
+    </div>
+    <ul class="productos productos-destacados" role="list">
+<!-- destacados:inicio -->
+      <li class="producto" id="key-lime-pie" data-producto="key-lime-pie" data-nombre="Key Lime Pie">
+        <div class="producto-foto"><img src="assets/fotos/key-lime-pie-480.webp" srcset="assets/fotos/key-lime-pie-480.webp 480w, assets/fotos/key-lime-pie.webp 675w" sizes="(max-width: 1099px) 45vw, 24vw" width="675" height="1200" alt="" loading="lazy" decoding="async"><button type="button" class="producto-agregar" aria-label="Agregar al pedido: Key Lime Pie" hidden>+</button></div>
+        <p class="producto-meta"><span class="producto-tipo">Las de la casa</span><span>01 / 06</span></p>
+        <h3 class="display">Key Lime Pie</h3>
+        <p class="producto-desc">Base crocante de galletitas, curd de lima y crema chantilly.</p>
+        <p class="producto-precio">Precio a consultar</p>
+        <div class="producto-acc">
+          <a class="enlace producto-wa" href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20pedir%3A%20Key%20Lime%20Pie.%0APara%3A%0ACantidad%3A" target="_blank" rel="noopener" aria-describedby="nueva-pestana">Pedir por WhatsApp <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg></a>
+          <span class="contador" hidden><button type="button" data-menos aria-label="Uno menos de Key Lime Pie">−</button><output aria-live="off">0</output><button type="button" data-mas aria-label="Uno más de Key Lime Pie">+</button></span>
+        </div>
+      </li>
+      <li class="producto" id="marquise" data-producto="marquise" data-nombre="Marquise">
+        <div class="producto-foto"><img src="assets/fotos/marquise-480.webp" srcset="assets/fotos/marquise-480.webp 480w, assets/fotos/marquise-800.webp 800w, assets/fotos/marquise.webp 1000w" sizes="(max-width: 1099px) 45vw, 24vw" width="1000" height="960" alt="" loading="lazy" decoding="async"><button type="button" class="producto-agregar" aria-label="Agregar al pedido: Marquise" hidden>+</button></div>
+        <p class="producto-meta"><span class="producto-tipo">Las de la casa</span><span>02 / 06</span></p>
+        <h3 class="display">Marquise</h3>
+        <p class="producto-desc">Base de brownie, dulce de leche, crema y frutos rojos.</p>
+        <p class="producto-precio">Precio a consultar</p>
+        <div class="producto-acc">
+          <a class="enlace producto-wa" href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20pedir%3A%20Marquise.%0APara%3A%0ACantidad%3A" target="_blank" rel="noopener" aria-describedby="nueva-pestana">Pedir por WhatsApp <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg></a>
+          <span class="contador" hidden><button type="button" data-menos aria-label="Uno menos de Marquise">−</button><output aria-live="off">0</output><button type="button" data-mas aria-label="Uno más de Marquise">+</button></span>
+        </div>
+      </li>
+      <li class="producto" id="sablee" data-producto="sablee" data-nombre="Sablée">
+        <div class="producto-foto"><img src="assets/fotos/sablee-ddl-480.webp" srcset="assets/fotos/sablee-ddl-480.webp 480w, assets/fotos/sablee-ddl-800.webp 800w, assets/fotos/sablee-ddl.webp 900w" sizes="(max-width: 1099px) 45vw, 24vw" width="900" height="1200" alt="" loading="lazy" decoding="async"><button type="button" class="producto-agregar" aria-label="Agregar al pedido: Sablée" hidden>+</button></div>
+        <p class="producto-meta"><span class="producto-tipo">Las de la casa</span><span>03 / 06</span></p>
+        <h3 class="display">Sablée</h3>
+        <p class="producto-desc">Con dulce de leche, crema y frutos rojos.</p>
+        <p class="producto-precio">Precio a consultar</p>
+        <div class="producto-acc">
+          <a class="enlace producto-wa" href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20pedir%3A%20Sabl%C3%A9e.%0APara%3A%0ACantidad%3A" target="_blank" rel="noopener" aria-describedby="nueva-pestana">Pedir por WhatsApp <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg></a>
+          <span class="contador" hidden><button type="button" data-menos aria-label="Uno menos de Sablée">−</button><output aria-live="off">0</output><button type="button" data-mas aria-label="Uno más de Sablée">+</button></span>
+        </div>
+      </li>
+      <li class="producto" id="carrot-cake" data-producto="carrot-cake" data-nombre="Carrot cake">
+        <div class="producto-foto"><img src="assets/fotos/carrot-cake-480.webp" srcset="assets/fotos/carrot-cake-480.webp 480w, assets/fotos/carrot-cake-800.webp 800w, assets/fotos/carrot-cake.webp 1000w" sizes="(max-width: 1099px) 45vw, 24vw" width="1000" height="1250" alt="" loading="lazy" decoding="async"><button type="button" class="producto-agregar" aria-label="Agregar al pedido: Carrot cake" hidden>+</button></div>
+        <p class="producto-meta"><span class="producto-tipo">Las de la casa</span><span>04 / 06</span></p>
+        <h3 class="display">Carrot cake</h3>
+        <p class="producto-precio">Precio a consultar</p>
+        <div class="producto-acc">
+          <a class="enlace producto-wa" href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20pedir%3A%20Carrot%20cake.%0APara%3A%0ACantidad%3A" target="_blank" rel="noopener" aria-describedby="nueva-pestana">Pedir por WhatsApp <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg></a>
+          <span class="contador" hidden><button type="button" data-menos aria-label="Uno menos de Carrot cake">−</button><output aria-live="off">0</output><button type="button" data-mas aria-label="Uno más de Carrot cake">+</button></span>
+        </div>
+      </li>
+      <li class="producto" id="torta-matilda" data-producto="torta-matilda" data-nombre="Torta Matilda">
+        <div class="producto-foto"><img src="assets/fotos/torta-matilda-480.webp" srcset="assets/fotos/torta-matilda-480.webp 480w, assets/fotos/torta-matilda-800.webp 800w, assets/fotos/torta-matilda.webp 1000w" sizes="(max-width: 1099px) 45vw, 24vw" width="1000" height="1250" alt="" loading="lazy" decoding="async"><button type="button" class="producto-agregar" aria-label="Agregar al pedido: Torta Matilda" hidden>+</button></div>
+        <p class="producto-meta"><span class="producto-tipo">Las de la casa</span><span>05 / 06</span></p>
+        <h3 class="display">Torta Matilda</h3>
+        <p class="producto-precio">Precio a consultar</p>
+        <div class="producto-acc">
+          <a class="enlace producto-wa" href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20pedir%3A%20Torta%20Matilda.%0APara%3A%0ACantidad%3A" target="_blank" rel="noopener" aria-describedby="nueva-pestana">Pedir por WhatsApp <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg></a>
+          <span class="contador" hidden><button type="button" data-menos aria-label="Uno menos de Torta Matilda">−</button><output aria-live="off">0</output><button type="button" data-mas aria-label="Uno más de Torta Matilda">+</button></span>
+        </div>
+      </li>
+      <li class="producto" id="shots" data-producto="shots" data-nombre="Shots">
+        <div class="producto-foto"><img src="assets/fotos/shots-480.webp" srcset="assets/fotos/shots-480.webp 480w, assets/fotos/shots-800.webp 800w, assets/fotos/shots.webp 958w" sizes="(max-width: 1099px) 45vw, 24vw" width="958" height="1198" alt="" loading="lazy" decoding="async"><button type="button" class="producto-agregar" aria-label="Agregar al pedido: Shots" hidden>+</button></div>
+        <p class="producto-meta"><span class="producto-tipo">Shots</span><span>06 / 06</span></p>
+        <h3 class="display">Shots</h3>
+        <p class="producto-desc">Postres en vaso, en distintos sabores.</p>
+        <p class="producto-precio">Precio a consultar</p>
+        <div class="producto-acc">
+          <a class="enlace producto-wa" href="https://wa.me/5491158300787?text=Hola%20SENTIDA%2C%20quiero%20pedir%3A%20Shots.%0APara%3A%0ACantidad%3A" target="_blank" rel="noopener" aria-describedby="nueva-pestana">Pedir por WhatsApp <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg></a>
+          <span class="contador" hidden><button type="button" data-menos aria-label="Uno menos de Shots">−</button><output aria-live="off">0</output><button type="button" data-mas aria-label="Uno más de Shots">+</button></span>
+        </div>
+      </li>
+<!-- destacados:fin -->
+    </ul>
+    <div class="destacados-pie">
+      <p>¿Tenés otra idea? Nos encanta escucharla.</p>
+      <p class="botones"><a class="btn btn-2" href="arma-tu-torta/">Armá tu torta</a><a class="enlace" href="tortas/">Ver todas nuestras tortas</a></p>
+    </div>
+  </div>
 </section>
 
 </main>

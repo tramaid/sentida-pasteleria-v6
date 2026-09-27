@@ -19,6 +19,8 @@ def test_las_tortas_de_la_casa(abrir):
     sin_foto = pg.locator(".producto .sin-foto").count()
     con_foto = pg.locator(".producto .producto-foto img").count()
     assert sin_foto + con_foto == 15
+    assert pg.text_content(f"{KEY} .producto-meta span:first-child") == "Las de la casa"
+    assert pg.get_attribute(f"{KEY} .producto-agregar", "aria-label") == "Agregar al pedido: Key Lime Pie"
     assert pg.errores == []
 
 
