@@ -65,6 +65,8 @@
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"/></symbol>
+  <symbol id="i-diagonal" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+  <symbol id="i-abajo" viewBox="0 0 24 24"><path d="M12 4v15M6.5 13.5 12 19l5.5-5.5"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
   <symbol id="i-cerrar" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
   <symbol id="i-bolsa" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12.5H6.2L5 8Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></symbol>
@@ -96,59 +98,36 @@
 
 <main id="contenido">
 
-<section class="entrada" aria-labelledby="entrada-t">
-  <div class="lema">
-    <h1 class="display" id="entrada-t">Lo soñás, lo creamos.</h1>
-    <p>Pastelería artesanal por encargo · Martínez, San Isidro</p>
+<section class="hero" aria-labelledby="hero-t">
+  <div class="hero-in envoltorio">
+    <div class="hero-txt">
+      <p class="eti con-linea">Pastelería artesanal · Martínez</p>
+      <h1 id="hero-t"><span class="hero-marca">SENTIDA</span><span class="hero-lema display">Lo soñás,<br>lo creamos.</span></h1>
+      <p class="hero-baja">Hay cosas que se imaginan mucho antes de probarlas. Nosotras las hacemos para vos, a mano y con todos los detalles.</p>
+      <div class="hero-acc">
+        <a class="btn btn-1" href="arma-tu-torta/">Armá tu torta <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg></a>
+        <a class="enlace" href="#empezar">Ver lo que hacemos <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-abajo"/></svg></a>
+      </div>
+    </div>
+    <div class="hero-arte">
+      <span class="circulo circulo-grande"><img src="assets/fotos/hero-flores-960.webp" srcset="assets/fotos/hero-flores-640.webp 640w, assets/fotos/hero-flores-960.webp 960w, assets/fotos/hero-flores-1220.webp 1220w" sizes="(max-width: 899px) 80vw, 42vw" width="1220" height="1600" alt="Torta alta con rombos pintados a mano y una corona de flores naturales" fetchpriority="high"></span>
+      <span class="circulo circulo-chico"><img src="assets/fotos/galletas-flores-proceso-480.webp" width="1000" height="1333" alt="Masa de galletas con pétalos de flores comestibles, recién cortada" decoding="async"></span>
+      <img class="hero-sello" src="assets/SENTIDASELLO.svg" alt="" width="122" height="122">
+      <p class="hero-nota display">Una idea tuya.<br>Una creación nuestra.</p>
+    </div>
+  </div>
+</section>
+
+<section class="empezar seccion envoltorio" id="empezar" aria-labelledby="empezar-t">
+  <div class="titulo-seccion">
+    <div><p class="eti con-linea">Hacé tu pedido</p><h2 class="display" id="empezar-t">Elegí por dónde <span class="acento">empezar.</span></h2></div>
+    <p>De una torta soñada para un día único a ese antojo que no puede esperar.</p>
   </div>
   <ul class="puertas" role="list">
-    <li>
-      <a class="puerta" href="tortas/">
-        <img src="assets/fotos/hero-cheesecake-800.webp" srcset="assets/fotos/hero-cheesecake-800.webp 800w, assets/fotos/hero-cheesecake-1400.webp 1400w, assets/fotos/hero-cheesecake-2048.webp 2048w" sizes="(max-width: 899px) 100vw, 34vw" width="2048" height="3072" alt="" fetchpriority="high" style="--pos:50% 50%">
-        <div class="puerta-txt">
-          <h2 class="display">Nuestras tortas</h2>
-          <span class="puerta-baja">Las de la casa, tal cual las hacemos.</span>
-          <span class="puerta-ir">Ver las tortas <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a class="puerta" href="arma-tu-torta/">
-        <img src="assets/fotos/hero-letra-f-800.webp" srcset="assets/fotos/hero-letra-f-800.webp 800w, assets/fotos/hero-letra-f-1400.webp 1400w, assets/fotos/hero-letra-f-2048.webp 2048w" sizes="(max-width: 899px) 100vw, 34vw" width="2048" height="3072" alt="" fetchpriority="high" style="--pos:50% 40%">
-        <div class="puerta-txt">
-          <h2 class="display">Armá tu torta</h2>
-          <span class="puerta-baja">Elegís el bizcochuelo, los rellenos y la decoración.</span>
-          <span class="puerta-ir">Armar la mía <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a class="puerta" href="pasteleria/">
-        <img src="assets/fotos/galletas-te-amo-800.webp" srcset="assets/fotos/galletas-te-amo-480.webp 480w, assets/fotos/galletas-te-amo-800.webp 800w, assets/fotos/galletas-te-amo.webp 900w" sizes="(max-width: 899px) 100vw, 34vw" width="900" height="1200" alt="" loading="lazy" decoding="async" style="--pos:50% 50%">
-        <div class="puerta-txt">
-          <h2 class="display">Pastelería</h2>
-          <span class="puerta-baja">Shots, cookies, alfajores y cupcakes.</span>
-          <span class="puerta-ir">Ver la pastelería <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></span>
-        </div>
-      </a>
-    </li>
+    <li><a class="puerta" href="arma-tu-torta/"><span class="circulo"><img src="assets/fotos/torta-petalos-480.webp" width="960" height="1280" alt="" loading="lazy" decoding="async"></span><span class="puerta-n">01 / A tu medida</span><h3 class="display">Armá tu torta</h3><span class="puerta-ir">Empezar <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg></span></a></li>
+    <li><a class="puerta" href="tortas/"><span class="circulo"><img src="assets/fotos/key-lime-pie-480.webp" width="675" height="1200" alt="" loading="lazy" decoding="async"></span><span class="puerta-n">02 / Las de la casa</span><h3 class="display">Nuestras tortas</h3><span class="puerta-ir">Ver las tortas <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg></span></a></li>
+    <li><a class="puerta" href="pasteleria/"><span class="circulo"><img src="assets/fotos/galletas-te-amo-480.webp" width="900" height="1200" alt="" loading="lazy" decoding="async"></span><span class="puerta-n">03 / Para regalar y compartir</span><h3 class="display">Pastelería</h3><span class="puerta-ir">Ver la pastelería <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg></span></a></li>
   </ul>
-</section>
-
-<section class="nos-linea envoltorio" aria-label="Quiénes somos">
-  <p class="display">Somos Anto y Nadia. Hacemos cada pedido a mano, de principio a fin, en Martínez.</p>
-  <a class="enlace" href="nosotras/">Conocernos <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flecha"/></svg></a>
-</section>
-
-<section class="como-pedir" aria-labelledby="como-t">
-  <div class="como-in envoltorio">
-    <h2 class="display" id="como-t">Cómo pedir</h2>
-    <ol role="list">
-      <li><span class="paso-n">1</span><strong class="display">Elegís</strong><span>Una de nuestras tortas, algo de pastelería o la torta que armás vos.</span></li>
-      <li><span class="paso-n">2</span><strong class="display">Nos lo mandás</strong><span>Por WhatsApp, con la fecha: el mensaje sale armado.</span></li>
-      <li><span class="paso-n">3</span><strong class="display">Te confirmamos</strong><span>Precio y disponibilidad. Lo retirás en Martínez o te lo llevamos en Zona Norte.</span></li>
-    </ol>
-  </div>
 </section>
 
 </main>

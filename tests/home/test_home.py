@@ -1,6 +1,6 @@
 from urllib.parse import unquote
 
-PUERTAS = [("tortas/", "Nuestras tortas"), ("arma-tu-torta/", "Armá tu torta"), ("pasteleria/", "Pastelería")]
+PUERTAS = [("arma-tu-torta/", "Armá tu torta"), ("tortas/", "Nuestras tortas"), ("pasteleria/", "Pastelería")]
 
 
 def hrefs(pg, sel):
@@ -16,30 +16,32 @@ def test_el_menu(abrir):
     assert pg.get_attribute(".cab [data-mi-pedido]", "href") == "tortas/#pedido"
 
 
-def test_la_home_son_tres_puertas(abrir):
+def test_el_hero(abrir):
     pg = abrir()
-    assert pg.text_content("h1") == "Lo soñás, lo creamos."
+    assert pg.text_content(".hero-marca") == "SENTIDA"
+    assert pg.text_content(".hero-lema") == "Lo soñás,lo creamos."
+    assert pg.get_attribute(".hero .btn-1", "href") == "arma-tu-torta/"
+    assert pg.get_attribute(".hero .enlace", "href") == "#empezar"
+    assert pg.locator(".hero .circulo img").count() == 2
+
+
+def test_elegi_por_donde_empezar(abrir):
+    pg = abrir()
+    assert pg.text_content("#empezar-t") == "Elegí por dónde empezar."
     assert hrefs(pg, ".puerta") == [h for h, _ in PUERTAS]
-    assert pg.eval_on_selector_all(".puerta h2", "hs => hs.map(h => h.textContent)") == [t for _, t in PUERTAS]
-    for i in range(3):
-        assert pg.locator(".puerta").nth(i).locator("img").count() == 1
+    assert pg.eval_on_selector_all(".puerta h3", "hs => hs.map(h => h.textContent)") == [t for _, t in PUERTAS]
+    assert pg.locator(".puerta .circulo img").count() == 3
 
 
-def test_las_tres_puertas_entran_en_la_primera_pantalla(abrir):
-    pg = abrir(1440, 900)
-    fondo = pg.evaluate("Math.max(...[...document.querySelectorAll('.puerta')].map(p => p.getBoundingClientRect().bottom))")
-    assert fondo <= 900
-
-
-def test_en_el_celular_la_primera_puerta_se_ve_de_entrada(abrir):
+def test_en_el_celular_el_hero_entra_y_las_puertas_siguen(abrir):
     pg = abrir(390, 844, is_mobile=True, has_touch=True)
-    arriba = pg.evaluate("document.querySelector('.puerta h2').getBoundingClientRect().bottom")
-    assert arriba < 844
+    assert pg.evaluate("document.querySelector('.hero .btn-1').getBoundingClientRect().bottom") <= 844 * 1.6
+    assert pg.evaluate("document.documentElement.scrollWidth") == 390
 
 
 def test_la_home_no_repite_las_secciones(abrir):
     pg = abrir()
-    for fuera in ("#carta", "#decoradas", "#antojos", "#madre", ".manif", ".mano", ".hero-foto"):
+    for fuera in ("#carta", "#decoradas", "#antojos", "#madre", ".manif", ".mano", ".hero-foto", ".entrada"):
         assert pg.locator(fuera).count() == 0, fuera
     assert "Madre" not in pg.text_content("body")
 

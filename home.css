@@ -1,77 +1,68 @@
 /* ============================================================
-   SENTIDA Pastelería — home v5
-   La home es la entrada: el lema y tres puertas (Nuestras tortas,
-   Armá tu torta, Pastelería). Debajo, una línea que lleva a Nosotras
-   y cómo pedir. Lo común (tokens, cabecera, botones, pie) está en
-   comun/base.css.
+   SENTIDA Pastelería — home v6 (estilo sentida-v2)
+   Hero con círculos, «Elegí por dónde empezar», «Lo que más nos
+   piden», «Todo empieza con una idea», Anto y Nadia, la banda
+   celeste y el cierre. Lo común está en comun/base.css.
    ============================================================ */
 
+/* Hero */
+.hero{background:var(--crema); overflow:hidden}
+.hero-in{min-height:680px; display:grid; grid-template-columns:49% 51%; align-items:center; position:relative}
+.hero-txt{position:relative; z-index:2; padding-block:48px}
+.hero-txt .eti{margin-bottom:35px; color:var(--marron-medio)}
+.hero-marca{display:block; font-family:var(--display); font-weight:500; font-size:clamp(3.4375rem,6vw,5.6875rem); letter-spacing:.105em; line-height:1}
+.hero-lema{display:block; margin-top:20px; font-size:clamp(3rem,5.3vw,5rem); line-height:1.07; letter-spacing:-.045em}
+.hero-baja{max-width:420px; margin:28px 0 35px; font-size:16px; line-height:1.8; color:var(--marron-medio)}
+.hero-acc{display:flex; flex-wrap:wrap; align-items:center; gap:18px 30px}
+.hero-arte{position:absolute; left:51%; right:-4%; top:0; bottom:0}
+.circulo-grande{position:absolute; right:1%; top:43px; width:min(45vw,610px); border-width:10px}
+.circulo-grande img{object-position:center 37%}
+.circulo-chico{position:absolute; left:2%; bottom:15px; width:220px}
+.hero-sello{position:absolute; right:5%; bottom:20px; width:122px; height:122px; border-radius:50%; background:var(--blanco); transform:rotate(-11deg); filter:drop-shadow(0 8px 15px rgba(108,77,56,.19))}
+.hero-nota{position:absolute; right:2%; top:52px; font-size:16px; line-height:1.25; text-align:center; color:var(--marron-medio); transform:rotate(7deg)}
 
-/* ------------------------------------------------------------
-   Entrada: el lema en una franja y las tres puertas a sangre.
-   En escritorio ocupan la primera pantalla entera.
-   ------------------------------------------------------------ */
-.entrada{
-  display:flex; flex-direction:column; background:var(--crema);
-  min-height:calc(100svh - var(--cab)); max-height:1040px;
+/* Elegí por dónde empezar */
+.puertas{list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; align-items:start}
+.puertas > li:nth-child(2){margin-top:44px}
+.puerta{display:flex; flex-direction:column; min-height:420px; padding:32px 24px 25px; border:1px solid var(--beige); background:var(--blanco); transition:background-color .2s, transform .2s}
+.puerta .circulo{width:min(100%,200px); margin:0 auto 24px}
+.puerta-n{font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--celeste-profundo)}
+.puerta h3{margin:13px 0 28px; font-size:clamp(1.75rem,2.2vw,2.125rem); line-height:1.08; letter-spacing:-.035em}
+.puerta-ir{margin-top:auto; display:flex; justify-content:space-between; align-items:center; padding-top:13px; border-top:1px solid var(--beige); font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase}
+.puerta:hover{background:#FBF3ED; color:var(--marron)}
+.mov .puerta:hover{transform:translateY(-5px)}
+.mov .puerta .circulo img{transition:transform .3s}
+.mov .puerta:hover .circulo img{transform:scale(1.04)}
+
+@media (max-width:1080px){
+  .circulo-grande{right:-7%}
+  .circulo-chico{width:180px}
+  .puerta{padding:25px 15px}
 }
-.lema{display:flex; flex-direction:column; align-items:center; gap:6px; padding:clamp(22px,3.4vh,40px) var(--lateral); text-align:center}
-.lema h1{font-size:clamp(2.125rem,3.6vw,3.5rem); line-height:1; letter-spacing:-.02em; text-wrap:balance}
-.lema p{font-size:13px; line-height:1.5; color:var(--marron-medio)}
-
-.puertas{flex:1; min-height:440px; list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:3px; background:var(--blanco)}
-.puertas > li{display:flex}
-.puerta{
-  position:relative; flex:1; display:flex; align-items:flex-end; overflow:hidden;
-  background:var(--marron); color:var(--blanco); isolation:isolate;
-}
-.puerta img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:var(--pos, 50% 50%); z-index:-2}
-.puerta::after{
-  content:""; position:absolute; inset:0; z-index:-1;
-  background:linear-gradient(180deg, rgba(64,45,33,0) 38%, rgba(64,45,33,.55) 66%, rgba(64,45,33,.88));
-}
-.puerta-txt{display:flex; flex-direction:column; align-items:flex-start; gap:10px; padding:clamp(20px,2.6vw,40px)}
-.puerta h2{font-size:clamp(2rem,3.1vw,3rem); line-height:1; letter-spacing:-.015em}
-.puerta-baja{font-size:15px; line-height:1.5; max-width:30ch}
-.puerta-ir{display:inline-flex; align-items:center; gap:8px; margin-top:4px; font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase}
-.puerta-ir .ico{width:15px; height:15px}
-.puerta:hover{color:var(--blanco)}
-.puerta:hover .puerta-ir{text-decoration:underline; text-underline-offset:6px}
-.puerta:focus-visible{outline:2px solid var(--blanco); outline-offset:-6px}
-.mov .puerta img{transition:transform 1s cubic-bezier(.2,.7,.2,1)}
-.mov .puerta:hover img{transform:scale(1.04)}
-
-/* ------------------------------------------------------------
-   Nosotras, en una línea
-   ------------------------------------------------------------ */
-.nos-linea{padding-block:clamp(72px,12vh,128px); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:20px 48px}
-.nos-linea p{font-size:clamp(1.5rem,2.6vw,2.25rem); line-height:1.2; max-width:30ch; text-wrap:balance}
-
-/* ------------------------------------------------------------
-   Cómo pedir: tres pasos
-   ------------------------------------------------------------ */
-.como-pedir{background:var(--crema)}
-.como-in{padding-block:clamp(64px,10vh,112px); display:flex; flex-direction:column; gap:clamp(28px,4vh,48px)}
-.como-pedir h2{font-size:clamp(2rem,3.5vw,3rem); line-height:1}
-.como-pedir ol{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(20px,3vw,48px)}
-.como-pedir li{display:flex; flex-direction:column; gap:10px; padding-top:18px; border-top:1px solid var(--marron)}
-.paso-n{display:inline-grid; place-items:center; width:34px; height:34px; border-radius:50%; background:var(--celeste); color:var(--marron); font-size:14px; font-weight:600}
-.como-pedir strong{font-size:26px; font-weight:500; line-height:1.1}
-.como-pedir li > span:last-child{font-size:15px; line-height:1.6; color:var(--marron-medio); max-width:34ch}
-
 @media (max-width:899px){
-  .entrada{min-height:0; max-height:none}
-  .puertas{grid-template-columns:1fr; min-height:0}
-  .puerta{min-height:min(64svh,520px)}
-  .como-pedir ol{grid-template-columns:1fr}
+  .hero-in{display:flex; flex-direction:column-reverse; min-height:0; padding-block:25px 55px}
+  .hero-arte{position:relative; left:auto; right:auto; width:100%; height:335px}
+  .circulo-grande{width:min(78vw,310px); top:0; right:3%; border-width:6px}
+  .circulo-chico{width:118px; left:0; bottom:0; border-width:5px}
+  .hero-sello{width:77px; height:77px; right:0; bottom:3px}
+  .hero-nota{display:none}
+  .hero-txt{text-align:center; padding-block:20px 0}
+  .hero-txt .eti{margin-bottom:17px}
+  .hero-marca{font-size:clamp(2.9375rem,13vw,4.6875rem)}
+  .hero-lema{font-size:clamp(2.6875rem,10vw,3.875rem); margin-top:13px}
+  .hero-baja{font-size:15px; margin:19px auto 25px; max-width:360px}
+  .hero-acc{flex-direction:column}
+  .hero-acc .btn{width:min(100%,340px)}
+  .puertas{grid-template-columns:1fr; gap:12px}
+  .puertas > li:nth-child(2){margin-top:0}
+  .puerta{min-height:0; flex-direction:row; flex-wrap:wrap; align-items:center; gap:4px 16px; padding:16px}
+  .puerta .circulo{width:96px; margin:0; border-width:4px}
+  .puerta .puerta-n{flex:1 1 150px}
+  .puerta h3{flex-basis:100%; margin:6px 0 10px}
+  .puerta-ir{flex-basis:100%}
 }
-/* Celular acostado: las puertas no pueden ocupar la pantalla entera. */
-@media (max-width:899px) and (orientation:landscape) and (max-height:560px){
-  .puertas{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .puerta{min-height:300px}
-  .puerta h2{font-size:1.625rem}
-  .puerta-baja{display:none}
-}
-@media (prefers-reduced-motion:reduce){
-  .puerta img{transition:none}
+@media (max-width:390px){
+  .hero-arte{height:300px}
+  .circulo-grande{width:270px}
+  .circulo-chico{width:105px}
 }
