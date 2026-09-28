@@ -66,11 +66,14 @@ def test_la_cabecera_no_se_pisa(abrir, pagina, w):
 
 
 @pytest.mark.parametrize("pagina", PAGINAS)
-def test_la_marca_en_texto(abrir, pagina):
+def test_la_marca_es_el_logo(abrir, pagina):
     pg = abrir(pagina=pagina)
-    assert pg.text_content(".cab-marca").strip() == "SENTIDA."
     assert pg.get_attribute(".cab-marca", "aria-label") == "SENTIDA Pastelería, inicio"
-    assert pg.get_attribute(".marca-punto", "aria-hidden") == "true"
+    assert pg.get_attribute(".cab-marca img", "src").endswith("assets/marca/logo.svg")
+    assert pg.get_attribute(".cab-marca img", "alt") == "SENTIDA"
+    assert pg.get_attribute(".pie-marca img", "src").endswith("assets/marca/logo-claro.svg")
+    assert pg.get_attribute(".pie-sello", "src").endswith("assets/marca/sello.svg")
+    assert "SENTIDASELLO" not in pg.content()
 
 
 @pytest.mark.parametrize("pagina", PAGINAS)
@@ -105,7 +108,7 @@ def test_el_pie_nuevo(abrir, sitio, pagina):
     assert pg.eval_on_selector_all(".pie-links a", "as => as.map(a => a.href)")[:4] ==         [sitio + "tortas/", sitio + "arma-tu-torta/", sitio + "pasteleria/", sitio + "nosotras/"]
     wa = pg.eval_on_selector_all(".pie-links a[href^='https://wa.me/']", "as => as.map(a => a.href)")
     assert [w.split("?")[0] for w in wa] == ["https://wa.me/5491158300787", "https://wa.me/5491131459646"]
-    assert pg.text_content(".pie-nombre").strip() == "SENTIDA."
+    assert pg.get_attribute(".pie-marca img", "alt") == "SENTIDA"
 
 
 @pytest.mark.parametrize("pagina", PAGINAS)

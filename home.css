@@ -10,7 +10,7 @@
 .hero-in{min-height:680px; display:grid; grid-template-columns:49% 51%; align-items:center; position:relative}
 .hero-txt{position:relative; z-index:2; padding-block:48px}
 .hero-txt .eti{margin-bottom:35px; color:var(--marron-medio)}
-.hero-marca{display:block; font-family:var(--display); font-weight:500; font-size:clamp(3.4375rem,6vw,5.6875rem); letter-spacing:.105em; line-height:1}
+.hero-marca{display:block; width:clamp(260px,34vw,480px); height:auto}
 .hero-lema{display:block; margin-top:20px; font-size:clamp(3rem,5.3vw,5rem); line-height:1.07; letter-spacing:-.045em}
 .hero-baja{max-width:420px; margin:28px 0 35px; font-size:16px; line-height:1.8; color:var(--marron-medio)}
 .hero-acc{display:flex; flex-wrap:wrap; align-items:center; gap:18px 30px}
@@ -101,7 +101,7 @@
   .hero-nota{display:none}
   .hero-txt{text-align:center; padding-block:20px 0}
   .hero-txt .eti{margin-bottom:17px}
-  .hero-marca{font-size:clamp(2.9375rem,13vw,4.6875rem)}
+  .hero-marca{width:min(78vw,320px); margin-inline:auto}
   .hero-lema{font-size:clamp(2.6875rem,10vw,3.875rem); margin-top:13px}
   .hero-baja{font-size:15px; margin:19px auto 25px; max-width:360px}
   .hero-acc{flex-direction:column}

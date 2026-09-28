@@ -119,7 +119,7 @@ def cabecera(actual, raiz="../"):
     inicio = raiz or "./"
     return f"""<header class="cab">
   <div class="cab-in">
-    <a class="cab-marca" href="{inicio}" aria-label="SENTIDA Pastelería, inicio"><span class="marca-texto">SENTIDA<span class="marca-punto" aria-hidden="true">.</span></span></a>
+    <a class="cab-marca" href="{inicio}" aria-label="SENTIDA Pastelería, inicio"><img class="marca-logo" src="{raiz}assets/marca/logo.svg" alt="SENTIDA" width="132" height="36"></a>
     <nav class="cab-nav" aria-label="Secciones">
       {nav}
     </nav>
@@ -144,7 +144,7 @@ def pie(raiz="../"):
     return f"""<footer class="pie">
   <div class="pie-in envoltorio">
     <div class="pie-marca">
-      <p class="pie-nombre">SENTIDA<span aria-hidden="true">.</span></p>
+      <img class="pie-logo" src="{raiz}assets/marca/logo-claro.svg" alt="SENTIDA" width="150" height="41" loading="lazy">
       <p class="pie-lema display">Lo soñás, lo creamos.</p>
     </div>
     <nav class="pie-links" aria-label="Pie">
@@ -164,7 +164,7 @@ def pie(raiz="../"):
         <p>Martínez, San Isidro<br>Solo por encargo</p>
       </div>
     </nav>
-    <img class="pie-sello" src="{raiz}assets/SENTIDASELLO.svg" alt="" width="105" height="105" loading="lazy">
+    <img class="pie-sello" src="{raiz}assets/marca/sello.svg" alt="" width="105" height="105" loading="lazy">
   </div>
   <div class="pie-fin envoltorio"><span>© 2026 SENTIDA Pastelería · Hecho a mano</span><span>Diseño TRAMA</span></div>
 </footer>"""
@@ -251,7 +251,7 @@ def pagina(clave, datos):
 <meta name="description" content="{esc(sec["descripcion"])}">
 <meta name="theme-color" content="#FCF9F2">
 <link rel="canonical" href="{SITIO}{clave}/">
-<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/marca/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="preload" href="../assets/fuentes/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fuentes/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>

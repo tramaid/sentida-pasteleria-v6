@@ -79,8 +79,7 @@ input:focus-visible,textarea:focus-visible{outline:2px solid var(--celeste-profu
 .cab-nav a[aria-current="page"]{text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:7px}
 .cab-nav .solo-ancho{display:none}
 .cab-marca{display:flex; align-items:center; min-height:44px}
-.marca-texto{font-family:var(--display); font-weight:500; font-size:32px; letter-spacing:.14em; line-height:1}
-.marca-punto{color:var(--celeste-filete)}
+.marca-logo{display:block; width:132px; height:auto}
 .cab-acc{display:flex; justify-content:flex-end; align-items:center; gap:12px}
 .menu{display:none}
 .menu summary{list-style:none; cursor:pointer; display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:0 14px; border:1px solid var(--marron); border-radius:2px}
@@ -124,8 +123,7 @@ input:focus-visible,textarea:focus-visible{outline:2px solid var(--celeste-profu
 .pie a:hover{color:var(--blanco); text-decoration:underline; text-underline-offset:4px}
 .pie :focus-visible{outline-color:var(--crema)}
 .pie-in{padding-block:clamp(60px,10vh,85px); display:grid; grid-template-columns:2fr 2fr 105px; gap:40px; align-items:start}
-.pie-nombre{font-family:var(--display); font-weight:500; font-size:28px; letter-spacing:.14em; line-height:1; color:var(--blanco)}
-.pie-nombre span{color:var(--celeste-filete)}
+.pie-logo{display:block; width:150px; height:auto}
 .pie-lema{margin-top:18px; font-size:23px; line-height:1.2; color:var(--crema)}
 .pie-links{display:grid; grid-template-columns:1fr 1fr; gap:24px; font-size:13px; line-height:1.5}
 .pie-eti{margin-bottom:10px; font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--beige)}
@@ -151,7 +149,7 @@ input:focus-visible,textarea:focus-visible{outline:2px solid var(--celeste-profu
   .marquesina i{margin:0 24px}
   .pie-in{grid-template-columns:1fr}
   .pie-sello{display:none}
-  .marca-texto{font-size:25px}
+  .marca-logo{width:104px}
 }
 @media (max-width:380px){
   .btn{padding:0 14px}

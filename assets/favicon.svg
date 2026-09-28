@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SENTIDA">
-  <circle cx="32" cy="32" r="32" fill="#F8EADE"/>
-  <circle cx="32" cy="32" r="29" fill="none" stroke="#CFB59E" stroke-width="1.2"/>
-  <text x="32" y="36.5" text-anchor="middle"
-        font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="500"
-        fill="#402D21" letter-spacing="0.5">S</text>
-  <rect x="21" y="44" width="22" height="1.4" fill="#46627A"/>
-  <rect x="26.6" y="47.4" width="10.8" height="1.4" fill="#46627A"/>
-</svg>

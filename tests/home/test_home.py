@@ -18,8 +18,11 @@ def test_el_menu(abrir):
 
 def test_el_hero(abrir):
     pg = abrir()
-    assert pg.text_content(".hero-marca") == "SENTIDA"
-    assert pg.text_content(".hero-lema") == "Lo soñás,lo creamos."
+    assert pg.get_attribute(".hero-marca", "src").endswith("assets/marca/logo-pasteleria.svg")
+    assert pg.evaluate("document.querySelector('#hero-t').textContent.replace(/\\s+/g, ' ').trim()") == "Lo soñás,lo creamos."
+    assert pg.get_attribute(".hero-marca", "alt") == "Sentida"
+    assert pg.get_attribute(".hero-sello", "src").endswith("assets/marca/sello.svg")
+    assert pg.locator("#hero-t img.hero-marca").count() == 1
     assert pg.get_attribute(".hero .btn-1", "href") == "arma-tu-torta/"
     assert pg.get_attribute(".hero .enlace", "href") == "#empezar"
     # Una sola torta y el sello: las chicas pidieron sacar la foto de la masa (28/09).
