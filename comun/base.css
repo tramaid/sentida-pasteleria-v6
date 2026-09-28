@@ -2,31 +2,10 @@
    SENTIDA · base común (TRAMA, 24/09/2026)
    La usan Decoradas, Nuestras tortas y Antojos: tokens, tipografías,
    botones, cabecera y pie. La home tiene home.css, con los mismos tokens.
+   Los colores y las fuentes viven en comun/marca.css.
    ============================================================ */
 
-@font-face{font-family:Erode; src:url("../assets/fuentes/erode-400.woff2") format("woff2"); font-weight:400; font-display:swap}
-@font-face{font-family:Erode; src:url("../assets/fuentes/erode-500.woff2") format("woff2"); font-weight:500; font-display:swap}
-@font-face{font-family:Montserrat; src:url("../assets/fuentes/montserrat-latin.woff2") format("woff2"); font-weight:100 900; font-display:swap}
-@font-face{font-family:"Montserrat respaldo"; src:local("Arial"), local("Helvetica"); size-adjust:109.2%; ascent-override:88.6%; descent-override:23%; line-gap-override:0%}
-@font-face{font-family:"Erode respaldo"; src:local("Georgia"); size-adjust:94.4%; ascent-override:98.5%; descent-override:23.3%; line-gap-override:9.5%}
-
 :root{
-  --blanco:#FEFAF8;
-  --crema:#F8EADE;
-  --crema-suave:#F9F3EE;     /* fondos intermedios y hover de tarjetas */
-  --beige:#CFB59E;
-  --celeste:#DDE6ED;          /* solo relleno chico, nunca texto */
-  --marron:#402D21;
-  --marron-medio:#6C4D38;
-  --celeste-profundo:#46627A;
-  --celeste-filete:#8FB1C9;   /* solo filetes, puntos y aros; nunca texto */
-  --linea:rgba(207,181,158,.6);
-  --sombra:rgba(64,45,33,.28);
-  --sombra-suave:rgba(64,45,33,.19);
-  --velo:rgba(64,45,33,.45);
-
-  --display:Erode, "Erode respaldo", Georgia, serif;
-  --ui:Montserrat, "Montserrat respaldo", system-ui, sans-serif;
   --lateral:clamp(20px,4vw,56px);
   --ancho:1440px;
   --cab:88px;

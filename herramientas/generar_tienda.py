@@ -249,12 +249,13 @@ def pagina(clave, datos):
 <meta name="robots" content="noindex">
 <title>{esc(sec["title"])}</title>
 <meta name="description" content="{esc(sec["descripcion"])}">
-<meta name="theme-color" content="#FEFAF8">
+<meta name="theme-color" content="#FCF9F2">
 <link rel="canonical" href="{SITIO}{clave}/">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<link rel="preload" href="../assets/fuentes/erode-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fuentes/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fuentes/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../comun/marca.css">
 <link rel="stylesheet" href="../comun/base.css">
 <link rel="stylesheet" href="../comun/ticket.css">
 <link rel="stylesheet" href="../comun/tienda.css">

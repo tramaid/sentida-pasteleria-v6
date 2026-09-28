@@ -31,3 +31,43 @@ def test_playfair_esta_y_erode_no():
     assert (fuentes / "playfair-latin.woff2").stat().st_size > 20_000
     assert (fuentes / "playfair-latin-ext.woff2").stat().st_size > 20_000
     assert not list(fuentes.glob("erode*"))
+
+
+import pytest
+
+PAGINAS = ["", "tortas/", "pasteleria/", "nosotras/", "arma-tu-torta/"]
+HEX = re.compile(r"#[0-9a-fA-F]{3,8}\b")
+
+
+def _css(nombre):
+    return (RAIZ / nombre).read_text(encoding="utf-8")
+
+
+def test_marca_css_tiene_los_colores_del_logo_y_playfair():
+    css = _css("comun/marca.css").lower()
+    for valor in ("--marron:#4e2c1e", "--celeste-filete:#7eafd6", "--blanco:#fcf9f2",
+                  "font-family:playfair", "playfair-latin.woff2"):
+        assert valor in css.replace(" ", ""), valor
+    assert "erode" not in css
+
+
+def test_ningun_css_declara_colores_fuera_de_marca():
+    for nombre in ["comun/base.css", "comun/ticket.css", "comun/tienda.css", "home.css",
+                   "nosotras/nosotras.css", "arma-tu-torta/decoradas.css"]:
+        css = re.sub(r"mask(?:-image)?\s*:[^;}]*", "", _css(nombre))
+        assert HEX.findall(css) == [], nombre
+        assert "rgba(" not in css, nombre
+
+
+@pytest.mark.parametrize("pagina", PAGINAS)
+def test_cada_pagina_carga_marca_antes_que_base_y_nada_de_erode(abrir, pagina):
+    pg = abrir(pagina=pagina)
+    hrefs = pg.eval_on_selector_all('link[rel="stylesheet"]', "ls => ls.map(l => l.getAttribute('href'))")
+    marca = next(i for i, h in enumerate(hrefs) if h.endswith("comun/marca.css"))
+    base = next(i for i, h in enumerate(hrefs) if h.endswith("comun/base.css"))
+    assert marca < base
+    assert "erode" not in pg.content().lower()
+    # Ruling del controller: en la home el h1 no lleva .display (el lema es un
+    # span.display adentro del h1), así que h1 solo heredaría Montserrat.
+    familia = pg.evaluate("getComputedStyle(document.querySelector('h1.display, h1 .display')).fontFamily")
+    assert familia.lower().startswith("playfair")

@@ -7,7 +7,7 @@ PAGINAS = ["", "arma-tu-torta/", "tortas/", "pasteleria/", "nosotras/"]
 def test_los_tokens_nuevos(abrir, pagina):
     pg = abrir(pagina=pagina)
     raiz = "getComputedStyle(document.documentElement)"
-    assert pg.evaluate(f"{raiz}.getPropertyValue('--celeste-filete').trim()") == "#8FB1C9"
+    assert pg.evaluate(f"{raiz}.getPropertyValue('--celeste-filete').trim()") == "#7EAFD6"
     assert pg.evaluate(f"{raiz}.getPropertyValue('--cab').trim()") == "88px"
     assert pg.evaluate("getComputedStyle(document.querySelector('.cab')).height") == "88px"
 

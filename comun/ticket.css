@@ -60,7 +60,7 @@
 
 /* El pedido: un panel que entra desde la derecha, como el de sentida-v2. */
 .carrito-dialogo{position:fixed; inset:0 0 0 auto; margin:0; width:min(480px,100vw); height:100vh; height:100dvh; max-width:none; max-height:none; border:0; padding:0; background:var(--blanco); color:var(--marron); font-family:var(--ui); box-shadow:-8px 0 30px var(--sombra-suave)}
-.carrito-dialogo::backdrop{background:var(--velo, rgba(64,45,33,.45))}
+.carrito-dialogo::backdrop{background:var(--velo)}
 .carrito-in{position:relative; display:flex; flex-direction:column; gap:16px; height:100%; padding:72px 24px 24px; overflow:auto; overscroll-behavior:contain; background:var(--blanco)}
 .mov .carrito-dialogo[open]{animation:cajon .3s cubic-bezier(.2,.7,.2,1)}
 @keyframes cajon{from{transform:translateX(100%)}}
