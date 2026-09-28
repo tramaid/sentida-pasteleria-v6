@@ -1,0 +1,5 @@
+# La marca se copia byte a byte a la tienda (sentida-tienda: flask sincronizar-marca,
+# tests/test_marca.py). Siempre LF, para que la copia no dependa de core.autocrlf.
+comun/marca.css text eol=lf
+comun/menu.js text eol=lf
+assets/marca/*.svg text eol=lf
