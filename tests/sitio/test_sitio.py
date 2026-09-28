@@ -134,3 +134,44 @@ def test_teclado_en_la_tienda(abrir, pagina):
         assert info["visible"], info
         visitados += 1
     assert visitados > 20
+
+
+SABER = ["Pedidos y anticipación", "Retiro y envíos", "Cambios y cancelaciones"]
+
+
+@pytest.mark.parametrize("pagina", PAGINAS)
+def test_la_banda_antes_de_pedir(abrir, sitio, pagina):
+    """Arriba del pie, en todas las páginas: tres <details> cerrados, con el
+    «+» dibujado en CSS (el <summary> no lleva ningún carácter suelto)."""
+    pg = abrir(pagina=pagina)
+    assert pg.evaluate("document.querySelector('.saber').nextElementSibling.classList.contains('pie')")
+    assert pg.eval_on_selector_all(".saber-item summary .saber-t", "es => es.map(e => e.textContent)") == SABER
+    assert pg.eval_on_selector_all(".saber-item", "ds => ds.map(d => d.open)") == [False] * 3
+    assert pg.eval_on_selector_all(".saber-mas", "es => es.map(e => e.textContent)") == [""] * 3
+    assert pg.get_attribute(".saber-item a[href$='arma-tu-torta/']", "href") is not None
+    pg.click(".saber-item:nth-child(2) summary")
+    assert pg.locator(".saber-sub").first.is_visible()
+    pg.wait_for_timeout(400)
+    assert pg.evaluate("getComputedStyle(document.querySelector('.saber-item[open] .saber-mas')).backgroundColor") == "rgb(78, 44, 30)"
+
+
+@pytest.mark.parametrize("pagina", PAGINAS)
+def test_la_banda_se_abre_sin_javascript_y_con_teclado(abrir, pagina):
+    pg = abrir(390, 844, pagina=pagina, java_script_enabled=False, **CEL)
+    assert pg.locator(".saber-item").count() == 3
+    assert pg.locator(".saber-item:nth-child(3) li").first.is_hidden()
+    pg.focus(".saber-item:nth-child(3) summary")
+    pg.keyboard.press("Enter")
+    assert pg.locator(".saber-item:nth-child(3) li").first.is_visible()
+    assert "7 días" in pg.text_content(".saber-item:nth-child(3) .saber-cuerpo")
+
+
+@pytest.mark.parametrize("pagina", PAGINAS)
+@pytest.mark.parametrize("w,h,kw", [(390, 844, CEL), (1440, 900, {})])
+def test_el_sello_del_pie_se_ve(abrir, pagina, w, h, kw):
+    pg = abrir(w, h, pagina=pagina, **kw)
+    pg.evaluate("document.querySelector('.pie-sello').scrollIntoView({block: 'center'})")
+    b = pg.locator(".pie-sello").bounding_box()
+    assert pg.locator(".pie-sello").is_visible()
+    assert b["width"] >= (110 if w < 900 else 150)
+    assert b["x"] >= 0 and b["x"] + b["width"] <= w

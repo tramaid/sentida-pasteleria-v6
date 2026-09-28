@@ -137,11 +137,83 @@ def cabecera(actual, raiz="../"):
 {marquesina()}"""
 
 
+WA_PIE = ICONOS.split('<symbol id="i-whatsapp" viewBox="0 0 24 24">', 1)[1].split("</symbol>", 1)[0]
+# Los íconos del pie viajan con el pie: las páginas escritas a mano no tienen
+# todas el mismo sprite.
+ICONOS_PIE = f"""<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="pie-wa" viewBox="0 0 24 24">{WA_PIE}</symbol>
+    <symbol id="pie-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.2 6.8h.01"/></symbol>
+    <symbol id="pie-lugar" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></symbol>
+  </svg>"""
+
+
+def ico_pie(cual):
+    clase = "ico ico-wa" if cual == "wa" else "ico"
+    return f'<svg class="{clase}" aria-hidden="true" focusable="false"><use href="#pie-{cual}"/></svg>'
+
+
+def saber(raiz="../"):
+    """La banda «Antes de pedir», arriba del pie: tres <details> que se abren
+    sin JavaScript. Cada uno se abre por su cuenta."""
+    consulta = wa("Hola SENTIDA, tengo una consulta.")
+    return f"""<aside class="saber" aria-labelledby="saber-t">
+  <div class="saber-in envoltorio">
+    <div class="saber-cab">
+      <p class="eti con-linea">Antes de pedir</p>
+      <h2 class="display" id="saber-t">Lo que tenés <span class="acento">que saber.</span></h2>
+      <p>¿Te queda otra duda? <a href="{consulta}" target="_blank" rel="noopener" aria-describedby="nueva-pestana">Escribinos por WhatsApp</a>.</p>
+    </div>
+    <div class="saber-lista">
+      <details class="saber-item">
+        <summary><span class="saber-n" aria-hidden="true">01</span><span class="saber-t">Pedidos y anticipación</span><span class="saber-mas" aria-hidden="true"></span></summary>
+        <div class="saber-cuerpo">
+          <ul role="list">
+            <li>Trabajamos por encargo y con cupo por día: cuanto antes nos escribas, mejor.</li>
+            <li>Nuestras tortas: pedilas con 48 h.</li>
+            <li>Pastelería: de 4 a 7 días, según el trabajo.</li>
+            <li>Tortas decoradas: armala en <a href="{raiz}arma-tu-torta/">Armá tu torta</a> y te confirmamos fecha y presupuesto por WhatsApp.</li>
+          </ul>
+        </div>
+      </details>
+      <details class="saber-item">
+        <summary><span class="saber-n" aria-hidden="true">02</span><span class="saber-t">Retiro y envíos</span><span class="saber-mas" aria-hidden="true"></span></summary>
+        <!-- Pendiente: Anto y Nadia confirman los horarios de retiro y hasta dónde llega el envío (las zonas). -->
+        <div class="saber-cuerpo saber-dos">
+          <div>
+            <h3 class="saber-sub">Retiro en Martínez, San Isidro</h3>
+            <ul role="list"><li>Coordinamos el día y el horario por WhatsApp.</li></ul>
+          </div>
+          <div>
+            <h3 class="saber-sub">Envío a domicilio en Zona Norte</h3>
+            <ul role="list"><li>Te pasamos el costo según la zona.</li></ul>
+          </div>
+        </div>
+      </details>
+      <details class="saber-item">
+        <summary><span class="saber-n" aria-hidden="true">03</span><span class="saber-t">Cambios y cancelaciones</span><span class="saber-mas" aria-hidden="true"></span></summary>
+        <!-- Provisorio: los plazos de cambios y cancelaciones esperan la confirmación de Anto y Nadia. -->
+        <div class="saber-cuerpo">
+          <ul role="list">
+            <li>Si necesitás cambiar la fecha, avisanos con al menos 7 días. La nueva fecha queda sujeta a nuestra disponibilidad y el presupuesto puede actualizarse.</li>
+            <li>Para cancelar, avisanos con al menos 7 días.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+</aside>"""
+
+
 def pie(raiz="../"):
+    """La banda «Antes de pedir» y el pie: marca · Explorá · Escribinos · el sello."""
     wa_anto = wa("Hola SENTIDA, quiero hacer un pedido.")
     wa_nadia = f"https://wa.me/5491131459646?text={quote('Hola SENTIDA, quiero hacer un pedido.', safe='')}"
     secciones = "\n".join(f'          <li><a href="{raiz}{href}">{texto}</a></li>' for _, texto, href in MENU)
-    return f"""<footer class="pie">
+    nueva = 'target="_blank" rel="noopener" aria-describedby="nueva-pestana"'
+    return f"""{saber(raiz)}
+
+<footer class="pie">
+  {ICONOS_PIE}
   <div class="pie-in envoltorio">
     <div class="pie-marca">
       <img class="pie-logo" src="{raiz}assets/marca/logo-claro.svg" alt="SENTIDA" width="150" height="41" loading="lazy">
@@ -154,24 +226,24 @@ def pie(raiz="../"):
 {secciones}
         </ul>
       </div>
-      <div>
+      <div class="pie-contacto">
         <p class="pie-eti">Escribinos</p>
         <ul role="list">
-          <li><a href="{wa_anto}" target="_blank" rel="noopener" aria-describedby="nueva-pestana">WhatsApp de Anto</a></li>
-          <li><a href="{wa_nadia}" target="_blank" rel="noopener" aria-describedby="nueva-pestana">WhatsApp de Nadia</a></li>
-          <li><a href="https://www.instagram.com/sentidapasteleria/" target="_blank" rel="noopener" aria-describedby="nueva-pestana">@sentidapasteleria</a></li>
+          <li><a href="{wa_anto}" {nueva}>{ico_pie("wa")}WhatsApp de Anto</a></li>
+          <li><a href="{wa_nadia}" {nueva}>{ico_pie("wa")}WhatsApp de Nadia</a></li>
+          <li><a href="https://www.instagram.com/sentidapasteleria/" {nueva}>{ico_pie("ig")}@sentidapasteleria</a></li>
         </ul>
-        <p>Martínez, San Isidro<br>Solo por encargo</p>
+        <p class="pie-lugar">{ico_pie("lugar")}<span>Martínez, San Isidro<br>Solo por encargo</span></p>
       </div>
     </nav>
-    <img class="pie-sello" src="{raiz}assets/marca/sello.svg" alt="" width="105" height="105" loading="lazy">
+    <img class="pie-sello" src="{raiz}assets/marca/sello.svg" alt="" width="164" height="164" loading="lazy">
   </div>
   <div class="pie-fin envoltorio"><span>© 2026 SENTIDA Pastelería · Hecho a mano</span><span>Diseño TRAMA</span></div>
 </footer>"""
 
 
 BLOQUE_CAB = re.compile(r'<header class="cab">.*?</header>(?:\n<div class="marquesina".*?<!-- /marquesina -->)?', re.S)
-BLOQUE_PIE = re.compile(r'<footer class="pie">.*?</footer>', re.S)
+BLOQUE_PIE = re.compile(r'(?:<aside class="saber".*?</aside>\n\n)?<footer class="pie">.*?</footer>', re.S)
 A_MANO = [("index.html", None, ""), ("nosotras/index.html", "nosotras", "../"),
           ("arma-tu-torta/index.html", "arma-tu-torta", "../")]
 

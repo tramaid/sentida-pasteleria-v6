@@ -116,21 +116,65 @@ input:focus-visible,textarea:focus-visible{outline:2px solid var(--celeste-profu
 @keyframes marquesina{to{transform:translateX(-50%)}}
 
 /* ------------------------------------------------------------
-   Pie
+   «Antes de pedir»: la banda crema arriba del pie. Tres <details>
+   (andan sin JavaScript); el «+» está dibujado, no es un carácter.
    ------------------------------------------------------------ */
-.pie{background:var(--marron); color:var(--crema)}
+.saber{background:var(--crema); color:var(--marron)}
+.saber-in{padding-block:clamp(64px,10vh,96px); display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:40px clamp(40px,6vw,96px); align-items:start}
+.saber-cab .eti{margin-bottom:20px}
+.saber-cab h2{font-size:clamp(2.25rem,3.6vw,3.25rem); line-height:1.08; letter-spacing:-.04em; text-wrap:balance}
+.saber-cab > p:not(.eti){margin-top:22px; max-width:380px; font-size:14px; line-height:1.7; color:var(--marron-medio)}
+.saber a:not(.btn){color:var(--marron); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px}
+.saber a:not(.btn):hover{color:var(--marron-medio)}
+.saber-lista{border-top:1px solid var(--marron)}
+.saber-item{border-bottom:1px solid var(--beige)}
+.saber-item:last-child{border-bottom-color:var(--marron)}
+.saber-item summary{list-style:none; cursor:pointer; display:grid; grid-template-columns:44px minmax(0,1fr) 38px; align-items:center; gap:12px; min-height:84px; padding:14px 0}
+.saber-item summary::-webkit-details-marker{display:none}
+.saber-n{font-size:11px; font-weight:600; letter-spacing:.18em; color:var(--celeste-profundo); font-variant-numeric:tabular-nums}
+.saber-t{font-family:var(--display); font-weight:400; font-size:clamp(1.375rem,2vw,1.75rem); line-height:1.2; letter-spacing:-.02em}
+.saber-mas{position:relative; width:38px; height:38px; border:1px solid var(--marron); border-radius:50%; transition:background-color .2s, border-color .2s}
+.saber-mas::before,.saber-mas::after{content:""; position:absolute; left:50%; top:50%; width:12px; height:1.5px; margin:-.75px 0 0 -6px; background:var(--marron); transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.saber-mas::after{transform:rotate(90deg)}
+.saber-item:not([open]) summary:hover .saber-mas{background:var(--blanco)}
+.saber-item[open] .saber-mas{background:var(--marron)}
+.saber-item[open] .saber-mas::before,.saber-item[open] .saber-mas::after{background:var(--crema)}
+.saber-item[open] .saber-mas::after{transform:rotate(0deg)}
+.saber-cuerpo{padding:0 50px 30px 56px; font-size:15px; line-height:1.7; color:var(--marron-medio)}
+.saber-cuerpo ul{list-style:none; padding:0; display:grid; gap:10px}
+.saber-cuerpo li{position:relative; padding-left:22px; max-width:560px}
+/* La viñeta es el aro de la cinta */
+.saber-cuerpo li::before{content:""; position:absolute; left:0; top:.62em; width:8px; height:8px; border:1px solid var(--celeste-filete); border-radius:50%}
+.saber-dos{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px 32px}
+.saber-sub{margin-bottom:10px; font-family:var(--ui); font-size:11px; font-weight:600; letter-spacing:.18em; line-height:1.5; text-transform:uppercase; color:var(--celeste-profundo)}
+.mov .saber-item[open] .saber-cuerpo{animation:saber-abrir .35s cubic-bezier(.16,1,.3,1)}
+@keyframes saber-abrir{from{opacity:0; transform:translateY(-6px)}}
+
+/* ------------------------------------------------------------
+   Pie: marca · Explorá · Escribinos · el sello. El borde de arriba
+   es el dentado del ticket: la banda crema se corta como el papel.
+   ------------------------------------------------------------ */
+.pie{position:relative; background:var(--marron); color:var(--crema)}
+.saber + .pie::before{
+  content:""; position:absolute; left:0; right:0; top:0; height:8px; background:var(--crema);
+  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50% / 16px 100%;
+          mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50% / 16px 100%;
+}
 .pie a{color:var(--crema)}
 .pie a:hover{color:var(--blanco); text-decoration:underline; text-underline-offset:4px}
 .pie :focus-visible{outline-color:var(--crema)}
-.pie-in{padding-block:clamp(60px,10vh,85px); display:grid; grid-template-columns:2fr 2fr 105px; gap:40px; align-items:start}
+.pie-in{padding-block:clamp(64px,10vh,92px); display:grid; grid-template-columns:minmax(0,3fr) minmax(0,8fr) auto; gap:40px clamp(40px,5vw,80px); align-items:start}
 .pie-logo{display:block; width:150px; height:auto}
 .pie-lema{margin-top:18px; font-size:23px; line-height:1.2; color:var(--crema)}
-.pie-links{display:grid; grid-template-columns:1fr 1fr; gap:24px; font-size:13px; line-height:1.5}
+.pie-links{display:grid; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); gap:24px 40px; font-size:13px; line-height:1.5}
 .pie-eti{margin-bottom:10px; font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--beige)}
 .pie-links ul{list-style:none; padding:0}
-.pie-links a{display:inline-flex; align-items:center; min-height:44px}
-.pie-links p:not(.pie-eti){padding-top:10px; line-height:1.9}
-.pie-sello{width:105px; height:105px; border-radius:50%; background:var(--blanco)}
+.pie-links a{display:inline-flex; align-items:center; gap:10px; min-height:44px}
+.pie-links .ico,.pie-lugar .ico{width:16px; height:16px; color:var(--beige)}
+.pie-links a:hover .ico{color:var(--blanco)}
+.pie-lugar{display:flex; align-items:flex-start; gap:10px; padding-top:12px; line-height:1.9}
+.pie-lugar .ico{margin-top:.25em}
+.pie-sello{width:164px; height:164px; border-radius:50%; background:var(--blanco); transform:rotate(-8deg)}
 .pie-fin{padding-block:24px; border-top:1px solid var(--marron-medio); display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:11px; letter-spacing:.1em}
 
 /* Con cuatro secciones, el menú entra entero recién desde 1100 px;
@@ -147,13 +191,24 @@ input:focus-visible,textarea:focus-visible{outline:2px solid var(--celeste-profu
   :root{--cab:64px}
   .marquesina{height:36px}
   .marquesina i{margin:0 24px}
-  .pie-in{grid-template-columns:1fr}
-  .pie-sello{display:none}
+  .saber-in{grid-template-columns:1fr}
+  .saber-cuerpo{padding:0 0 26px 56px}
+  .pie-in{grid-template-columns:minmax(0,1fr) auto; gap:36px 24px}
+  .pie-links{grid-column:1 / -1; grid-row:2}
+  .pie-sello{width:118px; height:118px; margin-top:-6px}
   .marca-logo{width:104px}
+}
+@media (max-width:599px){
+  .saber-item summary{grid-template-columns:34px minmax(0,1fr) 38px; min-height:76px}
+  .saber-cuerpo{padding-left:46px; font-size:14px}
+  .saber-dos{grid-template-columns:1fr}
+  .pie-links{grid-auto-flow:row}
+  .pie-links div:first-child ul{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:16px}
 }
 @media (max-width:380px){
   .btn{padding:0 14px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
+  .saber-mas::before,.saber-mas::after{transition:none}
 }
