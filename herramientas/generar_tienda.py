@@ -182,13 +182,34 @@ def comunes(html_pagina, actual, raiz):
     return BLOQUE_PIE.sub(lambda m: pie(raiz), html_pagina, count=1)
 
 
+FLECHA_ANT = '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.5 6 8.5 12l6 6"/></svg>'
+FLECHA_SIG = '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9.5 6 6 6-6 6"/></svg>'
+
+
+def galeria(nombre, fotos, agregar):
+    """Varias fotos en la tarjeta: una tira que se desliza (con o sin JavaScript).
+    Las flechas, los puntos y el aviso «Foto n de N» los prende comun/tienda.js."""
+    total = len(fotos)
+    puntos = '<span class="actual"></span>' + "<span></span>" * (total - 1)
+    return (f'<div class="producto-foto galeria" data-galeria>'
+            f'<div class="galeria-tira" tabindex="0" role="group" aria-label="Fotos de {esc(nombre)}">{"".join(fotos)}</div>'
+            f'<button type="button" class="galeria-flecha galeria-ant" aria-label="Foto anterior" hidden>{FLECHA_ANT}</button>'
+            f'<button type="button" class="galeria-flecha galeria-sig" aria-label="Foto siguiente" hidden>{FLECHA_SIG}</button>'
+            f'<span class="galeria-puntos" aria-hidden="true" hidden>{puntos}</span>'
+            f'<span class="galeria-estado sr" aria-live="polite">Foto 1 de {total}</span>'
+            f'{agregar}</div>')
+
+
 def tarjeta(p, tipos, n, total, raiz="../", nivel=3):
     nombre = esc(p["nombre"])
     agregar = f'<button type="button" class="producto-agregar" aria-label="Agregar al pedido: {nombre}" hidden>+</button>'
-    foto = img(p.get("foto") or p["slug"], "", TAMANOS_TARJETA, raiz,
-               diferida=not (nivel == 2 and n <= PRIMERA_FILA))
-    if foto:
-        partes = [f'<div class="producto-foto">{foto}{agregar}</div>']
+    principal = img(p.get("foto") or p["slug"], "", TAMANOS_TARJETA, raiz,
+                    diferida=not (nivel == 2 and n <= PRIMERA_FILA))
+    extras = [f for f in (img(nombre, "", TAMANOS_TARJETA, raiz) for nombre in p.get("fotos", [])) if f]
+    if principal and extras:
+        partes = [galeria(p["nombre"], [principal] + extras, agregar)]
+    elif principal:
+        partes = [f'<div class="producto-foto">{principal}{agregar}</div>']
     else:
         partes = [f'<div class="producto-foto sin-foto"><span class="display" aria-hidden="true">{nombre}</span>{agregar}</div>']
     categoria = esc(tipos[p["tipo"]]) if p.get("tipo") else SECCION_ETI.get(p["seccion"], "")

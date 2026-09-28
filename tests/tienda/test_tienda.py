@@ -19,13 +19,17 @@ def test_las_tortas_de_la_casa(abrir):
                  "sablee", "pavlova-lima", "choco-oreo"):
         assert pg.locator(f"#{slug}").count() == 1, slug
     sin_foto = pg.locator(".producto .sin-foto").count()
-    con_foto = pg.locator(".producto .producto-foto img").count()
+    # Con varias fotos, la tarjeta lleva una galería: se cuenta la primera de cada una.
+    con_foto = pg.locator(".producto .producto-foto img:first-child").count()
     assert sin_foto + con_foto == 13
     assert pg.text_content(f"{KEY} .producto-meta span:first-child") == "Las de la casa"
     # Los productos cuelgan del h1 (h2) y la primera fila no espera para cargar.
     assert pg.locator(".producto h3").count() == 0
-    assert pg.eval_on_selector_all(".producto-foto img", "is => is.slice(0, 3).map(i => i.loading)") == ["auto"] * 3
-    assert pg.eval_on_selector_all(".producto-foto img", "is => is.slice(3).every(i => i.loading === 'lazy')")
+    primeras = ".producto-foto img:first-child"
+    assert pg.eval_on_selector_all(primeras, "is => is.slice(0, 3).map(i => i.loading)") == ["auto"] * 3
+    assert pg.eval_on_selector_all(primeras, "is => is.slice(3).every(i => i.loading === 'lazy')")
+    # Las fotos extra de las galerías siempre esperan.
+    assert pg.eval_on_selector_all(".galeria-tira img:not(:first-child)", "is => is.length > 0 && is.every(i => i.loading === 'lazy')")
     assert pg.get_attribute(f"{KEY} .producto-agregar", "aria-label") == "Agregar al pedido: Key Lime Pie"
     assert pg.errores == []
 
@@ -33,7 +37,12 @@ def test_las_tortas_de_la_casa(abrir):
 def test_la_pasteleria_y_la_mesa_dulce(abrir):
     pg = abrir(pagina="pasteleria/")
     assert pg.text_content("h1") == "Pastelería."
-    assert pg.locator("[data-producto]").count() == 8
+    assert pg.locator("[data-producto]").count() == 6
+    # Las tres galletas son un solo producto, con tres fotos.
+    for fuera in ("galletas-corazon", "galletas-tematicas"):
+        assert pg.locator(f'[data-producto="{fuera}"]').count() == 0, fuera
+    assert pg.locator('[data-producto="galletas-decoradas"] .galeria-tira img').count() == 3
+    assert pg.locator('[data-producto="shots"] .galeria-tira img').count() == 5
     assert pg.locator(".producto .sin-foto").count() == 0
     assert pg.text_content('[data-producto="cuadraditos-dulces"] .producto-tipo') == "Cuadraditos"
     assert pg.text_content('[data-producto="shots"] .producto-tipo') == "Shots"
@@ -163,3 +172,50 @@ def test_sin_js_cada_tarjeta_tiene_su_whatsapp(abrir):
     assert "+" not in href
     assert pg.get_attribute(".cab [data-mi-pedido]", "href") == "../tortas/#pedido"
     assert pg.is_visible(".tienda-panel [data-carrito-vacio]")
+
+
+GAL = '[data-producto="key-lime-pie"] .galeria'
+
+
+def test_la_galeria_de_la_tarjeta(abrir):
+    pg = abrir()
+    assert pg.locator(".galeria").count() == 6
+    assert pg.locator(f"{GAL} .galeria-tira img").count() == 4
+    assert pg.get_attribute(f"{GAL} .galeria-ant", "aria-label") == "Foto anterior"
+    assert pg.get_attribute(f"{GAL} .galeria-sig", "aria-label") == "Foto siguiente"
+    assert pg.text_content(f"{GAL} .galeria-estado") == "Foto 1 de 4"
+    assert pg.locator(f"{GAL} .galeria-puntos span").count() == 4
+    # Las flechas aparecen al pasar y miden 44 px.
+    pg.hover(GAL)
+    caja = pg.locator(f"{GAL} .galeria-sig").bounding_box()
+    assert caja["width"] >= 44 and caja["height"] >= 44
+    pg.click(f"{GAL} .galeria-sig")
+    pg.wait_for_function(f"document.querySelector('{GAL} .galeria-estado').textContent === 'Foto 2 de 4'")
+    assert pg.eval_on_selector_all(f"{GAL} .galeria-puntos span", "ss => ss.map(s => s.classList.contains('actual'))") == [False, True, False, False]
+    # La anterior desde la primera da la vuelta a la última.
+    pg.click(f"{GAL} .galeria-ant")
+    pg.wait_for_function(f"document.querySelector('{GAL} .galeria-estado').textContent === 'Foto 1 de 4'")
+    pg.click(f"{GAL} .galeria-ant")
+    pg.wait_for_function(f"document.querySelector('{GAL} .galeria-estado').textContent === 'Foto 4 de 4'")
+    # El «+» sigue andando.
+    pg.click(KEY + " .producto-agregar")
+    assert pg.text_content(KEY + " .contador output") == "1"
+    assert pg.errores == []
+
+
+def test_la_galeria_se_desliza_en_el_celular(abrir):
+    pg = abrir(390, 844, **CEL)
+    assert pg.is_hidden(f"{GAL} .galeria-sig") is False  # existe, pero no se ve sin foco
+    assert pg.evaluate(f"getComputedStyle(document.querySelector('{GAL} .galeria-sig')).opacity") == "0"
+    pg.evaluate(f"(t => t.scrollTo({{left: t.clientWidth}}))(document.querySelector('{GAL} .galeria-tira'))")
+    pg.wait_for_function(f"document.querySelector('{GAL} .galeria-estado').textContent === 'Foto 2 de 4'")
+
+
+def test_la_galeria_sin_js_es_una_tira(abrir):
+    pg = abrir(390, 844, java_script_enabled=False, **CEL)
+    assert pg.is_hidden(f"{GAL} .galeria-sig")
+    assert pg.is_hidden(f"{GAL} .galeria-puntos")
+    assert pg.get_attribute(f"{GAL} .galeria-tira", "tabindex") == "0"
+    assert pg.evaluate(f"(t => t.scrollWidth > t.clientWidth * 3)(document.querySelector('{GAL} .galeria-tira'))")
+    # Una sola foto: la tarjeta queda como siempre.
+    assert pg.locator('[data-producto="pavlova-lima"] .galeria').count() == 0

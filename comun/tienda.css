@@ -19,6 +19,27 @@
 .sin-foto span{font-size:clamp(22px,2.2vw,32px); line-height:1.05; letter-spacing:-.02em; color:var(--marron)}
 .producto-agregar{position:absolute; right:14px; bottom:14px; width:44px; height:44px; display:grid; place-items:center; border:0; border-radius:50%; background:var(--blanco); color:var(--marron); font-family:var(--ui); font-size:26px; font-weight:300; line-height:1; cursor:pointer; transition:background-color .2s, color .2s}
 .producto-agregar:hover{background:var(--marron); color:var(--blanco)}
+/* Varias fotos: una tira que se desliza de a una (sin JavaScript también).
+   Con JavaScript, puntos abajo a la izquierda y flechas al pasar o con el teclado. */
+.galeria-tira{display:flex; height:100%; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; overscroll-behavior-x:contain; scrollbar-width:none}
+.galeria-tira::-webkit-scrollbar{display:none}
+.galeria-tira img{flex:0 0 100%; min-width:0; scroll-snap-align:start; scroll-snap-stop:always}
+.galeria-tira:focus-visible{outline:2px solid var(--marron); outline-offset:-2px}
+.mov .galeria-tira{scroll-behavior:smooth}
+.mov .producto:hover .galeria img{transform:none}
+.galeria-flecha{position:absolute; top:50%; z-index:1; width:44px; height:44px; margin-top:-22px; display:grid; place-items:center; padding:0; border:0; border-radius:50%; background:var(--blanco); color:var(--marron); cursor:pointer; opacity:0; pointer-events:none; transition:opacity .2s, background-color .2s, color .2s}
+.galeria-flecha .ico{width:20px; height:20px}
+.galeria-ant{left:10px}
+.galeria-sig{right:10px}
+.galeria:hover .galeria-flecha,.galeria:focus-within .galeria-flecha{opacity:1; pointer-events:auto}
+.galeria-flecha:hover{background:var(--marron); color:var(--blanco)}
+/* En pantallas táctiles se desliza con el dedo: las flechas solo aparecen con el teclado. */
+@media (hover:none){
+  .galeria:hover:not(:focus-within) .galeria-flecha{opacity:0; pointer-events:none}
+}
+.galeria-puntos{position:absolute; left:14px; bottom:26px; height:20px; padding:0 8px; display:flex; align-items:center; gap:6px; background:var(--blanco); border-radius:2px; pointer-events:none}
+.galeria-puntos span{width:6px; height:6px; border-radius:50%; background:var(--beige); transition:background-color .2s, transform .2s}
+.galeria-puntos .actual{background:var(--marron); transform:scale(1.2)}
 .producto-meta{display:flex; justify-content:space-between; gap:12px; margin:18px 0 6px; font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--celeste-profundo)}
 .producto :is(h2,h3){font-size:clamp(22px,1.9vw,27px); line-height:1.2; letter-spacing:-.03em}
 .producto-desc{margin-top:4px; font-size:14px; line-height:1.5; color:var(--marron-medio)}
