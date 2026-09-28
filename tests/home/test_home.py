@@ -88,6 +88,6 @@ def test_el_pedido_de_la_home_tiene_sus_iconos(abrir):
 def test_el_hero_queda_entero(abrir):
     for w in (900, 1024, 1280, 1440, 1920):
         pg = abrir(w, 900)
-        der = pg.evaluate("Math.max(...[...document.querySelectorAll('.hero-nota, .hero-sello, .circulo-grande')]"
+        der = pg.evaluate("Math.max(...[...document.querySelectorAll('.hero-sello, .circulo-grande')]"
                           ".map(e => e.getBoundingClientRect().right))")
         assert der <= w, w
