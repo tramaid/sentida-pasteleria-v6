@@ -28,7 +28,7 @@ def test_el_hero(abrir):
     # Un solo círculo y el sello: las chicas pidieron sacar la foto de la masa (28/09).
     # Adentro del círculo se turnan ocho tortas (28/09): la primera carga ya, las demás después del load.
     assert pg.locator(".hero .circulo").count() == 1
-    assert pg.locator(".hero .circulo img").count() == 8
+    assert pg.locator(".hero .circulo img").count() == 10
     assert pg.get_attribute(".hero .circulo img >> nth=0", "fetchpriority") == "high"
     assert pg.get_attribute(".hero .circulo img >> nth=0", "src").endswith("hero-flores-960.webp")
     assert pg.locator(".hero .hero-sello").count() == 1
@@ -38,7 +38,7 @@ def test_las_fotos_del_hero_se_turnan_y_se_pausan(abrir):
     pg = abrir(init="window.__intervalos = []; const si = window.setInterval; window.setInterval = (f, t) => { window.__intervalos.push(t); return si(f, 50); };")
     assert pg.evaluate("window.__intervalos") == [5000]
     alts = pg.eval_on_selector_all(".hero .circulo img", "is => is.map(i => i.alt)")
-    assert all(alts) and len(set(alts)) == 8
+    assert all(alts) and len(set(alts)) == 10
     pg.wait_for_function("document.querySelector('.hero .circulo img.visible') !== document.querySelector('.hero .circulo img')")
     assert pg.locator(".hero .circulo img.visible").count() == 1
     assert pg.locator(".hero .circulo img:not([aria-hidden])").count() == 1
