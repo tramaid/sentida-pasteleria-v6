@@ -21,6 +21,7 @@ Se considera cumplido cuando:
 
 - **Logo:** los tres SVG del usuario en `E:\E descargas\SENTIDA-sitio-web\`: `solo-sentida-nuevo.svg`, `logo-sentida-nuevo-01.svg` (con PASTELERÍA) y `SELLO-SENTIDA-NUEVO-01.svg`.
 - **Colores:** siguen al logo. Marrón `#4E2C1E` (antes `#402D21`), celeste de filetes `#7EAFD6` (antes `#8FB1C9`) y blanco crema `#FCF9F2` (antes `#FEFAF8`).
+- **Hero de la home** (lo pidieron las chicas el 28/09): una sola foto, la de la torta, con el sello. Se saca el círculo chico de la masa de galletas; en el celular, el círculo grande va centrado. Ya está hecho en la rama `v6`.
 - **Tipografías:** los títulos pasan de Erode a **Playfair** (Google Fonts, OFL, variable). El texto sigue en **Montserrat**. La comparación está en `E:\E descargas\SENTIDA-sitio-web\comparacion-tipografias\index.html`.
 - **La ficha** toma la estructura de la ficha de CARVAN del usuario (`E:\CARVAN\carvan-tienda\templates\publico\_ficha_*`), que ya vive en la tienda: tocar la tarjeta abre un popup sobre la grilla, hay una página propia por producto y una galería ampliable.
 - **La tienda no tiene home:** `/` va a `/catalogo`.

@@ -22,7 +22,9 @@ def test_el_hero(abrir):
     assert pg.text_content(".hero-lema") == "Lo soñás,lo creamos."
     assert pg.get_attribute(".hero .btn-1", "href") == "arma-tu-torta/"
     assert pg.get_attribute(".hero .enlace", "href") == "#empezar"
-    assert pg.locator(".hero .circulo img").count() == 2
+    # Una sola torta y el sello: las chicas pidieron sacar la foto de la masa (28/09).
+    assert pg.locator(".hero .circulo img").count() == 1
+    assert pg.locator(".hero .hero-sello").count() == 1
 
 
 def test_elegi_por_donde_empezar(abrir):

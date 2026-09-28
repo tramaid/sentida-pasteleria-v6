@@ -1,6 +1,6 @@
 /* ============================================================
    SENTIDA Pastelería — home v6 (estilo sentida-v2)
-   Hero con círculos, «Elegí por dónde empezar», «Lo que más nos
+   Hero con un círculo y el sello, «Elegí por dónde empezar», «Lo que más nos
    piden», «Todo empieza con una idea», Anto y Nadia, la banda
    celeste y el cierre. Lo común está en comun/base.css.
    ============================================================ */
@@ -18,7 +18,6 @@
 .hero-arte{position:absolute; left:51%; right:var(--lateral); top:0; bottom:0}
 .circulo-grande{position:absolute; right:0; top:43px; width:min(100%,610px); border-width:10px}
 .circulo-grande img{object-position:center 37%}
-.circulo-chico{position:absolute; left:2%; bottom:15px; width:220px}
 .hero-sello{position:absolute; right:0; bottom:20px; width:122px; height:122px; border-radius:50%; background:var(--blanco); transform:rotate(-11deg); filter:drop-shadow(0 8px 15px var(--sombra-suave))}
 .hero-nota{position:absolute; left:4%; top:10px; font-size:16px; line-height:1.25; text-align:center; color:var(--marron-medio); transform:rotate(7deg)}
 
@@ -82,7 +81,6 @@
   .hero-nota{left:0}
 }
 @media (max-width:1080px){
-  .circulo-chico{width:180px}
   .puerta{padding:25px 15px}
 }
 @media (max-width:899px){
@@ -97,8 +95,8 @@
   .banda-txt{padding:70px 25px}
   .hero-in{display:flex; flex-direction:column-reverse; min-height:0; padding-block:25px 55px}
   .hero-arte{position:relative; left:auto; right:auto; width:100%; height:335px}
-  .circulo-grande{width:min(78vw,310px); top:0; right:3%; border-width:6px}
-  .circulo-chico{width:118px; left:0; bottom:0; border-width:5px}
+  /* Una sola torta: el círculo va centrado, con el sello abajo a la derecha. */
+  .circulo-grande{width:min(78vw,310px); top:0; left:0; right:0; margin-inline:auto; border-width:6px}
   .hero-sello{width:77px; height:77px; right:0; bottom:3px}
   .hero-nota{display:none}
   .hero-txt{text-align:center; padding-block:20px 0}
@@ -119,5 +117,4 @@
 @media (max-width:390px){
   .hero-arte{height:300px}
   .circulo-grande{width:270px}
-  .circulo-chico{width:105px}
 }
