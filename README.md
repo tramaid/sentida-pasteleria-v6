@@ -35,6 +35,23 @@ El prefijo `54 9` es obligatorio para que WhatsApp resuelva móviles argentinos;
 - Varias fotos del banco llevan el sello de la marca anterior y dos tarjetas muestran un producto distinto al de su título (ver `QA.md`).
 - No hay definición sobre precios, detalle por producto ni zona de entrega.
 
+## Marca (28/09/2026)
+
+El logo nuevo, el sello y la tipografía Playfair. Spec en
+`docs/superpowers/specs/2026-09-28-marca-tienda-ficha-design.md`.
+
+- Los colores del logo y las fuentes (Playfair en los títulos, Montserrat en el
+  texto) viven en `comun/marca.css`. Cada página lo carga antes que `base.css`.
+- Los logos, el sello y el favicon están en `assets/marca/`, y las fuentes en
+  `assets/fuentes/`.
+- Los SVG que llegan de Illustrator se pasan por `herramientas/limpiar_svg.py`
+  antes de guardarlos. El script saca el `<style>` interno y los ids, y deja el
+  `fill` directo. Ejemplo: `python herramientas/limpiar_svg.py origen.svg assets/marca/sello.svg`.
+- La tienda (`../sentida-tienda`) usa una copia de todo esto. Después de cambiar
+  la marca, correr esto en la tienda:
+  `SECRET_KEY=dev python -m flask --app app sincronizar-marca ../sentida-site`.
+  Su test `tests/test_marca.py` avisa si la copia quedó vieja.
+
 ## v6: el estilo de sentida-v2 (27/09/2026)
 
 Rama `v6`. La cara de la propuesta `tramaid/sentida-v2`, que les gustó a las
@@ -46,7 +63,7 @@ dueñas, sobre el sitio que funciona de la v5. Spec en
   y el pie de `index.html`, `nosotras/` y `arma-tu-torta/`, y el bloque «Lo que
   más nos piden» de la home (productos con `"destacado": true`). Después de
   tocar el catálogo o esas partes, correrlo.
-- El pedido se abre como panel lateral. Los títulos van en Erode 400.
+- El pedido se abre como panel lateral. Los títulos iban en Erode 400; desde el 28/09 van en Playfair (ver «Marca»).
 
 ## v5: la home con tres puertas (25/09/2026)
 
