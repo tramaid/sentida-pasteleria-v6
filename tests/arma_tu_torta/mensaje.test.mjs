@@ -7,7 +7,7 @@ const M = require('../../arma-tu-torta/mensaje.js');
 const COMPLETO = {
   fecha: '2026-11-07', sinFecha: false, tamano: 'mediana', bizcochuelo: 'vainilla',
   relleno: 'ddl', agregados: ['chips', 'nuez'], relleno2: 'frutos-rojos',
-  idea: 'flores naturales en tonos pastel', referencia: 'flores', nombreTorta: 'Mamá', numero: '60'
+  idea: 'flores naturales en tonos pastel', nombreTorta: 'Mamá', numero: '60'
 };
 
 test('fecha en palabras', () => {
@@ -35,7 +35,7 @@ test('mensaje completo, tal cual la especificación', () => {
     'Bizcochuelo: vainilla',
     'Relleno: dulce de leche con chips y nuez',
     'Segundo relleno: frutos rojos',
-    'Decoración: flores naturales en tonos pastel (como la de flores naturales)',
+    'Decoración: flores naturales en tonos pastel',
     'Nombre: Mamá',
     'Número: 60'
   ].join('\n'));
@@ -63,8 +63,9 @@ test('agregados sin relleno elegido', () => {
   assert.equal(l.vacio, false);
 });
 
-test('decoración solo con referencia, e idea con espacios de más', () => {
-  assert.equal(M.lineas({referencia: 'petalos'})[5].valor, 'como la de pétalos');
+test('decoración: idea con espacios de más; una referencia vieja se ignora', () => {
+  const l = M.lineas({referencia: 'petalos'})[5];
+  assert.deepEqual([l.valor, l.vacio], ['a definir', true]);
   assert.equal(M.lineas({idea: '  rosa   y  dorado '})[5].valor, 'rosa y dorado');
 });
 
@@ -90,7 +91,7 @@ test('el primer paso incompleto', () => {
   assert.equal(M.primerIncompleto({}), 1);
   assert.equal(M.primerIncompleto({sinFecha: true, tamano: 'chica'}), 3);
   assert.equal(M.primerIncompleto(COMPLETO), 7);
-  assert.equal(M.primerIncompleto({...COMPLETO, idea: '', referencia: ''}), 7);
+  assert.equal(M.primerIncompleto({...COMPLETO, idea: '', fotos: 0}), 7);
 });
 
 test('url de WhatsApp codificada', () => {
@@ -109,4 +110,28 @@ test('los dos rellenos tienen agregados', () => {
   const ls = M.lineas({relleno: 'kinder', agregados: ['nuez'], relleno2: 'ddl', agregados2: ['bombon', 'mani']});
   assert.equal(ls.find(x => x.clave === 'relleno').valor, 'crema Kinder con nuez');
   assert.equal(ls.find(x => x.clave === 'relleno2').valor, 'dulce de leche con bombón y maní');
+});
+
+test('fotos de referencia: una línea con cuántas, después de la decoración', () => {
+  const ls = M.lineas({...COMPLETO, fotos: 3});
+  const i = ls.findIndex(l => l.clave === 'fotos');
+  assert.equal(ls[i - 1].clave, 'decoracion');
+  assert.deepEqual([ls[i].etiqueta, ls[i].valor, ls[i].vacio], ['Fotos', '3 de referencia', false]);
+  assert.ok(M.texto({...COMPLETO, fotos: 3}).includes('\nFotos: 3 de referencia\nNombre: Mamá'));
+});
+
+test('sin fotos (o un número raro) no hay línea', () => {
+  for (const fotos of [undefined, 0, -2, 'x', null]) {
+    assert.ok(!M.lineas({fotos}).some(l => l.clave === 'fotos'), String(fotos));
+  }
+  assert.equal(M.lineas({fotos: '2'}).find(l => l.clave === 'fotos').valor, '2 de referencia');
+});
+
+test('con el enlace de WhatsApp, las fotos van en el chat', () => {
+  const t = M.texto({...COMPLETO, fotos: 2, fotosEnChat: true});
+  assert.ok(t.includes('\nFotos de referencia: te las mando en el chat (2)\n'));
+  assert.ok(!t.includes('Fotos: 2'));
+  // El ticket no cambia: sigue diciendo cuántas.
+  assert.equal(M.lineas({fotos: 2, fotosEnChat: true}).pop().valor, '2 de referencia');
+  assert.ok(!M.texto({...COMPLETO, fotosEnChat: true}).includes('Fotos'));
 });

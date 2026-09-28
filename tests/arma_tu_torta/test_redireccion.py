@@ -1,10 +1,10 @@
 import pytest
 
 # Las direcciones viejas siguen andando: pueden estar compartidas en Instagram o
-# en un WhatsApp. Se conservan ?ref= y el # (el paso de la comanda).
+# en un WhatsApp. Se conservan la búsqueda (?…) y el # (el paso de la comanda).
 VIEJAS = [
-    ("comanda/?ref=letras#inicio", "/arma-tu-torta/?ref=letras#inicio"),
-    ("decoradas/?ref=letras#inicio", "/arma-tu-torta/?ref=letras#inicio"),
+    ("comanda/?x=1#inicio", "/arma-tu-torta/?x=1#inicio"),
+    ("decoradas/?x=1#inicio", "/arma-tu-torta/?x=1#inicio"),
     ("antojos/", "/pasteleria/"),
 ]
 

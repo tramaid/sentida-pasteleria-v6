@@ -30,6 +30,7 @@
 <script src="../comun/menu.js" defer></script>
 <script src="mensaje.js" defer></script>
 <script src="comanda.js" defer></script>
+<script src="fotos.js" defer></script>
 <script src="borrador.js" defer></script>
 <script src="pasos.js" defer></script>
 <script src="panel.js" defer></script>
@@ -43,6 +44,7 @@
   <symbol id="i-izq" viewBox="0 0 24 24"><path d="M20 12H5M10.5 6.5 5 12l5.5 5.5"/></symbol>
   <symbol id="i-diagonal" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-mas" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-cerrar" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
   <symbol id="i-bolsa" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12.5H6.2L5 8Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></symbol>
   <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.13a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.17 8.17 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.46-.72-1.69-.8-.22-.09-.39-.13-.55.12-.17.25-.63.8-.78.96-.14.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.14.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.41-.55-.42h-.47c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.06s.89 2.39 1.01 2.56c.13.16 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.46-.6 1.67-1.18.2-.57.2-1.07.14-1.17-.06-.11-.22-.17-.47-.29Z"/></symbol>
@@ -199,13 +201,13 @@
             <p class="campo-ayuda" id="idea-ayuda">Temática, colores, lo que se te ocurra.</p>
             <textarea id="idea" name="idea" rows="3" aria-describedby="idea-ayuda"></textarea>
           </div>
-          <p class="paso-sub" id="referencia-t">Una referencia, si querés</p>
-          <div class="referencias" role="radiogroup" aria-labelledby="referencia-t">
-            <label class="referencia"><input type="radio" name="referencia" value="petalos"><span><img src="../assets/fotos/torta-petalos-480.webp" width="960" height="1280" alt="" loading="lazy" decoding="async"><span class="ref-t">Pétalos</span></span></label>
-            <label class="referencia"><input type="radio" name="referencia" value="flores"><span><img src="../assets/fotos/hero-flores-640.webp" width="1220" height="1600" alt="" loading="lazy" decoding="async"><span class="ref-t">Flores naturales</span></span></label>
-            <label class="referencia"><input type="radio" name="referencia" value="letras"><span><img src="../assets/fotos/letra-f-480.webp" width="1000" height="1333" alt="" loading="lazy" decoding="async"><span class="ref-t">Letras y números</span></span></label>
-            <label class="referencia"><input type="radio" name="referencia" value="mensaje"><span><img src="../assets/fotos/hello-30-480.webp" width="731" height="1300" alt="" loading="lazy" decoding="async"><span class="ref-t">Con mensaje</span></span></label>
-            <label class="referencia"><input type="radio" name="referencia" value="" checked><span><span class="ref-vacia" aria-hidden="true"></span><span class="ref-t">Sin referencia</span></span></label>
+          <div class="campo campo-fotos" id="campo-fotos" hidden>
+            <p class="campo-t" id="fotos-t">Fotos de referencia, si querés</p>
+            <p class="campo-ayuda" id="fotos-ayuda">Capturas, fotos de Pinterest, lo que te inspire. Hasta 6.</p>
+            <input type="file" id="fotos" accept="image/*" multiple hidden>
+            <button type="button" class="btn btn-2 fotos-adjuntar" id="fotos-adjuntar" aria-describedby="fotos-t fotos-ayuda"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-mas"/></svg>Adjuntar fotos</button>
+            <p class="fotos-aviso" id="fotos-aviso"></p>
+            <ul class="fotos-lista" id="fotos-lista" aria-labelledby="fotos-t" hidden></ul>
           </div>
           <div class="campos-dos">
             <div class="campo">
@@ -244,6 +246,11 @@ Decoración: </textarea>
           <div class="botones">
             <button class="btn btn-1" type="submit"><svg class="ico ico-wa" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>Mandar por WhatsApp a Anto</button>
             <button class="btn btn-2" type="button" id="reiniciar" hidden>Empezar de nuevo</button>
+          </div>
+          <div class="nota-fotos" id="nota-fotos" data-nota-fotos hidden>
+            <p data-nota-texto></p>
+            <ul class="fotos-mini" id="fotos-mini" aria-label="Tus fotos de referencia"></ul>
+            <button type="button" class="enlace-btn" id="sin-compartir" hidden>Mejor abrir el chat y mandarlas ahí</button>
           </div>
           <p class="cierre-nadia"><a href="https://wa.me/5491131459646?text=Hola%20SENTIDA%2C%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener" aria-describedby="nueva-pestana">¿Preferís escribirle a Nadia? 11&nbsp;3145&#8209;9646</a></p>
         </form>
@@ -334,6 +341,7 @@ Decoración: </textarea>
         <p class="ticket-fijo"><strong>Incluye:</strong> nombre, número en chocolate, decoraciones básicas, velita y detalles en buttercream.</p>
       </div>
     </div>
+    <p class="nota-fotos" data-nota-fotos hidden></p>
     <p class="dialogo-editado">Editaste el mensaje a mano, así que se manda tu versión. Revisalo antes de enviar.</p>
     <div class="botones">
       <button class="btn btn-1 dialogo-enviar" type="submit" form="envio"><svg class="ico ico-wa" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>Mandar por WhatsApp a Anto</button>

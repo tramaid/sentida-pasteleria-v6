@@ -58,16 +58,6 @@ def test_dialogo_sin_edicion_manda_directo(abrir):
     assert pg.is_visible("#comanda-dialogo button[type=submit]")
 
 
-def test_la_referencia_se_puede_sacar(abrir):
-    pg = abrir()
-    armar(pg, hasta=6)
-    pg.check("input[name=referencia][value=petalos]")
-    assert "como la de pétalos" in pg.input_value("#mensaje")
-    pg.check("input[name=referencia][value='']")
-    assert "Decoración: a definir" in pg.input_value("#mensaje")
-    assert "pétalos" not in pg.input_value("#mensaje")
-
-
 def test_el_mensaje_no_hace_zoom_en_iphone(abrir):
     pg = abrir(390, 844, **CEL)
     assert pg.evaluate("parseFloat(getComputedStyle(document.getElementById('mensaje')).fontSize)") >= 16

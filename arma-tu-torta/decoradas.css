@@ -69,18 +69,24 @@
 .check{display:inline-flex; align-items:center; gap:10px; min-height:44px; font-size:15px; cursor:pointer}
 .check input{width:20px; height:20px; margin:0; accent-color:var(--marron)}
 
-.referencias{display:grid; grid-template-columns:repeat(5,minmax(0,112px)); gap:12px}
-.ref-vacia{display:block; width:100%; aspect-ratio:1; border:1px dashed var(--beige); border-radius:2px; outline:2px solid transparent; outline-offset:2px}
-.referencia input:checked + span .ref-vacia{outline-color:var(--marron)}
-.referencia input:focus-visible + span .ref-vacia{outline-color:var(--celeste-profundo)}
-.referencia{position:relative; display:block}
-.referencia input{position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:pointer}
-.referencia > span{display:flex; flex-direction:column; gap:8px}
-.referencia img{width:100%; aspect-ratio:1; object-fit:cover; border-radius:2px; outline:2px solid transparent; outline-offset:2px}
-.ref-t{align-self:flex-start; font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; line-height:1.3; padding:2px 4px; border-radius:2px}
-.referencia input:checked + span img{outline-color:var(--marron)}
-.referencia input:checked + span .ref-t{background:var(--celeste)}
-.referencia input:focus-visible + span img{outline-color:var(--celeste-profundo)}
+/* Fotos de referencia (con JavaScript: fotos.js) */
+.fotos-adjuntar{align-self:flex-start; gap:12px}
+.fotos-aviso{font-size:14px; font-weight:600; line-height:1.45; color:var(--marron); max-width:46ch}
+.fotos-aviso:empty{display:none}
+.fotos-lista{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(6,minmax(0,88px)); gap:10px}
+.fotos-lista li{position:relative}
+.fotos-lista img{display:block; width:100%; aspect-ratio:1; object-fit:cover; border:1px solid var(--linea); border-radius:2px; background:var(--crema)}
+.foto-quitar{
+  position:absolute; top:4px; right:4px; display:flex; align-items:center; justify-content:center; width:36px; height:36px;
+  padding:0; background:var(--blanco); color:var(--marron); border:1px solid var(--marron); border-radius:2px; cursor:pointer;
+}
+.foto-quitar:hover{background:var(--crema)}
+.foto-quitar:focus-visible{outline:2px solid var(--celeste-profundo); outline-offset:2px}
+.foto-quitar .ico{width:16px; height:16px}
+.nota-fotos{max-width:560px; font-size:14px; line-height:1.5; color:var(--marron); background:var(--crema); border:1px solid var(--beige); border-radius:2px; padding:12px 14px}
+.fotos-mini{list-style:none; margin:10px 0 0; padding:0; display:flex; flex-wrap:wrap; gap:6px}
+.fotos-mini img{display:block; width:48px; height:48px; object-fit:cover; border:1px solid var(--beige); border-radius:2px}
+.nota-fotos .enlace-btn{min-height:40px; margin-top:4px}
 
 .panel{position:sticky; top:var(--cab); height:calc(100vh - var(--cab)); align-self:start}
 .panel-foto{position:absolute; inset:0; overflow:hidden; background:var(--crema)}
@@ -159,7 +165,7 @@
   .paso-foto{display:block; width:100%; margin-top:8px}
   .paso-foto img{width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:2px}
   .paso-foto figcaption{margin-top:8px; font-size:13px; color:var(--marron-medio)}
-  .referencias{grid-template-columns:repeat(2,minmax(0,1fr)); width:100%}
+  .fotos-lista{grid-template-columns:repeat(3,minmax(0,1fr)); width:100%; max-width:360px}
 
   /* Mientras se arma, la tira del ticket reemplaza a la cabecera. */
   .js.en-comanda .cab{visibility:hidden}

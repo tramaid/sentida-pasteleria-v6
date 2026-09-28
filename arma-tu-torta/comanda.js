@@ -26,8 +26,20 @@
     return el ? el.value : '';
   }
 
+  // Las fotos de referencia viven en memoria (fotos.js), no en el formulario.
+  var sinCompartir = false;
+  function fotos() { return window.ComandaFotos ? window.ComandaFotos.archivos() : []; }
+  // Mandar las fotos con el mensaje (la hoja de compartir del sistema) solo en
+  // pantallas táctiles: en la computadora esa hoja puede no tener WhatsApp.
+  function puedeCompartir(a) {
+    if (sinCompartir || !a.length || !navigator.canShare || !navigator.share) return false;
+    if (!(window.matchMedia && matchMedia('(pointer: coarse)').matches)) return false;
+    try { return !!navigator.canShare({files: a}); } catch (err) { return false; }
+  }
+
   function leer() {
     var f = armado.elements;
+    var a = fotos();
     return {
       fecha: f.fecha.value,
       sinFecha: f['sin-fecha'].checked,
@@ -40,10 +52,12 @@
       agregados2: Array.prototype.map.call(armado.querySelectorAll('[name="agregado2"]:checked'),
         function (c) { return c.value; }),
       idea: f.idea.value,
-      referencia: marcado('referencia'),
       nombreTorta: f['nombre-torta'].value,
       numero: f.numero.value,
-      ademas: f.ademas ? f.ademas.value : ''
+      ademas: f.ademas ? f.ademas.value : '',
+      fotos: a.length,
+      // Sin compartir, el enlace de WhatsApp lleva solo el texto: las fotos, aparte.
+      fotosEnChat: a.length > 0 && !puedeCompartir(a)
     };
   }
 
@@ -52,7 +66,7 @@
     var f = armado.elements;
     f.fecha.value = e.fecha || '';
     f['sin-fecha'].checked = !!e.sinFecha;
-    ['tamano', 'bizcochuelo', 'relleno', 'relleno2', 'referencia'].forEach(function (n) {
+    ['tamano', 'bizcochuelo', 'relleno', 'relleno2'].forEach(function (n) {
       armado.querySelectorAll('[name="' + n + '"]').forEach(function (r) { r.checked = r.value === (e[n] || ''); });
     });
     armado.querySelectorAll('[name="agregado"]').forEach(function (c) {
@@ -116,6 +130,7 @@
 
   function reiniciar() {
     armado.reset();
+    if (window.ComandaFotos) window.ComandaFotos.vaciar();
     editado = false;
     if (reescribirBtn) reescribirBtn.hidden = true;
     anterior = {};
@@ -169,12 +184,30 @@
     armado.elements.fecha.focus();
   });
 
-  envio.addEventListener('submit', function (ev) {
-    ev.preventDefault();
+  function abrirChat() {
     var destino = urlWhatsApp();
     var w = window.open(destino, '_blank');
     if (w) { try { w.opener = null; } catch (err) { /* otra ventana */ } }
     else window.location.href = destino;  // navegador que bloquea pestañas nuevas
+  }
+  // El enlace de siempre: el mensaje pasa a decir que las fotos van en el chat.
+  function sinFotosAdjuntas() {
+    sinCompartir = true;
+    render({silencioso: true, motivo: 'fotos'});
+    abrirChat();
+  }
+
+  envio.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var a = fotos();
+    if (!puedeCompartir(a)) { abrirChat(); return; }
+    // Celular: el mensaje y las fotos juntos, por la hoja de compartir.
+    var p;
+    try { p = navigator.share({files: a, text: mensaje.value}); } catch (err) { p = Promise.reject(err); }
+    Promise.resolve(p).catch(function (err) {
+      if (err && err.name === 'AbortError') return;  // se canceló: no se hace nada
+      sinFotosAdjuntas();
+    });
   });
 
   window.Comanda = {
@@ -183,6 +216,7 @@
     render: render,
     reiniciar: reiniciar,
     urlWhatsApp: urlWhatsApp,
+    sinFotosAdjuntas: sinFotosAdjuntas,
     editado: function () { return editado; },
     alCambiar: function (fn) {
       oyentes.push(fn);

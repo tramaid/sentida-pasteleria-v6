@@ -5,7 +5,7 @@ def test_sin_js_se_ve_todo(abrir):
     for n in range(1, 7):
         assert pg.locator(f'.paso[data-n="{n}"]').is_visible()
     assert pg.locator("#cierre").is_visible()
-    for oculto in ("#tira", "#pasos-nav", "#avance", "#campo-ademas"):
+    for oculto in ("#tira", "#pasos-nav", "#avance", "#campo-ademas", "#campo-fotos", "#nota-fotos"):
         assert pg.is_hidden(oculto), oculto
     assert pg.is_visible(".solo-sin-js")
     assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0

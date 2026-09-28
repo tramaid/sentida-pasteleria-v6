@@ -187,7 +187,7 @@ def test_atras_sin_haber_tocado_empezar_vuelve_al_paso_uno(abrir):
 
 
 def test_atras_despues_del_salto_a_la_comanda(abrir):
-    pg = abrir(pagina="arma-tu-torta/?ref=petalos")
+    pg = abrir()
     pg.evaluate("location.hash = '#comanda'")  # como el enlace «Saltar a la comanda»
     pg.check("#sin-fecha")
     siguiente(pg)

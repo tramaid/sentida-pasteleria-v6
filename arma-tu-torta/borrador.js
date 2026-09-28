@@ -1,13 +1,12 @@
 /* SENTIDA · la comanda — borrador en el navegador.
    Lo elegido (y el paso en el que quedaste) se guarda en localStorage para
    que una recarga o una interrupción no lo borren. Nada sale del teléfono.
-   También marca la referencia que llega desde la home (?ref=petalos). */
+   Las fotos de referencia no se guardan: pesan demasiado para localStorage. */
 (function () {
   'use strict';
   var C = window.Comanda, S = window.Sentida;
   if (!C || !S) return;
   var CLAVE = 'sentida-comanda-v1';
-  var REFERENCIAS = ['petalos', 'flores', 'letras', 'mensaje'];
   var paso = null;
 
   function hay() {
@@ -17,6 +16,8 @@
     try {
       var copia = {};
       Object.keys(e).forEach(function (k) { copia[k] = e[k]; });
+      delete copia.fotos;
+      delete copia.fotosEnChat;
       copia.paso = paso;
       localStorage.setItem(CLAVE, JSON.stringify(copia));
     } catch (err) { /* sin lugar o bloqueado */ }
@@ -38,7 +39,7 @@
       agregados: Array.isArray(e.agregados) ? e.agregados.filter(function (a) { return typeof a === 'string'; }) : [],
       relleno2: s(e.relleno2),
       agregados2: Array.isArray(e.agregados2) ? e.agregados2.filter(function (a) { return typeof a === 'string'; }) : [],
-      idea: s(e.idea), referencia: s(e.referencia),
+      idea: s(e.idea),
       nombreTorta: s(e.nombreTorta), numero: s(e.numero), ademas: s(e.ademas)
     };
   }
@@ -62,13 +63,6 @@
     if (motivo === 'reinicio') { paso = null; borrar(); }
     else if (motivo === 'cambio') guardar(estado);
   });
-
-  // La referencia que llega desde la home, si el borrador no tiene otra.
-  var ref = (/[?&]ref=([a-z]+)/.exec(location.search) || [])[1];
-  if (ref && REFERENCIAS.indexOf(ref) >= 0 && !C.leer().referencia) {
-    var radio = document.querySelector('input[name="referencia"][value="' + ref + '"]');
-    if (radio) { radio.checked = true; C.render({silencioso: true}); }
-  }
 
   window.ComandaBorrador = {
     paso: function () { return paso; },

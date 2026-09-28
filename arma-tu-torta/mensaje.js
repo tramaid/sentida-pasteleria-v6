@@ -18,10 +18,6 @@
     chocotorta: 'crema Chocotorta', kinder: 'crema Kinder',
     bombon: 'bombón', merenguitos: 'merenguitos', chips: 'chips', nuez: 'nuez', mani: 'maní'
   };
-  var REFERENCIAS = {
-    petalos: 'la de pétalos', flores: 'la de flores naturales',
-    letras: 'las de letras y números', mensaje: 'la del mensaje'
-  };
   // Lo que se muestra si se toca Siguiente sin haber elegido.
   var FALTA = {
     1: 'Elegí una fecha o marcá «Todavía no sé».',
@@ -72,9 +68,11 @@
     push('relleno', 'Relleno', conAgregados(e.relleno, e.agregados));
     push('relleno2', 'Segundo relleno', conAgregados(e.relleno2, e.agregados2));
 
-    var idea = S.limpio(e.idea), ref = REFERENCIAS[e.referencia] || '';
-    var deco = idea && ref ? idea + ' (como ' + ref + ')' : idea || (ref ? 'como ' + ref : '');
-    push('decoracion', 'Decoración', deco ? {valor: deco, vacio: false} : {valor: A_DEFINIR, vacio: true});
+    var idea = S.limpio(e.idea);
+    push('decoracion', 'Decoración', idea ? {valor: idea, vacio: false} : {valor: A_DEFINIR, vacio: true});
+    // Las fotos no viajan en el texto: solo cuántas son.
+    var n = cuantas(e.fotos);
+    if (n) push('fotos', 'Fotos', {valor: n + ' de referencia', vacio: false});
 
     var nombre = S.limpio(e.nombreTorta);
     if (nombre) push('nombre', 'Nombre', {valor: nombre, vacio: false});
@@ -85,9 +83,22 @@
     return out;
   }
 
+  function cuantas(n) {
+    n = Math.floor(Number(n));
+    return n > 0 ? n : 0;
+  }
+
+  // Con e.fotosEnChat (el enlace de WhatsApp no lleva archivos), la línea de
+  // las fotos avisa que van aparte, en el chat.
   function texto(e) {
+    e = e || {};
     return 'Hola SENTIDA, les paso mi comanda:\n' +
-      lineas(e).map(function (l) { return l.etiqueta + ': ' + l.valor; }).join('\n');
+      lineas(e).map(function (l) {
+        if (l.clave === 'fotos' && e.fotosEnChat) {
+          return 'Fotos de referencia: te las mando en el chat (' + cuantas(e.fotos) + ')';
+        }
+        return l.etiqueta + ': ' + l.valor;
+      }).join('\n');
   }
 
   // Qué le falta al paso n para poder pasar ('' si nada). 6 y 7 no piden nada.

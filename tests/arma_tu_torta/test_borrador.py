@@ -56,21 +56,14 @@ def test_sin_borrador_dice_empezar_y_no_guarda_nada(abrir):
     assert pg.evaluate(f"localStorage.getItem('{CLAVE}')") is None
 
 
-def test_la_referencia_llega_desde_la_home(abrir):
-    pg = abrir(pagina="arma-tu-torta/?ref=petalos")
-    assert pg.is_checked("input[name=referencia][value=petalos]")
-    assert "Decoración: como la de pétalos" in pg.input_value("#mensaje")
-
-
-def test_la_referencia_no_pisa_el_borrador(abrir):
-    pg = abrir(pagina="arma-tu-torta/?ref=petalos",
-               init=f"localStorage.setItem('{CLAVE}', JSON.stringify({{referencia: 'flores'}}))")
-    assert pg.is_checked("input[name=referencia][value=flores]")
-
-
-def test_una_referencia_desconocida_se_ignora(abrir):
-    pg = abrir(pagina="arma-tu-torta/?ref=zzz")
-    assert pg.is_checked("input[name=referencia][value='']")
+def test_un_borrador_viejo_con_referencia_no_rompe_nada(abrir):
+    # Antes el paso 6 tenía «Una referencia» (y la home la mandaba con ?ref=).
+    viejo = "{tamano: 'chica', idea: 'rosa', referencia: 'flores', fotos: 3, paso: {actual: 6, alcanzado: 6}}"
+    pg = abrir(pagina="arma-tu-torta/?ref=petalos", init=f"localStorage.setItem('{CLAVE}', JSON.stringify({viejo}))")
+    msj = pg.input_value("#mensaje")
+    assert "Decoración: rosa\n" in msj + "\n"
+    assert "como la de" not in msj and "Fotos" not in msj
+    assert pg.locator("input[name=referencia]").count() == 0
     assert pg.errores == []
 
 

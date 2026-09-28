@@ -39,7 +39,6 @@ def completar(pg, n):
         pg.check("input[name=relleno2][value=frutos-rojos]")
     elif n == 6:
         pg.fill("#idea", "flores naturales en tonos pastel")
-        pg.check("input[name=referencia][value=flores]")
         pg.fill("#nombre-torta", "Mamá")
         pg.fill("#numero", "60")
 

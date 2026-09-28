@@ -16,7 +16,7 @@
   var hoy = window.Sentida ? window.Sentida.hoyISO() : '';
   // Línea del ticket -> paso donde se elige.
   var PASO_DE = {fecha: 1, tamano: 2, bizcochuelo: 3, relleno: 4, relleno2: 5,
-                 decoracion: 6, nombre: 6, numero: 6, ademas: 7};
+                 decoracion: 6, fotos: 6, nombre: 6, numero: 6, ademas: 7};
   var doc = document.documentElement;
   var pasos = {};
   document.querySelectorAll('.paso[data-n], #cierre[data-n]').forEach(function (p) {
@@ -94,7 +94,7 @@
       var hash = n === CIERRE ? '#cierre' : '#paso-' + n;
       if (opts.reemplazar) history.replaceState({paso: n}, '', hash);
       else if (location.hash !== hash) {
-        // La entrada que se deja (la portada, #comanda, ?ref=…) recuerda qué
+        // La entrada que se deja (la portada, #comanda…) recuerda qué
         // paso mostraba, para que el botón atrás vuelva a ese paso.
         if (anterior && !(history.state && history.state.paso)) history.replaceState({paso: anterior}, '');
         history.pushState({paso: n}, '', hash);

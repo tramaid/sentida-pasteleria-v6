@@ -81,7 +81,12 @@ Rama `v5`. Pedido de la clienta: al entrar, elegir primero qué se busca. Spec e
   sangre, una línea que lleva a Nosotras y «Cómo pedir» en tres pasos. Usa
   `comun/base.css` como el resto del sitio.
 - **Direcciones viejas:** `/decoradas/`, `/antojos/` y `/comanda/` redirigen a
-  las nuevas y conservan `?ref=` y el `#`.
+  las nuevas y conservan la búsqueda (`?…`) y el `#`.
+- **Fotos de referencia** (paso 6 de Armá tu torta, `fotos.js`): hasta 6,
+  en memoria (no van al borrador). Un enlace `wa.me` solo lleva texto: en
+  pantallas táctiles con `navigator.share` las fotos salen con el mensaje por
+  la hoja de compartir; si no, el mensaje dice «te las mando en el chat» y una
+  nota junto a «Mandar» lo explica. Sin JavaScript el campo no aparece.
 - Lo que sigue: los rellenos de Armá tu torta con una sola lista, la venta por
   media docena y docena en Pastelería, y el logo nuevo cuando esté en vector.
 
@@ -102,8 +107,7 @@ Propuesta para las dueñas: queda así hasta que ellas la revisen. Spec en
 
 - **La home** (`index.html`, `home.css`, `home.js`) es la v4. Su hero lleva a
   Decoradas y a Nuestras tortas; «Las de la casa» lleva a cada torta en la
-  tienda; las fotos de decoradas abren la comanda con su referencia
-  (`?ref=`); «Cómo pedir» ofrece la tienda, Decoradas y WhatsApp directo. La
+  tienda; las fotos de decoradas abren la comanda; «Cómo pedir» ofrece la tienda, Decoradas y WhatsApp directo. La
   barra de WhatsApp del celular sigue igual. La home no lleva el Día de la
   Madre (se sacó el 25/09/2026).
 - **El hero de la home** tiene el texto quieto y cinco fotos que se turnan

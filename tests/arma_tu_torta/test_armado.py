@@ -10,7 +10,7 @@ ESPERADO = "\n".join([
     "Bizcochuelo: vainilla",
     "Relleno: dulce de leche con chips y nuez",
     "Segundo relleno: frutos rojos",
-    "Decoración: flores naturales en tonos pastel (como la de flores naturales)",
+    "Decoración: flores naturales en tonos pastel",
     "Nombre: Mamá",
     "Número: 60",
 ])
