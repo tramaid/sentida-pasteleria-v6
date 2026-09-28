@@ -22,7 +22,6 @@ FOTOS = RAIZ / "assets" / "fotos"
 SITIO = "https://tramaid.github.io/sentida-pasteleria/"
 ANTO = "5491158300787"
 TAMANOS_TARJETA = "(max-width: 1099px) 45vw, 24vw"
-TAMANOS_MESA = "(max-width: 899px) 45vw, 18vw"
 
 MENU = [
     ("tortas", "Nuestras tortas", "tortas/"),
@@ -38,14 +37,6 @@ PRIMERA_FILA = 3
 DESTACADOS_INICIO = "<!-- destacados:inicio -->"
 DESTACADOS_FIN = "<!-- destacados:fin -->"
 MARQUESINA_TEXTO = ["Lo soñás, lo creamos", "Pastelería artesanal", "Tortas a medida", "Hecho a mano"]
-
-# La mesa dulce de Pastelería: (foto, epígrafe, texto alternativo).
-MESA = [
-    ("vasitos-flores", "Vasitos con flores", "Vasitos de postre con crema y flores comestibles"),
-    ("carrot-mini", "Carrot cake en cuadraditos", "Cuadraditos de carrot cake con rosetas de frosting"),
-    ("vasitos-frutillas", "Vasitos de frutillas", "Vasitos con frutillas, crema y merengue"),
-    ("vasitos-maracuya", "Vasitos de maracuyá", "Vasitos de maracuyá con chocolate blanco"),
-]
 
 ICONOS = """<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"/></symbol>
@@ -229,21 +220,15 @@ def con_destacados(html_home, bloque):
 
 
 def mesa_dulce():
-    fotos = "\n".join(
-        f'          <li><figure><div class="foto">{img(nombre, alt, TAMANOS_MESA)}</div>'
-        f'<figcaption>{esc(epigrafe)}</figcaption></figure></li>'
-        for nombre, epigrafe, alt in MESA)
+    """El cierre de Pastelería: solo el texto; las fotos están en los productos."""
     consulta = wa("Hola SENTIDA, quiero consultar por una mesa dulce.\nFecha:\nInvitados:")
     return f"""
       <section class="mesa-dulce" aria-labelledby="mesa-t">
         <h2 class="display" id="mesa-t">¿Es para una<br>mesa dulce?</h2>
         <div class="mesa-dulce-txt">
-          <p>Vasitos, carrot cake en cuadraditos, galletas con tu mensaje y alfajores. Armamos la mesa con vos, según los invitados.</p>
+          <p>Shots, cuadraditos dulces, galletas con tu mensaje y alfajores. Armamos la mesa con vos, según los invitados.</p>
           <a class="enlace" href="{consulta}" target="_blank" rel="noopener" aria-describedby="nueva-pestana">Consultar por una mesa dulce <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-diagonal"/></svg></a>
         </div>
-        <ul class="mesa-fotos" role="list">
-{fotos}
-        </ul>
       </section>"""
 
 

@@ -37,10 +37,6 @@
 .mesa-dulce h2{font-size:clamp(2.25rem,4vw,3.5rem); line-height:.95; letter-spacing:-.025em}
 .mesa-dulce-txt{display:flex; flex-direction:column; align-items:flex-start; gap:12px}
 .mesa-dulce-txt p{font-size:15px; line-height:1.6; color:var(--marron-medio); max-width:44ch}
-.mesa-fotos{grid-column:1 / -1; list-style:none; padding:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px}
-.mesa-fotos .foto{aspect-ratio:4/5; overflow:hidden; border-radius:2px; background:var(--crema)}
-.mesa-fotos img{width:100%; height:100%; object-fit:cover}
-.mesa-fotos figcaption{margin-top:8px; font-size:13px; line-height:1.4; color:var(--marron-medio)}
 
 .tira-pedido{display:none}
 
@@ -63,7 +59,6 @@
   .tienda-in{grid-template-columns:minmax(0,1fr); padding-bottom:120px}
   .tienda-panel{position:static; max-width:440px}
   .mesa-dulce{grid-template-columns:minmax(0,1fr); align-items:start}
-  .mesa-fotos{grid-template-columns:repeat(2,minmax(0,1fr))}
   /* Con algo en el pedido, una tira abajo lo muestra y lo abre. */
   .tira-pedido{
     position:fixed; left:12px; right:12px; bottom:calc(12px + env(safe-area-inset-bottom)); z-index:55;

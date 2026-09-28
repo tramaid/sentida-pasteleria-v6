@@ -10,15 +10,17 @@ KEY = '[data-producto="key-lime-pie"]'
 def test_las_tortas_de_la_casa(abrir):
     pg = abrir()
     assert pg.text_content("h1") == "Nuestras tortas."
-    assert pg.locator("[data-producto]").count() == 15
+    assert pg.locator("[data-producto]").count() == 13
     assert pg.locator('[data-producto="pan-dulce"]').count() == 0
+    for fuera in ("cheesecake-dulce-de-leche", "pavlova-dulce-de-leche"):
+        assert pg.locator(f'[data-producto="{fuera}"]').count() == 0, fuera
     assert pg.get_attribute('.cab-nav a[aria-current="page"]', "href") == "../tortas/"
     for slug in ("key-lime-pie", "cheesecake-new-york", "marquise", "frutillas-con-crema",
                  "sablee", "pavlova-lima", "choco-oreo"):
         assert pg.locator(f"#{slug}").count() == 1, slug
     sin_foto = pg.locator(".producto .sin-foto").count()
     con_foto = pg.locator(".producto .producto-foto img").count()
-    assert sin_foto + con_foto == 15
+    assert sin_foto + con_foto == 13
     assert pg.text_content(f"{KEY} .producto-meta span:first-child") == "Las de la casa"
     # Los productos cuelgan del h1 (h2) y la primera fila no espera para cargar.
     assert pg.locator(".producto h3").count() == 0
@@ -31,12 +33,16 @@ def test_las_tortas_de_la_casa(abrir):
 def test_la_pasteleria_y_la_mesa_dulce(abrir):
     pg = abrir(pagina="pasteleria/")
     assert pg.text_content("h1") == "Pastelería."
-    assert pg.locator("[data-producto]").count() == 7
+    assert pg.locator("[data-producto]").count() == 8
+    assert pg.locator(".producto .sin-foto").count() == 0
+    assert pg.text_content('[data-producto="cuadraditos-dulces"] .producto-tipo') == "Cuadraditos"
     assert pg.text_content('[data-producto="shots"] .producto-tipo') == "Shots"
     assert pg.text_content('[data-producto="shots"] h2') == "Shots"
     assert pg.text_content(".tienda-cab .eti") == "Para regalar y compartir"
     assert "chupito" not in pg.content().lower()
-    assert pg.locator(".mesa-fotos img").count() == 4
+    # La mesa dulce es solo texto: las fotos viven en los productos.
+    assert pg.locator(".mesa-dulce img").count() == 0
+    assert "vasitos" not in pg.text_content(".mesa-dulce").lower()
     href = pg.get_attribute(".mesa-dulce .enlace", "href")
     assert unquote(href.split("?text=", 1)[1]) == "Hola SENTIDA, quiero consultar por una mesa dulce.\nFecha:\nInvitados:"
 
@@ -149,7 +155,7 @@ def test_la_tira_del_celular(abrir):
 def test_sin_js_cada_tarjeta_tiene_su_whatsapp(abrir):
     pg = abrir(java_script_enabled=False)
     n = pg.locator("[data-producto]").count()
-    assert n == 15
+    assert n == 13
     assert pg.locator("[data-producto] .producto-wa:visible").count() == n
     assert pg.locator("[data-producto] .producto-agregar:visible").count() == 0
     href = pg.get_attribute(KEY + " .producto-wa", "href")

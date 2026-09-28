@@ -10,16 +10,16 @@
     },
     "pasteleria": {
       "titulo": "Pastelería.",
-      "bajada": "Alfajores, galletas, cupcakes y shots, para regalar o para la mesa dulce. Sumalos a tu pedido y te confirmamos precio y disponibilidad por WhatsApp.",
+      "bajada": "Alfajores, galletas, cupcakes, shots y cuadraditos dulces, para regalar o para la mesa dulce. Sumalos a tu pedido y te confirmamos precio y disponibilidad por WhatsApp.",
       "title": "Pastelería · SENTIDA Pastelería",
-      "descripcion": "Alfajores, galletas, cupcakes y shots de SENTIDA Pastelería, por encargo en Martínez. Armá tu pedido y mandalo por WhatsApp."
+      "descripcion": "Alfajores, galletas, cupcakes, shots y cuadraditos dulces de SENTIDA Pastelería, por encargo en Martínez. Armá tu pedido y mandalo por WhatsApp."
     }
   },
   "tipos": {
     "alfajores": "Alfajores",
     "galletas": "Galletas",
     "cupcakes": "Cupcakes",
-    "shots": "Shots"
+    "shots": "Shots", "cuadraditos": "Cuadraditos"
   },
   "productos": [
     {"slug": "key-lime-pie", "destacado": true, "nombre": "Key Lime Pie", "seccion": "tortas", "descripcion": "Base crocante de galletitas, curd de lima y crema chantilly."},
@@ -35,15 +35,16 @@
     {"slug": "brownie-chantilly", "nombre": "Brownie con dulce de leche y crema chantilly", "seccion": "tortas", "descripcion": ""},
     {"slug": "torta-matilda", "destacado": true, "nombre": "Torta Matilda", "seccion": "tortas", "descripcion": ""},
     {"slug": "torta-havannet", "nombre": "Torta Havannet", "seccion": "tortas", "descripcion": ""},
-    {"slug": "cheesecake-dulce-de-leche", "nombre": "Cheesecake de dulce de leche", "seccion": "tortas", "descripcion": ""},
-    {"slug": "pavlova-dulce-de-leche", "nombre": "Pavlova de dulce de leche y frutos rojos", "seccion": "tortas", "descripcion": "Con crema chantilly, dulce de leche y frutos rojos."},
     {"slug": "alfajores-maicena", "nombre": "Alfajores de maicena", "seccion": "pasteleria", "tipo": "alfajores", "foto": "alfajores", "descripcion": "Rellenos de dulce de leche."},
     {"slug": "galletas-corazon", "nombre": "Galletas corazón", "seccion": "pasteleria", "tipo": "galletas", "foto": "galletas-te-amo", "descripcion": "Con mensaje escrito a mano."},
     {"slug": "galletas-tematicas", "nombre": "Galletas temáticas", "seccion": "pasteleria", "tipo": "galletas", "descripcion": "Para acompañar la torta del cumpleaños."},
     {"slug": "galletas-decoradas", "nombre": "Galletas decoradas", "seccion": "pasteleria", "tipo": "galletas", "descripcion": "Con glasé, a tema o con el nombre."},
     {"slug": "cupcakes-decorados", "nombre": "Cupcakes decorados", "seccion": "pasteleria", "tipo": "cupcakes", "descripcion": "Decorados a mano, en la paleta que elijas."},
     {"slug": "cupcakes-tematicos", "nombre": "Cupcakes temáticos", "seccion": "pasteleria", "tipo": "cupcakes", "descripcion": "Con figuras en pasta de azúcar, a tema."},
-    {"slug": "shots", "destacado": true, "nombre": "Shots", "seccion": "pasteleria", "tipo": "shots", "descripcion": "Postres en vaso, en distintos sabores."},
+    {"slug": "shots", "destacado": true, "nombre": "Shots", "seccion": "pasteleria", "tipo": "shots", "descripcion": "Postres en vaso, en distintos sabores.",
+     "variantes": [{"nombre": "Con flores", "foto": "vasitos-flores"}, {"nombre": "De frutillas", "foto": "vasitos-frutillas"}, {"nombre": "De maracuyá", "foto": "vasitos-maracuya"}]},
+    {"slug": "cuadraditos-dulces", "nombre": "Cuadraditos dulces", "seccion": "pasteleria", "tipo": "cuadraditos", "foto": "carrot-mini", "descripcion": "En distintos sabores.",
+     "variantes": [{"nombre": "Carrot cake", "foto": "carrot-mini"}]},
     {"slug": "pan-dulce", "nombre": "Pan dulce", "seccion": "temporada", "visible": false, "descripcion": "Frutos secos tostados y chips de chocolate, glaseado con aroma a naranja. Aprox. 700 g."},
     {"slug": "rosca-de-pascua", "nombre": "Rosca de Pascua", "seccion": "temporada", "visible": false, "descripcion": ""}
   ]
