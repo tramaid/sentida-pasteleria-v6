@@ -27,6 +27,27 @@
 .manif .envoltorio{padding-block:clamp(72px,14vh,160px)}
 .manif p{font-size:clamp(1.75rem,3.6vw,3.5rem); line-height:1.12; letter-spacing:-.012em; max-width:24em; text-wrap:pretty}
 
+/* Algunos de nuestros trabajos: tira que se desliza */
+.trab{padding-block:clamp(64px,11vh,128px); background:var(--blanco)}
+.trab-cab{display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:clamp(28px,5vh,48px)}
+.trab-cab .eti{margin-bottom:18px}
+.trab h2{font-size:clamp(2.25rem,4.4vw,4.5rem); line-height:1; letter-spacing:-.025em; text-wrap:balance}
+.trab-flechas{display:flex; gap:10px; flex-shrink:0}
+.trab-btn{display:grid; place-items:center; width:48px; height:48px; border-radius:50%; border:1px solid var(--marron); background:transparent; color:var(--marron); cursor:pointer}
+.trab-btn:hover{background:var(--marron); color:var(--blanco)}
+.trab-btn:disabled{opacity:.35; cursor:default; background:transparent; color:var(--marron)}
+.trab-ant .ico{transform:rotate(180deg)}
+.trab-tira{list-style:none; margin:0; padding:4px var(--lateral) 12px; display:flex; gap:clamp(12px,1.6vw,20px); overflow-x:auto; scroll-snap-type:x mandatory; scroll-padding-inline:var(--lateral); scrollbar-width:thin; scrollbar-color:var(--beige) transparent; overscroll-behavior-x:contain}
+.trab-tira:focus-visible{outline:2px solid var(--marron); outline-offset:4px}
+.trab-item{flex:0 0 auto; height:clamp(320px,52vh,520px); scroll-snap-align:start; border:8px solid var(--crema); box-shadow:0 0 0 1px var(--celeste-filete); border-radius:2px; overflow:hidden; background:var(--crema)}
+.trab-item img{display:block; height:100%; width:auto; max-width:none}
+@media (max-width:899px){
+  .trab-cab{align-items:flex-start; flex-direction:column}
+  .trab-flechas{display:none}
+  .trab-item{height:min(62vh,420px)}
+}
+@media (prefers-reduced-motion:no-preference){ .trab-tira{scroll-behavior:smooth} }
+
 /* Hecho a mano */
 .mano{display:grid; grid-template-columns:1fr 1fr; background:var(--blanco)}
 .mano-foto{min-height:560px; border:8px solid var(--crema); box-shadow:0 0 0 1px var(--celeste-filete)}
