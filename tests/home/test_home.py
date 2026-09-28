@@ -25,9 +25,41 @@ def test_el_hero(abrir):
     assert pg.locator("#hero-t img.hero-marca").count() == 1
     assert pg.get_attribute(".hero .btn-1", "href") == "arma-tu-torta/"
     assert pg.get_attribute(".hero .enlace", "href") == "#empezar"
-    # Una sola torta y el sello: las chicas pidieron sacar la foto de la masa (28/09).
-    assert pg.locator(".hero .circulo img").count() == 1
+    # Un solo círculo y el sello: las chicas pidieron sacar la foto de la masa (28/09).
+    # Adentro del círculo se turnan ocho tortas (28/09): la primera carga ya, las demás después del load.
+    assert pg.locator(".hero .circulo").count() == 1
+    assert pg.locator(".hero .circulo img").count() == 8
+    assert pg.get_attribute(".hero .circulo img >> nth=0", "fetchpriority") == "high"
+    assert pg.get_attribute(".hero .circulo img >> nth=0", "src").endswith("hero-flores-960.webp")
     assert pg.locator(".hero .hero-sello").count() == 1
+
+
+def test_las_fotos_del_hero_se_turnan_y_se_pausan(abrir):
+    pg = abrir(init="window.__intervalos = []; const si = window.setInterval; window.setInterval = (f, t) => { window.__intervalos.push(t); return si(f, 50); };")
+    assert pg.evaluate("window.__intervalos") == [5000]
+    alts = pg.eval_on_selector_all(".hero .circulo img", "is => is.map(i => i.alt)")
+    assert all(alts) and len(set(alts)) == 8
+    pg.wait_for_function("document.querySelector('.hero .circulo img.visible') !== document.querySelector('.hero .circulo img')")
+    assert pg.locator(".hero .circulo img.visible").count() == 1
+    assert pg.locator(".hero .circulo img:not([aria-hidden])").count() == 1
+    boton = pg.locator(".hero-pausa")
+    assert boton.get_attribute("aria-label") == "Pausar las fotos"
+    caja = boton.bounding_box()
+    assert caja["width"] >= 44 and caja["height"] >= 44
+    boton.click()
+    assert boton.get_attribute("aria-pressed") == "true"
+    assert boton.get_attribute("aria-label") == "Seguir con las fotos"
+    quieta = pg.evaluate("[...document.querySelectorAll('.hero .circulo img')].findIndex(i => i.classList.contains('visible'))")
+    pg.wait_for_timeout(300)
+    assert pg.evaluate("[...document.querySelectorAll('.hero .circulo img')].findIndex(i => i.classList.contains('visible'))") == quieta
+    assert pg.errores == []
+
+
+def test_con_movimiento_reducido_el_hero_queda_quieto(abrir):
+    pg = abrir(reduced_motion="reduce")
+    assert pg.locator(".hero .circulo img").count() == 1
+    assert pg.is_hidden(".hero-pausa")
+    assert pg.errores == []
 
 
 def test_elegi_por_donde_empezar(abrir):

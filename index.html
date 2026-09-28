@@ -43,6 +43,7 @@
 <script src="comun/pedido-mensaje.js" defer></script>
 <script src="comun/carrito.js" data-raiz="" defer></script>
 <script src="comun/tienda.js" defer></script>
+<script src="home.js" defer></script>
 
 <script type="application/ld+json">
 {
@@ -114,7 +115,20 @@
       </div>
     </div>
     <div class="hero-arte">
-      <span class="circulo circulo-grande"><img src="assets/fotos/hero-flores-960.webp" srcset="assets/fotos/hero-flores-640.webp 640w, assets/fotos/hero-flores-960.webp 960w, assets/fotos/hero-flores-1220.webp 1220w" sizes="(max-width: 899px) 80vw, 42vw" width="1220" height="1600" alt="Torta alta con rombos pintados a mano y una corona de flores naturales" fetchpriority="high"></span>
+      <!-- Las fotos se turnan cada 5 s (home.js). La primera carga ya; las demás esperan en el <template> hasta después del load. -->
+      <span class="circulo circulo-grande hero-fotos" data-hero-fotos>
+        <img class="visible" src="assets/fotos/hero-flores-960.webp" srcset="assets/fotos/hero-flores-640.webp 640w, assets/fotos/hero-flores-960.webp 960w, assets/fotos/hero-flores-1220.webp 1220w" sizes="(max-width: 899px) 80vw, 42vw" width="1220" height="1600" alt="Torta alta con rombos pintados a mano y una corona de flores naturales" fetchpriority="high">
+        <template data-hero-mas>
+          <img src="assets/fotos/deco-dos-pisos-800.webp" srcset="assets/fotos/deco-dos-pisos-480.webp 480w, assets/fotos/deco-dos-pisos-800.webp 800w, assets/fotos/deco-dos-pisos.webp 1000w" sizes="(max-width: 899px) 80vw, 42vw" width="1000" height="1250" alt="Torta de dos pisos turquesa con rombos dorados y una corona de flores naturales" decoding="async">
+          <img src="assets/fotos/deco-15-800.webp" srcset="assets/fotos/deco-15-480.webp 480w, assets/fotos/deco-15-800.webp 800w, assets/fotos/deco-15.webp 1000w" sizes="(max-width: 899px) 80vw, 42vw" width="1000" height="1250" alt="Torta con forma de número 15, con macarons, merenguitos y rosas" decoding="async">
+          <img src="assets/fotos/deco-letra-s-800.webp" srcset="assets/fotos/deco-letra-s-480.webp 480w, assets/fotos/deco-letra-s-800.webp 800w, assets/fotos/deco-letra-s.webp 1000w" sizes="(max-width: 899px) 80vw, 42vw" width="1000" height="1333" alt="Torta con forma de letra S, con crema celeste, flores y caracoles de chocolate blanco" decoding="async">
+          <img src="assets/fotos/deco-letra-flores-800.webp" srcset="assets/fotos/deco-letra-flores-480.webp 480w, assets/fotos/deco-letra-flores-800.webp 800w, assets/fotos/deco-letra-flores.webp 1000w" sizes="(max-width: 899px) 80vw, 42vw" width="1000" height="1333" alt="Torta con forma de letra, con macarons, chocolate y una gerbera rosa" decoding="async">
+          <img src="assets/fotos/deco-30-800.webp" srcset="assets/fotos/deco-30-480.webp 480w, assets/fotos/deco-30-800.webp 800w, assets/fotos/deco-30.webp 1000w" sizes="(max-width: 899px) 80vw, 42vw" width="1000" height="1333" alt="Torta con forma de número 30, con cactus y flores de azúcar" decoding="async">
+          <img src="assets/fotos/deco-harry-potter-800.webp" srcset="assets/fotos/deco-harry-potter-480.webp 480w, assets/fotos/deco-harry-potter-800.webp 800w, assets/fotos/deco-harry-potter.webp 941w" sizes="(max-width: 899px) 80vw, 42vw" width="941" height="1672" alt="Torta de Harry Potter, con la snitch dorada, los anteojos y la varita" decoding="async">
+          <img src="assets/fotos/deco-golf-800.webp" srcset="assets/fotos/deco-golf-480.webp 480w, assets/fotos/deco-golf-800.webp 800w, assets/fotos/deco-golf.webp 1000w" sizes="(max-width: 899px) 80vw, 42vw" width="1000" height="1333" alt="Torta de golf, con pasto de crema y una bandera con el número 4" decoding="async">
+        </template>
+        <button type="button" class="hero-pausa" aria-pressed="false" aria-label="Pausar las fotos" hidden><svg class="ico ico-pausar" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6v12M15 6v12"/></svg><svg class="ico ico-seguir" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10-6.5-10-6.5Z"/></svg></button>
+      </span>
       <img class="hero-sello" src="assets/marca/sello.svg" alt="" width="170" height="170">
     </div>
   </div>
