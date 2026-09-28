@@ -1,5 +1,6 @@
 """Paso 6: fotos de referencia. Van en memoria; un enlace de WhatsApp solo
-lleva texto, así que en el celular salen por la hoja de compartir."""
+lleva texto: «Mandar» abre el chat de Anto y, en el celular, «Mandar las
+fotos» las comparte aparte."""
 import struct
 import zlib
 from urllib.parse import unquote
@@ -109,7 +110,7 @@ def test_sin_hoja_de_compartir_abre_el_chat_y_avisa(abrir):
     siguiente(pg)
     assert pg.is_visible("#nota-fotos")
     assert pg.text_content("#nota-fotos [data-nota-texto]") == NOTA_CHAT
-    assert pg.is_hidden("#sin-compartir")
+    assert pg.is_hidden("#compartir-fotos")
     assert pg.locator("#fotos-mini img:visible").count() == 2
     with pg.context.expect_page() as nueva:
         pg.click("#envio button[type=submit]")
@@ -131,59 +132,39 @@ def test_sin_fotos_no_hay_nota_ni_linea(abrir):
     assert "Fotos" not in unquote(nueva.value.url)
 
 
-def test_en_el_celular_las_fotos_van_con_el_mensaje(abrir):
+def test_en_el_celular_mandar_abre_el_chat_de_anto_y_las_fotos_van_despues(abrir):
     pg = abrir(390, 844, init=COMPARTIR, **CEL)
     en_el_paso_6(pg)
     pg.set_input_files("#fotos", fotos(2))
     siguiente(pg)
-    msj = pg.input_value("#mensaje")
-    assert "\nFotos: 2 de referencia\n" in msj
-    assert CHAT not in msj
-    assert pg.is_visible("#nota-fotos")
-    assert "van con el mensaje" in pg.text_content("#nota-fotos [data-nota-texto]")
-    pg.click("#envio button[type=submit]")
+    assert "Mandar las fotos" in pg.text_content("#nota-fotos [data-nota-texto]")
+    assert pg.is_visible("#compartir-fotos")
+    # «Mandar» va directo al chat de Anto (el número, no la hoja de compartir).
+    with pg.context.expect_page() as nueva:
+        pg.click("#envio button[type=submit]")
+    url = nueva.value.url
+    assert url.startswith("https://wa.me/5491158300787") or "5491158300787" in url
+    assert f"\n{CHAT} (2)\n" in unquote(url.split("?text=", 1)[1])
+    assert pg.evaluate("window.__compartido.length") == 0
+    # Después, solo las fotos.
+    pg.click("#compartir-fotos")
     pg.wait_for_function("window.__compartido.length === 1")
     c = pg.evaluate("window.__compartido[0]")
-    assert c["n"] == 2
-    assert c["nombres"] == ["idea-1.png", "idea-2.png"]
-    assert c["tipos"] == ["image/png", "image/png"]
-    assert c["texto"] == msj
-    assert pg.evaluate("window.__abiertas") == 0
+    assert c["n"] == 2 and c["nombres"] == ["idea-1.png", "idea-2.png"] and c.get("texto") is None
     assert pg.errores == []
 
 
-def test_en_el_celular_cancelar_no_hace_nada_y_un_error_abre_el_chat(abrir):
-    pg = abrir(390, 844, init=COMPARTIR, **CEL)
-    en_el_paso_6(pg)
-    pg.set_input_files("#fotos", fotos(3))
-    siguiente(pg)
-    pg.evaluate("window.__falla = 'AbortError'")
-    pg.click("#envio button[type=submit]")
-    pg.wait_for_function("window.__compartido.length === 1")
-    pg.wait_for_timeout(200)
-    assert pg.evaluate("window.__abiertas") == 0
-    assert CHAT not in pg.input_value("#mensaje")
-
-    # Otro error: el enlace de siempre, y el mensaje avisa que van en el chat.
-    pg.evaluate("window.__falla = 'NotAllowedError'")
-    with pg.context.expect_page() as nueva:
-        pg.click("#envio button[type=submit]")
-    texto = unquote(nueva.value.url.split("?text=", 1)[1])
-    assert f"\n{CHAT} (3)\n" in texto
-    assert pg.text_content("#nota-fotos [data-nota-texto]") == NOTA_CHAT
-
-
-def test_en_el_celular_se_puede_elegir_el_chat(abrir):
+def test_en_el_celular_cancelar_las_fotos_no_abre_nada(abrir):
     pg = abrir(390, 844, init=COMPARTIR, **CEL)
     en_el_paso_6(pg)
     pg.set_input_files("#fotos", fotos(1))
     siguiente(pg)
-    assert pg.is_visible("#sin-compartir")
-    with pg.context.expect_page() as nueva:
-        pg.click("#sin-compartir")
-    assert f"{CHAT} (1)" in unquote(nueva.value.url)
-    assert pg.evaluate("window.__compartido.length") == 0
-    assert pg.is_hidden("#sin-compartir")
+    pg.evaluate("window.__falla = 'AbortError'")
+    pg.click("#compartir-fotos")
+    pg.wait_for_function("window.__compartido.length === 1")
+    pg.wait_for_timeout(200)
+    assert pg.evaluate("window.__abiertas") == 0
+    assert pg.errores == []
 
 
 def test_el_enlace_de_nadia_sigue_siendo_solo_texto(abrir):

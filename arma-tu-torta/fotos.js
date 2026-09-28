@@ -1,8 +1,9 @@
 /* SENTIDA · la comanda — fotos de referencia (paso 6).
    Las fotos quedan en memoria, en una lista: se pueden sumar en varias
    tandas y quitar de a una. No se guardan en el borrador (pesan demasiado).
-   Un enlace de WhatsApp solo lleva texto: en el celular, comanda.js las
-   manda con la hoja de compartir; si no, el mensaje avisa que van en el chat.
+   Un enlace de WhatsApp solo lleva texto: «Mandar» abre el chat de Anto y el
+   mensaje avisa que las fotos van en el chat. En el celular, «Mandar las
+   fotos» las comparte después (la hoja no deja elegir el contacto por link).
    Sin JavaScript el campo queda oculto: no habría cómo mandarlas. */
 (function () {
   'use strict';
@@ -19,7 +20,7 @@
   var MAX = 6;
   var fotos = [];  // {archivo, url}
   var NOTA_CHAT = 'WhatsApp no deja adjuntar fotos desde la web: cuando se abra el chat, mandá las fotos ahí.';
-  var NOTA_COMPARTIR = 'Tus fotos van con el mensaje: al mandar, elegí WhatsApp y el chat con Anto (11 5830‑0787).';
+  var NOTA_COMPARTIR = 'Primero mandá la comanda: se abre el chat de Anto. Después volvé acá y tocá «Mandar las fotos»: su chat va a aparecer primero.';
 
   function anunciar(t) { if (anuncio) anuncio.textContent = t; }
   function avisar(t) { if (aviso) aviso.textContent = t; }
@@ -110,17 +111,17 @@
 
   // La nota junto a «Mandar»: cómo viajan las fotos.
   var notas = document.querySelectorAll('[data-nota-fotos]');
-  var sinCompartir = document.getElementById('sin-compartir');
-  if (sinCompartir) sinCompartir.addEventListener('click', function () { C.sinFotosAdjuntas(); });
+  var compartir = document.getElementById('compartir-fotos');
+  if (compartir) compartir.addEventListener('click', function () { C.compartirFotos(); });
   C.alCambiar(function (estado) {
     var n = estado ? estado.fotos : 0;
-    var enChat = !!(estado && estado.fotosEnChat);
+    var hoja = n > 0 && C.puedeCompartirFotos();
     Array.prototype.forEach.call(notas, function (nota) {
       nota.hidden = !n;
       var t = nota.querySelector('[data-nota-texto]') || nota;
-      t.textContent = enChat ? NOTA_CHAT : NOTA_COMPARTIR;
+      t.textContent = hoja ? NOTA_COMPARTIR : NOTA_CHAT;
     });
-    if (sinCompartir) sinCompartir.hidden = !n || enChat;
+    if (compartir) compartir.hidden = !hoja;
   });
 
   campo.hidden = false;

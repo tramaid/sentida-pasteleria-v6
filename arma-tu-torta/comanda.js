@@ -27,12 +27,14 @@
   }
 
   // Las fotos de referencia viven en memoria (fotos.js), no en el formulario.
-  var sinCompartir = false;
   function fotos() { return window.ComandaFotos ? window.ComandaFotos.archivos() : []; }
-  // Mandar las fotos con el mensaje (la hoja de compartir del sistema) solo en
-  // pantallas táctiles: en la computadora esa hoja puede no tener WhatsApp.
+  // «Mandar» siempre abre el chat de Anto: la hoja de compartir del sistema no
+  // deja elegir el contacto (hace buscarlo). Las fotos van aparte, en el chat:
+  // en el celular, con un botón que las comparte (el chat de Anto aparece
+  // primero, recién abierto); en la computadora, a mano. La hoja solo en
+  // pantallas táctiles: en la computadora puede no tener WhatsApp.
   function puedeCompartir(a) {
-    if (sinCompartir || !a.length || !navigator.canShare || !navigator.share) return false;
+    if (!a.length || !navigator.canShare || !navigator.share) return false;
     if (!(window.matchMedia && matchMedia('(pointer: coarse)').matches)) return false;
     try { return !!navigator.canShare({files: a}); } catch (err) { return false; }
   }
@@ -56,8 +58,8 @@
       numero: f.numero.value,
       ademas: f.ademas ? f.ademas.value : '',
       fotos: a.length,
-      // Sin compartir, el enlace de WhatsApp lleva solo el texto: las fotos, aparte.
-      fotosEnChat: a.length > 0 && !puedeCompartir(a)
+      // El enlace de WhatsApp lleva solo el texto: las fotos van aparte, en el chat.
+      fotosEnChat: a.length > 0
     };
   }
 
@@ -190,25 +192,18 @@
     if (w) { try { w.opener = null; } catch (err) { /* otra ventana */ } }
     else window.location.href = destino;  // navegador que bloquea pestañas nuevas
   }
-  // El enlace de siempre: el mensaje pasa a decir que las fotos van en el chat.
-  function sinFotosAdjuntas() {
-    sinCompartir = true;
-    render({silencioso: true, motivo: 'fotos'});
-    abrirChat();
-  }
-
   envio.addEventListener('submit', function (ev) {
     ev.preventDefault();
-    var a = fotos();
-    if (!puedeCompartir(a)) { abrirChat(); return; }
-    // Celular: el mensaje y las fotos juntos, por la hoja de compartir.
-    var p;
-    try { p = navigator.share({files: a, text: mensaje.value}); } catch (err) { p = Promise.reject(err); }
-    Promise.resolve(p).catch(function (err) {
-      if (err && err.name === 'AbortError') return;  // se canceló: no se hace nada
-      sinFotosAdjuntas();
-    });
+    abrirChat();
   });
+
+  // Celular, después de abrir el chat: solo las fotos, por la hoja de compartir.
+  // Cancelar o un error no hacen nada: se pueden mandar a mano desde el chat.
+  function compartirFotos() {
+    var a = fotos();
+    if (!puedeCompartir(a)) return;
+    try { Promise.resolve(navigator.share({files: a})).catch(function () {}); } catch (err) { /* a mano */ }
+  }
 
   window.Comanda = {
     leer: leer,
@@ -216,7 +211,8 @@
     render: render,
     reiniciar: reiniciar,
     urlWhatsApp: urlWhatsApp,
-    sinFotosAdjuntas: sinFotosAdjuntas,
+    puedeCompartirFotos: function () { return puedeCompartir(fotos()); },
+    compartirFotos: compartirFotos,
     editado: function () { return editado; },
     alCambiar: function (fn) {
       oyentes.push(fn);
