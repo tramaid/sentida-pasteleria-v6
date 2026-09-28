@@ -28,9 +28,9 @@ def test_el_hero(abrir):
     # Un solo círculo y el sello: las chicas pidieron sacar la foto de la masa (28/09).
     # Adentro del círculo se turnan ocho tortas (28/09): la primera carga ya, las demás después del load.
     assert pg.locator(".hero .circulo").count() == 1
-    assert pg.locator(".hero .circulo img").count() == 10
+    assert pg.locator(".hero .circulo img").count() == 9
     assert pg.get_attribute(".hero .circulo img >> nth=0", "fetchpriority") == "high"
-    assert pg.get_attribute(".hero .circulo img >> nth=0", "src").endswith("hero-flores-960.webp")
+    assert pg.get_attribute(".hero .circulo img >> nth=0", "src").endswith("key-lime-pie-800.webp")
     assert pg.locator(".hero .hero-sello").count() == 1
 
 
@@ -38,7 +38,7 @@ def test_las_fotos_del_hero_se_turnan_y_se_pausan(abrir):
     pg = abrir(init="window.__intervalos = []; const si = window.setInterval; window.setInterval = (f, t) => { window.__intervalos.push(t); return si(f, 50); };")
     assert pg.evaluate("window.__intervalos") == [5000]
     alts = pg.eval_on_selector_all(".hero .circulo img", "is => is.map(i => i.alt)")
-    assert all(alts) and len(set(alts)) == 10
+    assert all(alts) and len(set(alts)) == 9
     pg.wait_for_function("document.querySelector('.hero .circulo img.visible') !== document.querySelector('.hero .circulo img')")
     assert pg.locator(".hero .circulo img.visible").count() == 1
     assert pg.locator(".hero .circulo img:not([aria-hidden])").count() == 1
@@ -83,12 +83,12 @@ def test_la_home_no_repite_las_secciones(abrir):
     assert "Madre" not in pg.text_content("body")
 
 
-def test_idea_nosotras_y_cierre(abrir):
+def test_idea_y_cierre_sin_quienes_somos(abrir):
     pg = abrir()
     assert pg.get_attribute(".idea .btn-1", "href") == "arma-tu-torta/"
     assert pg.eval_on_selector_all(".idea-pasos h3", "hs => hs.map(h => h.textContent)") == \
         ["Nos contás", "Te la cotizamos", "La hacemos a mano"]
-    assert pg.get_attribute(".anto-nadia .enlace", "href") == "nosotras/"
+    assert pg.locator(".anto-nadia").count() == 0          # quiénes somos vive en Nosotras
     assert pg.text_content("#cierre-t") == "¿Qué vamos a crear juntas?"
     wa = pg.get_attribute(".cierre a[href^='https://wa.me/']", "href")
     assert wa.startswith("https://wa.me/5491158300787?text=")
