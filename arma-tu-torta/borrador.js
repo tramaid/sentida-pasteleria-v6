@@ -36,7 +36,9 @@
       fecha: s(e.fecha), sinFecha: e.sinFecha === true, tamano: s(e.tamano), bizcochuelo: s(e.bizcochuelo),
       relleno: s(e.relleno),
       agregados: Array.isArray(e.agregados) ? e.agregados.filter(function (a) { return typeof a === 'string'; }) : [],
-      relleno2: s(e.relleno2), idea: s(e.idea), referencia: s(e.referencia),
+      relleno2: s(e.relleno2),
+      agregados2: Array.isArray(e.agregados2) ? e.agregados2.filter(function (a) { return typeof a === 'string'; }) : [],
+      idea: s(e.idea), referencia: s(e.referencia),
       nombreTorta: s(e.nombreTorta), numero: s(e.numero), ademas: s(e.ademas)
     };
   }

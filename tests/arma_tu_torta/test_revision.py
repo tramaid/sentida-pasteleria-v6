@@ -91,3 +91,17 @@ def test_si_la_pestana_nueva_esta_bloqueada_va_en_la_misma(abrir):
         pg.click("#envio button[type=submit]")
     assert pg.url.startswith("https://wa.me/5491158300787?text=")
     assert "Bizcochuelo: vainilla" in unquote(pg.url.split("?text=", 1)[1])
+
+
+def test_el_segundo_relleno_tiene_todas_las_opciones_y_agregados(abrir):
+    pg = abrir()
+    pg.click("#empezar")
+    armar(pg, hasta=5)
+    uno = pg.eval_on_selector_all("input[name=relleno]", "l => l.map(i => i.value)")
+    dos = pg.eval_on_selector_all("input[name=relleno2]", "l => l.map(i => i.value)")
+    assert uno == dos and len(uno) == 7
+    assert pg.eval_on_selector_all("input[name=agregado]", "l => l.map(i => i.value)") == \
+        pg.eval_on_selector_all("input[name=agregado2]", "l => l.map(i => i.value)")
+    pg.check("input[name=relleno2][value=kinder]")
+    pg.check("input[name=agregado2][value=mani]")
+    assert "Segundo relleno: crema Kinder con maní" in pg.input_value("#mensaje")

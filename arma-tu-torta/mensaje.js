@@ -60,13 +60,17 @@
     push('tamano', 'Tamaño', opcion(e.tamano, TAMANOS));
     push('bizcochuelo', 'Bizcochuelo', opcion(e.bizcochuelo, NOMBRES));
 
-    var rel = opcion(e.relleno, NOMBRES);
-    var ag = (e.agregados || []).map(function (a) { return NOMBRES[a] || a; });
-    if (ag.length) {
-      rel = {valor: (rel.vacio ? A_DEFINIR + ', con ' : rel.valor + ' con ') + lista(ag), vacio: false};
+    // Los dos rellenos ofrecen las mismas opciones y los mismos agregados.
+    function conAgregados(v, agregados) {
+      var rel = opcion(v, NOMBRES);
+      var ag = (agregados || []).map(function (a) { return NOMBRES[a] || a; });
+      if (ag.length) {
+        rel = {valor: (rel.vacio ? A_DEFINIR + ', con ' : rel.valor + ' con ') + lista(ag), vacio: false};
+      }
+      return rel;
     }
-    push('relleno', 'Relleno', rel);
-    push('relleno2', 'Segundo relleno', opcion(e.relleno2, NOMBRES));
+    push('relleno', 'Relleno', conAgregados(e.relleno, e.agregados));
+    push('relleno2', 'Segundo relleno', conAgregados(e.relleno2, e.agregados2));
 
     var idea = S.limpio(e.idea), ref = REFERENCIAS[e.referencia] || '';
     var deco = idea && ref ? idea + ' (como ' + ref + ')' : idea || (ref ? 'como ' + ref : '');

@@ -37,6 +37,8 @@
       agregados: Array.prototype.map.call(armado.querySelectorAll('[name="agregado"]:checked'),
         function (c) { return c.value; }),
       relleno2: marcado('relleno2'),
+      agregados2: Array.prototype.map.call(armado.querySelectorAll('[name="agregado2"]:checked'),
+        function (c) { return c.value; }),
       idea: f.idea.value,
       referencia: marcado('referencia'),
       nombreTorta: f['nombre-torta'].value,
@@ -55,6 +57,9 @@
     });
     armado.querySelectorAll('[name="agregado"]').forEach(function (c) {
       c.checked = (e.agregados || []).indexOf(c.value) >= 0;
+    });
+    armado.querySelectorAll('[name="agregado2"]').forEach(function (c) {
+      c.checked = (e.agregados2 || []).indexOf(c.value) >= 0;
     });
     f.idea.value = e.idea || '';
     f['nombre-torta'].value = e.nombreTorta || '';

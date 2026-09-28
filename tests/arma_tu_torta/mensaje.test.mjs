@@ -104,3 +104,9 @@ test('la fecha del paso 1 no puede ser anterior a hoy', () => {
   assert.equal(M.falta(1, {fecha: '2026-09-23', sinFecha: true}, '2026-09-24'), '');
   assert.equal(M.primerIncompleto({...COMPLETO, fecha: '2020-01-01'}, '2026-09-24'), 1);
 });
+
+test('los dos rellenos tienen agregados', () => {
+  const ls = M.lineas({relleno: 'kinder', agregados: ['nuez'], relleno2: 'ddl', agregados2: ['bombon', 'mani']});
+  assert.equal(ls.find(x => x.clave === 'relleno').valor, 'crema Kinder con nuez');
+  assert.equal(ls.find(x => x.clave === 'relleno2').valor, 'dulce de leche con bombón y maní');
+});
