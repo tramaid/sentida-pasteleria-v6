@@ -68,6 +68,8 @@
     armado.hidden = n === CIERRE;  // en el cierre, el formulario vacío no ocupa lugar
     volver.hidden = n === 1;
     siguiente.hidden = n === CIERRE;
+    // En el cierre solo queda Volver: la barra deja de estar fija para no tapar el mensaje ni el envío.
+    nav.classList.toggle('en-cierre', n === CIERRE);
     siguienteT.textContent = n === 6 ? 'Ver mi comanda' : 'Siguiente';
     if (avance) avance.setAttribute('data-paso', n);
   }

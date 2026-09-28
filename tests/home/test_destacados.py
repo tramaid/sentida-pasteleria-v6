@@ -54,9 +54,10 @@ def test_con_destacados_reemplaza_solo_entre_marcadores():
 
 def test_en_el_celular_las_tarjetas_quedan_prolijas(abrir):
     pg = abrir(360, 740, is_mobile=True, has_touch=True)
-    # El número «01 / 06» no se parte en dos renglones.
+    # La categoría va en un solo renglón, y el número «01 / 06» no se muestra en dos columnas angostas.
+    assert pg.eval_on_selector_all("#destacados .producto-meta", "ms => ms.every(m => m.offsetHeight < 24)")
     assert pg.eval_on_selector_all("#destacados .producto-meta span:last-child",
-                                   "ss => ss.every(s => s.getClientRects().length === 1)")
+                                   "ss => ss.every(s => s.getClientRects().length === 0)")
     # Con JavaScript, sin nada en el pedido, no queda una franja vacía debajo de cada tarjeta.
     assert pg.eval_on_selector_all("#destacados .producto-acc", "as => Math.max(...as.map(a => a.offsetHeight))") < 12
     # Los botones de «¿Tenés otra idea?» van centrados como el texto.

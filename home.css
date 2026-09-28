@@ -14,12 +14,13 @@
 .hero-lema{display:block; margin-top:20px; font-size:clamp(3rem,5.3vw,5rem); line-height:1.07; letter-spacing:-.045em}
 .hero-baja{max-width:420px; margin:28px 0 35px; font-size:16px; line-height:1.8; color:var(--marron-medio)}
 .hero-acc{display:flex; flex-wrap:wrap; align-items:center; gap:18px 30px}
-.hero-arte{position:absolute; left:51%; right:-4%; top:0; bottom:0}
-.circulo-grande{position:absolute; right:1%; top:43px; width:min(45vw,610px); border-width:10px}
+/* El arte queda dentro de la envoltura: la nota y el sello se ven enteros en cualquier ancho. */
+.hero-arte{position:absolute; left:51%; right:var(--lateral); top:0; bottom:0}
+.circulo-grande{position:absolute; right:0; top:43px; width:min(100%,610px); border-width:10px}
 .circulo-grande img{object-position:center 37%}
 .circulo-chico{position:absolute; left:2%; bottom:15px; width:220px}
-.hero-sello{position:absolute; right:5%; bottom:20px; width:122px; height:122px; border-radius:50%; background:var(--blanco); transform:rotate(-11deg); filter:drop-shadow(0 8px 15px rgba(108,77,56,.19))}
-.hero-nota{position:absolute; right:2%; top:52px; font-size:16px; line-height:1.25; text-align:center; color:var(--marron-medio); transform:rotate(7deg)}
+.hero-sello{position:absolute; right:0; bottom:20px; width:122px; height:122px; border-radius:50%; background:var(--blanco); transform:rotate(-11deg); filter:drop-shadow(0 8px 15px var(--sombra-suave))}
+.hero-nota{position:absolute; left:4%; top:10px; font-size:16px; line-height:1.25; text-align:center; color:var(--marron-medio); transform:rotate(7deg)}
 
 /* Elegí por dónde empezar */
 .puertas{list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; align-items:start}
@@ -29,21 +30,22 @@
 .puerta-n{font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--celeste-profundo)}
 .puerta h3{margin:13px 0 28px; font-size:clamp(1.75rem,2.2vw,2.125rem); line-height:1.08; letter-spacing:-.035em}
 .puerta-ir{margin-top:auto; display:flex; justify-content:space-between; align-items:center; padding-top:13px; border-top:1px solid var(--beige); font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase}
-.puerta:hover{background:#FBF3ED; color:var(--marron)}
+.puerta:hover{background:var(--crema-suave); color:var(--marron)}
 .mov .puerta:hover{transform:translateY(-5px)}
 .mov .puerta .circulo img{transition:transform .3s}
 .mov .puerta:hover .circulo img{transform:scale(1.04)}
 
 /* Todo empieza con una idea */
 .idea{background:var(--crema)}
-.idea-in{display:grid; grid-template-columns:47% 53%; align-items:center}
+.idea-in{display:grid; grid-template-columns:47% 53%; grid-template-rows:auto 1fr}
 .idea-txt{padding-right:70px; align-self:start}
 .idea-txt .eti{margin-bottom:24px}
 .idea-txt h2{font-size:clamp(2.9375rem,5vw,4.5rem); line-height:1.1; letter-spacing:-.045em; margin-bottom:25px}
 .idea-txt > p:not(.eti){max-width:410px; margin-bottom:32px; font-size:16px; line-height:1.8; color:var(--marron-medio)}
-.idea-foto{height:525px; overflow:hidden}
-.idea-foto img{width:100%; height:100%; object-fit:cover; object-position:center 40%}
-.idea-pasos{grid-column:2; list-style:none; margin:44px 0 0; padding:0}
+.idea-foto{position:relative; grid-column:2; grid-row:1 / span 2; min-height:525px; overflow:hidden}
+/* La foto acompaña el alto del texto y los pasos, sin imponer el suyo. */
+.idea-foto img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 40%}
+.idea-pasos{grid-column:1; grid-row:2; list-style:none; margin:48px 70px 0 0; padding:0}
 .idea-pasos li{display:grid; grid-template-columns:55px 1fr; column-gap:10px; padding:19px 0; border-top:1px solid var(--beige)}
 .idea-n{grid-row:span 2; font-size:24px; line-height:1.2; color:var(--celeste-profundo)}
 .idea-pasos h3{font-size:24px; line-height:1.1}
@@ -75,16 +77,19 @@
 .cierre > p:not(.eti):not(.botones){max-width:430px; margin:26px auto 32px; font-size:15px; color:var(--marron-medio)}
 .cierre .botones{justify-content:center}
 
+@media (max-width:1180px){
+  .circulo-grande{width:88%; top:60px}
+  .hero-nota{left:0}
+}
 @media (max-width:1080px){
-  .circulo-grande{right:-7%}
   .circulo-chico{width:180px}
   .puerta{padding:25px 15px}
 }
 @media (max-width:899px){
   .idea-in{display:flex; flex-direction:column; align-items:stretch}
   .idea-txt{padding:0}
-  .idea-foto{height:430px; margin-top:42px}
-  .idea-pasos{margin-top:20px}
+  .idea-foto{height:430px; min-height:0; margin-top:42px}
+  .idea-pasos{margin:20px 0 0}
   .anto-nadia{display:flex; flex-direction:column; gap:44px}
   .an-fotos{width:100%; height:440px}
   .banda{grid-template-columns:1fr; height:auto}

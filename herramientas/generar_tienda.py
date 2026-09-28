@@ -31,6 +31,10 @@ MENU = [
     ("nosotras", "Nosotras", "nosotras/"),
 ]
 SECCION_ETI = {"tortas": "Las de la casa", "pasteleria": "Pastelería", "temporada": "De temporada"}
+# La etiqueta sobre el título de cada página (no repite el título).
+ETI_PAGINA = {"tortas": "Las de la casa", "pasteleria": "Para regalar y compartir"}
+# Las tarjetas de la primera fila se ven al entrar: cargan sin esperar.
+PRIMERA_FILA = 3
 DESTACADOS_INICIO = "<!-- destacados:inicio -->"
 DESTACADOS_FIN = "<!-- destacados:fin -->"
 MARQUESINA_TEXTO = ["Lo soñás, lo creamos", "Pastelería artesanal", "Tortas a medida", "Hecho a mano"]
@@ -82,7 +86,7 @@ def wa(texto):
     return f"https://wa.me/{ANTO}?text={quote(texto, safe='')}"
 
 
-def img(nombre, alt, sizes, raiz="../"):
+def img(nombre, alt, sizes, raiz="../", diferida=True):
     """<img> con las variantes que existan de assets/fotos/<nombre>.webp; '' si no hay foto."""
     base = FOTOS / f"{nombre}.webp"
     if not base.exists():
@@ -94,7 +98,7 @@ def img(nombre, alt, sizes, raiz="../"):
     srcset.append(f"{raiz}assets/fotos/{nombre}.webp {ancho}w")
     src = srcset[0].split(" ")[0]
     return (f'<img src="{src}" srcset="{", ".join(srcset)}" sizes="{sizes}" '
-            f'width="{ancho}" height="{alto}" alt="{esc(alt)}" loading="lazy" decoding="async">')
+            f'width="{ancho}" height="{alto}" alt="{esc(alt)}"{' loading="lazy"' if diferida else ''} decoding="async">')
 
 
 def enlaces(actual, ancho, raiz):
@@ -108,9 +112,14 @@ def enlaces(actual, ancho, raiz):
 
 
 def marquesina():
+    """La cinta es decorativa (aria-hidden); la pausa no, porque la cinta se mueve sola."""
     tramo = " <i></i> ".join(MARQUESINA_TEXTO) + " <i></i>"
-    return (f'<div class="marquesina" aria-hidden="true"><div class="marquesina-pista">'
-            f'<span>{tramo}</span><span>{tramo}</span></div></div><!-- /marquesina -->')
+    pausa = ('<button type="button" class="marquesina-pausa" aria-pressed="false" aria-label="Pausar la cinta">'
+             '<svg class="ico ico-pausar" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6v12M15 6v12"/></svg>'
+             '<svg class="ico ico-seguir" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10-6.5-10-6.5Z"/></svg>'
+             '</button>')
+    return (f'<div class="marquesina"><div class="marquesina-pista" aria-hidden="true">'
+            f'<span>{tramo}</span><span>{tramo}</span></div>{pausa}</div><!-- /marquesina -->')
 
 
 def cabecera(actual, raiz="../"):
@@ -182,17 +191,18 @@ def comunes(html_pagina, actual, raiz):
     return BLOQUE_PIE.sub(lambda m: pie(raiz), html_pagina, count=1)
 
 
-def tarjeta(p, tipos, n, total, raiz="../"):
+def tarjeta(p, tipos, n, total, raiz="../", nivel=3):
     nombre = esc(p["nombre"])
     agregar = f'<button type="button" class="producto-agregar" aria-label="Agregar al pedido: {nombre}" hidden>+</button>'
-    foto = img(p.get("foto") or p["slug"], "", TAMANOS_TARJETA, raiz)
+    foto = img(p.get("foto") or p["slug"], "", TAMANOS_TARJETA, raiz,
+               diferida=not (nivel == 2 and n <= PRIMERA_FILA))
     if foto:
         partes = [f'<div class="producto-foto">{foto}{agregar}</div>']
     else:
         partes = [f'<div class="producto-foto sin-foto"><span class="display" aria-hidden="true">{nombre}</span>{agregar}</div>']
     categoria = esc(tipos[p["tipo"]]) if p.get("tipo") else SECCION_ETI.get(p["seccion"], "")
     partes.append(f'<p class="producto-meta"><span class="producto-tipo">{categoria}</span><span>{n:02d} / {total:02d}</span></p>')
-    partes.append(f'<h3 class="display">{nombre}</h3>')
+    partes.append(f'<h{nivel} class="display">{nombre}</h{nivel}>')
     if p.get("descripcion"):
         partes.append(f'<p class="producto-desc">{esc(p["descripcion"])}</p>')
     partes.append('<p class="producto-precio">Precio a consultar</p>')
@@ -240,7 +250,9 @@ def mesa_dulce():
 def pagina(clave, datos):
     sec = datos["secciones"][clave]
     productos = [p for p in datos["productos"] if p["seccion"] == clave and p.get("visible", True)]
-    tarjetas = "\n".join(tarjeta(p, datos["tipos"], i + 1, len(productos)) for i, p in enumerate(productos))
+    # En la tienda los productos cuelgan directo del h1: van en h2.
+    tarjetas = "\n".join(tarjeta(p, datos["tipos"], i + 1, len(productos), nivel=2)
+                         for i, p in enumerate(productos))
     extra = mesa_dulce() if clave == "pasteleria" else ""
     return f"""<!doctype html>
 <!-- Generada por herramientas/generar_tienda.py desde datos/catalogo.json: no editar a mano. -->
@@ -287,7 +299,7 @@ def pagina(clave, datos):
   <div class="tienda-in">
     <div class="tienda-col">
       <div class="tienda-cab">
-        <div><p class="eti con-linea">{esc(SECCION_ETI.get(clave, ""))}</p>
+        <div><p class="eti con-linea">{esc(ETI_PAGINA.get(clave, ""))}</p>
         <h1 class="display" id="tienda-t">{esc(sec["titulo"])}</h1></div>
         <p>{esc(sec["bajada"])}</p>
       </div>

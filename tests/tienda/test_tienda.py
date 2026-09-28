@@ -20,6 +20,10 @@ def test_las_tortas_de_la_casa(abrir):
     con_foto = pg.locator(".producto .producto-foto img").count()
     assert sin_foto + con_foto == 15
     assert pg.text_content(f"{KEY} .producto-meta span:first-child") == "Las de la casa"
+    # Los productos cuelgan del h1 (h2) y la primera fila no espera para cargar.
+    assert pg.locator(".producto h3").count() == 0
+    assert pg.eval_on_selector_all(".producto-foto img", "is => is.slice(0, 3).map(i => i.loading)") == ["auto"] * 3
+    assert pg.eval_on_selector_all(".producto-foto img", "is => is.slice(3).every(i => i.loading === 'lazy')")
     assert pg.get_attribute(f"{KEY} .producto-agregar", "aria-label") == "Agregar al pedido: Key Lime Pie"
     assert pg.errores == []
 
@@ -29,7 +33,8 @@ def test_la_pasteleria_y_la_mesa_dulce(abrir):
     assert pg.text_content("h1") == "Pastelería."
     assert pg.locator("[data-producto]").count() == 7
     assert pg.text_content('[data-producto="shots"] .producto-tipo') == "Shots"
-    assert pg.text_content('[data-producto="shots"] h3') == "Shots"
+    assert pg.text_content('[data-producto="shots"] h2') == "Shots"
+    assert pg.text_content(".tienda-cab .eti") == "Para regalar y compartir"
     assert "chupito" not in pg.content().lower()
     assert pg.locator(".mesa-fotos img").count() == 4
     href = pg.get_attribute(".mesa-dulce .enlace", "href")

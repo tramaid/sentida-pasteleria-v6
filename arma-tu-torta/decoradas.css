@@ -130,10 +130,11 @@
 .en-pasos .pasos{flex:1; display:flex; flex-direction:column}
 .en-pasos .paso{flex:1; min-height:0; border-bottom:0; padding-block:28px 32px}
 .en-pasos .cierre{flex:1; padding-block:28px 32px}
-.en-pasos #mensaje{min-height:220px}
+.en-pasos #mensaje{min-height:0; height:216px}  /* entran las siete líneas y el botón de mandar */
 .en-pasos .solo-sin-js{display:none}
 .pasos-nav{position:sticky; bottom:0; z-index:5; display:flex; flex-wrap:wrap; align-items:center; gap:10px; padding:14px 0 calc(16px + env(safe-area-inset-bottom)); background:var(--blanco); border-top:1px solid var(--linea)}
 #siguiente{margin-left:auto}
+.pasos-nav.en-cierre{position:static; border-top:0; padding-top:0}
 .pasos-falta{flex-basis:100%; font-size:14px; font-weight:600; line-height:1.4; color:var(--marron)}
 .pasos-falta:empty{display:none}
 .btn-1[aria-disabled="true"],.btn-1[aria-disabled="true"]:hover{background:var(--crema); color:var(--marron-medio); border-color:var(--beige); cursor:not-allowed}
@@ -173,6 +174,12 @@
   .tira-ver{flex:none; min-height:44px; padding:0 14px; background:var(--marron); color:var(--blanco); border:1px solid transparent; border-radius:2px; font-family:var(--ui); font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; cursor:pointer}
   .en-pasos .paso,.en-pasos .cierre{padding-block:24px 28px}
   html.en-pasos{scroll-padding-bottom:88px}
+  /* La barra entra en una sola fila: Volver queda como flecha (el nombre sigue para lectores de pantalla). */
+  .pasos-nav{flex-wrap:nowrap; padding-top:10px}
+  .pasos-nav .pasos-falta{position:absolute; left:0; right:0; bottom:100%; padding:10px 0; background:var(--blanco)}
+  #volver{flex:none; width:51px; padding:0; justify-content:center}
+  #volver .volver-t{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap}
+  #siguiente{flex:1; justify-content:space-between}
 }
 
 @media (max-width:429px){

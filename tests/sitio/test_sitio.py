@@ -78,11 +78,25 @@ def test_la_marquesina(abrir, pagina):
     pg = abrir(pagina=pagina)
     m = pg.locator(".marquesina")
     assert m.count() == 1
-    assert m.get_attribute("aria-hidden") == "true"
+    assert pg.get_attribute(".marquesina-pista", "aria-hidden") == "true"
     assert pg.evaluate("document.querySelector('.cab').nextElementSibling.classList.contains('marquesina')")
     assert pg.evaluate("getComputedStyle(document.querySelector('.marquesina-pista')).animationName") == "marquesina"
     quieta = abrir(pagina=pagina, reduced_motion="reduce")
     assert quieta.evaluate("getComputedStyle(document.querySelector('.marquesina-pista')).animationName") == "none"
+    assert quieta.is_hidden(".marquesina-pausa")
+
+
+@pytest.mark.parametrize("pagina", PAGINAS)
+def test_la_marquesina_se_puede_pausar(abrir, pagina):
+    pg = abrir(pagina=pagina)
+    boton = ".marquesina-pausa"
+    assert pg.get_attribute(boton, "aria-pressed") == "false"
+    pg.click(boton)
+    assert pg.get_attribute(boton, "aria-pressed") == "true"
+    assert pg.get_attribute(boton, "aria-label") == "Mover la cinta"
+    assert pg.evaluate("getComputedStyle(document.querySelector('.marquesina-pista')).animationPlayState") == "paused"
+    pg.reload()
+    assert pg.get_attribute(boton, "aria-pressed") == "true"
 
 
 @pytest.mark.parametrize("pagina", PAGINAS)

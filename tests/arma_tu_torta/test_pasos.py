@@ -203,3 +203,19 @@ def test_una_fecha_pasada_no_deja_seguir(abrir):
     pg.click("#siguiente", force=True)
     assert visibles(pg) == [1]
     assert pg.text_content("#pasos-falta") == "Elegí una fecha de hoy en adelante."
+
+
+def test_en_el_cierre_la_barra_no_tapa_el_envio(abrir):
+    pg = abrir(1440, 900)
+    armar(pg)
+    envio = pg.locator("#envio [type=submit]").bounding_box()
+    nav = pg.locator("#pasos-nav").bounding_box()
+    assert envio["y"] + envio["height"] <= nav["y"]
+
+
+def test_en_celular_la_barra_entra_en_una_fila(abrir):
+    pg = abrir(390, 844, **CEL)
+    pg.click("#empezar")
+    armar(pg, hasta=6)
+    assert pg.locator("#pasos-nav").bounding_box()["height"] < 90
+    assert pg.get_by_role("button", name="Volver").is_visible()

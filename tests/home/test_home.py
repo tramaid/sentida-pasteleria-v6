@@ -72,3 +72,17 @@ def test_el_pie_no_lleva_el_sentida_gigante(abrir):
 
 def test_sin_errores(abrir):
     assert abrir().errores == []
+
+
+def test_el_pedido_de_la_home_tiene_sus_iconos(abrir):
+    pg = abrir()
+    assert pg.evaluate("[...document.querySelectorAll('use')].map(u => u.getAttribute('href'))"
+                       ".filter(h => h.startsWith('#') && !document.querySelector(h))") == []
+
+
+def test_el_hero_queda_entero(abrir):
+    for w in (900, 1024, 1280, 1440, 1920):
+        pg = abrir(w, 900)
+        der = pg.evaluate("Math.max(...[...document.querySelectorAll('.hero-nota, .hero-sello, .circulo-grande')]"
+                          ".map(e => e.getBoundingClientRect().right))")
+        assert der <= w, w

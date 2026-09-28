@@ -13,6 +13,7 @@
 :root{
   --blanco:#FEFAF8;
   --crema:#F8EADE;
+  --crema-suave:#F9F3EE;     /* fondos intermedios y hover de tarjetas */
   --beige:#CFB59E;
   --celeste:#DDE6ED;          /* solo relleno chico, nunca texto */
   --marron:#402D21;
@@ -21,6 +22,7 @@
   --celeste-filete:#8FB1C9;   /* solo filetes, puntos y aros; nunca texto */
   --linea:rgba(207,181,158,.6);
   --sombra:rgba(64,45,33,.28);
+  --sombra-suave:rgba(64,45,33,.19);
   --velo:rgba(64,45,33,.45);
 
   --display:Erode, "Erode respaldo", Georgia, serif;
@@ -114,13 +116,25 @@ input:focus-visible,textarea:focus-visible{outline:2px solid var(--celeste-profu
    Marquesina: cinta celeste con el lema. Es decorativa (aria-hidden).
    Sin «mov», quieta.
    ------------------------------------------------------------ */
-.marquesina{margin-top:var(--cab); height:44px; display:flex; align-items:center; overflow:hidden; background:var(--celeste); color:var(--celeste-profundo)}
+.marquesina{position:relative; margin-top:var(--cab); height:44px; display:flex; align-items:center; overflow:hidden; background:var(--celeste); color:var(--celeste-profundo)}
 .marquesina-pista{display:flex; width:max-content}
+/* La pausa: solo existe cuando la cinta se mueve (.mov). */
+.marquesina-pausa{display:none}
+.mov .marquesina-pausa{
+  position:absolute; right:0; top:0; bottom:0; z-index:1; display:grid; place-items:center; width:44px; padding:0;
+  border:0; background:var(--celeste); color:var(--celeste-profundo); cursor:pointer;
+  box-shadow:-18px 0 14px -4px var(--celeste);
+}
+.marquesina-pausa:hover{color:var(--marron)}
+.marquesina-pausa:focus-visible{outline-offset:-4px}
+.marquesina-pausa .ico{width:16px; height:16px}
+.marquesina-pausa .ico-seguir,.marquesina.pausada .ico-pausar{display:none}
+.marquesina.pausada .ico-seguir{display:block}
 .marquesina-pista span{white-space:nowrap; padding-right:34px; font-size:11px; font-weight:600; letter-spacing:.21em; text-transform:uppercase}
 .marquesina i{display:inline-block; position:relative; font-style:normal; width:10px; height:10px; margin:0 40px; vertical-align:middle; border:1px solid var(--celeste-filete); border-radius:50%}
 .marquesina i::after{content:""; position:absolute; inset:2px; border:1px solid var(--celeste-filete); border-radius:50%}
 .mov .marquesina-pista{animation:marquesina 48s linear infinite}
-.mov .marquesina:hover .marquesina-pista{animation-play-state:paused}
+.mov .marquesina:hover .marquesina-pista,.mov .marquesina.pausada .marquesina-pista{animation-play-state:paused}
 @keyframes marquesina{to{transform:translateX(-50%)}}
 
 /* ------------------------------------------------------------
@@ -137,7 +151,7 @@ input:focus-visible,textarea:focus-visible{outline:2px solid var(--celeste-profu
 .pie-links{display:grid; grid-template-columns:1fr 1fr; gap:24px; font-size:13px; line-height:1.5}
 .pie-eti{margin-bottom:10px; font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--beige)}
 .pie-links ul{list-style:none; padding:0}
-.pie-links a{display:inline-flex; align-items:center; min-height:40px}
+.pie-links a{display:inline-flex; align-items:center; min-height:44px}
 .pie-links p:not(.pie-eti){padding-top:10px; line-height:1.9}
 .pie-sello{width:105px; height:105px; border-radius:50%; background:var(--blanco)}
 .pie-fin{padding-block:24px; border-top:1px solid var(--marron-medio); display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:11px; letter-spacing:.1em}
