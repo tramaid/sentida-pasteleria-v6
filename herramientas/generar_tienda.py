@@ -184,8 +184,8 @@ def saber(raiz="../"):
             <ul role="list"><li>Coordinamos el día y el horario por WhatsApp.</li></ul>
           </div>
           <div>
-            <h3 class="saber-sub">Envío a domicilio en Zona Norte</h3>
-            <ul role="list"><li>Te pasamos el costo según la zona.</li></ul>
+            <h3 class="saber-sub">Envíos</h3>
+            <ul role="list"><li>Consultanos por WhatsApp y te contamos si llegamos a tu zona.</li></ul>
           </div>
         </div>
       </details>

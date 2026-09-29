@@ -68,8 +68,9 @@
     var puntos = g.querySelectorAll('.galeria-puntos span');
     var estado = g.querySelector('.galeria-estado');
     var n = fotos.length, actual = 0, cuadro = 0;
-    // Las flechas reemplazan al foco de la tira.
-    tira.removeAttribute('tabindex');
+    // Las flechas reemplazan al foco de la tira. Sacar el tabindex no alcanza:
+    // Chrome y Firefox igual enfocan un contenedor con scroll; -1 sí lo saca del Tab.
+    tira.tabIndex = -1;
     g.querySelector('.galeria-ant').hidden = false;
     g.querySelector('.galeria-sig').hidden = false;
     g.querySelector('.galeria-puntos').hidden = false;

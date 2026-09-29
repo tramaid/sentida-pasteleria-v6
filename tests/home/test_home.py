@@ -26,9 +26,10 @@ def test_el_hero(abrir):
     assert pg.get_attribute(".hero .btn-1", "href") == "arma-tu-torta/"
     assert pg.get_attribute(".hero .enlace", "href") == "#empezar"
     # Un solo círculo y el sello: las chicas pidieron sacar la foto de la masa (28/09).
-    # Adentro del círculo se turnan ocho tortas (28/09): la primera carga ya, las demás después del load.
+    # Adentro del círculo se turnan nueve tortas (28/09): la primera carga ya y las demás
+    # entran de a una, un turno antes de mostrarse (29/09): al empezar hay dos, no nueve.
     assert pg.locator(".hero .circulo").count() == 1
-    assert pg.locator(".hero .circulo img").count() == 9
+    assert pg.locator(".hero .circulo img").count() == 2
     assert pg.get_attribute(".hero .circulo img >> nth=0", "fetchpriority") == "high"
     assert pg.get_attribute(".hero .circulo img >> nth=0", "src").endswith("key-lime-pie-800.webp")
     assert pg.locator(".hero .hero-sello").count() == 1
