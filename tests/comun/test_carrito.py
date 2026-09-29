@@ -94,7 +94,7 @@ def test_el_mensaje_con_envio_y_algo_mas(abrir):
         "• Key Lime Pie × 1",
         "• Alfajores de maicena × 12",
         f"Para: {FUTURA_TEXTO}",
-        "Entrega: envío en Zona Norte",
+        "Entrega: envío a domicilio",
         "A nombre de: Laura",
         "Además: sin nuez, por favor",
         "¿Me confirman precio y disponibilidad?",

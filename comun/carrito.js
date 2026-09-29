@@ -55,7 +55,7 @@
           '<input type="date" id="carrito-fecha" name="fecha"></div>' +
         '<fieldset class="cf"><legend class="cf-t">¿Retiro o envío?</legend>' +
           '<label class="cf-op"><input type="radio" name="entrega" value="retiro"> Retiro en Martínez</label>' +
-          '<label class="cf-op"><input type="radio" name="entrega" value="envio"> Envío en Zona Norte</label>' +
+          '<label class="cf-op"><input type="radio" name="entrega" value="envio"> Envío a Vicente López o San Isidro</label>' +
         '</fieldset>' +
         '<div class="cf"><label class="cf-t" for="carrito-nombre">¿A nombre de quién?</label>' +
           '<input type="text" id="carrito-nombre" name="nombre" autocomplete="name"></div>' +

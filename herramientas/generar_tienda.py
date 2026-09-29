@@ -177,15 +177,15 @@ def saber(raiz="../"):
       </details>
       <details class="saber-item">
         <summary><span class="saber-n" aria-hidden="true">02</span><span class="saber-t">Retiro y envíos</span><span class="saber-mas" aria-hidden="true"></span></summary>
-        <!-- Pendiente: Anto y Nadia confirman los horarios de retiro y hasta dónde llega el envío (las zonas). -->
+        <!-- Pendiente: Anto y Nadia confirman los horarios de retiro y hasta dónde llega el envío (las zonas: hoy, lo que entendemos, Vicente López y San Isidro). -->
         <div class="saber-cuerpo saber-dos">
           <div>
             <h3 class="saber-sub">Retiro en Martínez, San Isidro</h3>
             <ul role="list"><li>Coordinamos el día y el horario por WhatsApp.</li></ul>
           </div>
           <div>
-            <h3 class="saber-sub">Envíos</h3>
-            <ul role="list"><li>Consultanos por WhatsApp y te contamos si llegamos a tu zona.</li></ul>
+            <h3 class="saber-sub">Envíos a Vicente López y San Isidro</h3>
+            <ul role="list"><li>Te pasamos el costo por WhatsApp. Si estás en otra zona, consultanos.</li></ul>
           </div>
         </div>
       </details>

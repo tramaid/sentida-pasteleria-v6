@@ -62,7 +62,7 @@
     e.items.forEach(function (i) { ls.push('• ' + i.nombre + ' × ' + i.cant); });
     var f = S.fecha(e.fecha);
     if (f) ls.push('Para: ' + f);
-    ls.push('Entrega: ' + (e.entrega === 'envio' ? 'envío en Zona Norte' : 'retiro en Martínez'));
+    ls.push('Entrega: ' + (e.entrega === 'envio' ? 'envío a domicilio' : 'retiro en Martínez'));
     var nombre = S.limpio(e.nombre), ademas = S.limpio(e.ademas);
     if (nombre) ls.push('A nombre de: ' + nombre);
     if (ademas) ls.push('Además: ' + ademas);
