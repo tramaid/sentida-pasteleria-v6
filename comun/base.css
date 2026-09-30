@@ -177,6 +177,30 @@ input:focus-visible,textarea:focus-visible{outline:2px solid var(--celeste-profu
 .pie-sello{width:164px; height:164px; border-radius:50%; background:var(--blanco); transform:rotate(-8deg)}
 .pie-fin{padding-block:24px; border-top:1px solid var(--marron-medio); display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:11px; letter-spacing:.1em}
 
+/* ------------------------------------------------------------
+   La franja legal del pie (legal/pie.html, la misma en la tienda) y las
+   páginas de Privacidad y Términos (legal/*.html).
+   ------------------------------------------------------------ */
+.pie-legal{padding-block:20px 24px; border-top:1px solid var(--marron-medio); display:grid; gap:12px; font-size:12px; line-height:1.6}
+.pie-legal-links{display:flex; flex-wrap:wrap; align-items:center; gap:4px 28px; font-size:13px}
+.pie-legal-links a{display:inline-flex; align-items:center; min-height:44px}
+.pie .pie-arrepentimiento{padding:0 16px; border:1px solid var(--crema); border-radius:2px}
+.pie .pie-arrepentimiento:hover{background:var(--crema); color:var(--marron); text-decoration:none}
+.pie-aaip{max-width:120ch; font-size:11px; line-height:1.6; color:var(--beige)}
+.legal{padding-block:clamp(40px,7vh,80px) clamp(72px,12vh,120px)}
+.legal-cab .eti{margin-bottom:18px}
+.legal-cab h1{font-size:clamp(2.6rem,5vw,4.3rem); line-height:1.05; letter-spacing:-.03em}
+.legal-texto{max-width:68ch; margin-top:clamp(28px,5vh,48px); font-size:16px; line-height:1.7}
+.legal-texto > * + *{margin-top:16px}
+.legal-texto h2{margin-top:44px; font-family:var(--display); font-weight:400; font-size:clamp(1.5rem,2.4vw,1.9rem); line-height:1.2}
+.legal-texto ul{padding-left:1.2em}
+.legal-texto li + li{margin-top:10px}
+.legal-texto a{text-decoration:underline; text-decoration-color:var(--beige); text-underline-offset:4px}
+.legal-fecha{font-size:13px; color:var(--marron-medio)}
+/* La línea de consentimiento junto a cada «Mandar» (Ley 25.326). */
+.acepto{font-size:13px; line-height:1.5; color:var(--marron-medio)}
+.acepto a{color:inherit; text-decoration:underline; text-decoration-color:var(--beige); text-underline-offset:4px}
+
 /* Con cuatro secciones, el menú entra entero recién desde 1100 px;
    «Nosotras», desde 1280 px (antes queda en el pie). */
 @media (min-width:1280px){

@@ -1,6 +1,7 @@
 """Genera las páginas de la tienda, tortas/index.html y pasteleria/index.html,
-a partir de datos/catalogo.json, y la cabecera y el pie de las páginas escritas
-a mano (index, nosotras, arma-tu-torta).
+a partir de datos/catalogo.json; las páginas legales, privacidad/ y terminos/,
+a partir de legal/; y la cabecera y el pie de las páginas escritas a mano
+(index, nosotras, arma-tu-torta).
 
 Uso, desde sentida-site/:
     python herramientas/generar_tienda.py
@@ -15,12 +16,24 @@ import json
 import pathlib
 from urllib.parse import quote
 
+from jinja2 import Environment, FileSystemLoader
 from PIL import Image
 
 RAIZ = pathlib.Path(__file__).resolve().parents[1]
 FOTOS = RAIZ / "assets" / "fotos"
 SITIO = "https://tramaid.github.io/sentida-pasteleria/"
 ANTO = "5491158300787"
+# La tienda (sentida-tienda): ahí vive el formulario del Botón de arrepentimiento,
+# porque el sitio no tiene servidor. Hoy, la vista previa en Render; en
+# producción la tienda cuelga del mismo dominio, en /tienda/.
+TIENDA = "https://sentida-tienda.onrender.com/"
+# Los textos legales y los datos del titular: una sola fuente para el sitio y
+# la tienda (que los copia con `flask sincronizar-marca`).
+LEGAL = RAIZ / "legal"
+PAGINAS_LEGALES = {
+    "privacidad": ("Política de privacidad", "Cómo cuidamos tus datos personales: qué recolectamos, para qué y cómo ejercer tus derechos."),
+    "terminos": ("Términos y condiciones", "Cómo se hace un pedido, precios, pago, retiro y envíos, cambios y el derecho de arrepentimiento."),
+}
 TAMANOS_TARJETA = "(max-width: 1099px) 45vw, 24vw"
 
 MENU = [
@@ -204,8 +217,25 @@ def saber(raiz="../"):
 </aside>"""
 
 
+def _legal():
+    """El entorno de Jinja de legal/ y el contexto que esperan sus plantillas."""
+    env = Environment(loader=FileSystemLoader(LEGAL), autoescape=True)
+    titular = json.loads((LEGAL / "titular.json").read_text(encoding="utf-8"))
+    return env, titular
+
+
+def legal(plantilla, raiz="../"):
+    """Una plantilla de legal/ (el pie o un texto), con las rutas del sitio."""
+    env, titular = _legal()
+    urls = {"privacidad": f"{raiz}privacidad/", "terminos": f"{raiz}terminos/",
+            "arrepentimiento": f"{TIENDA}arrepentimiento"}
+    return env.get_template(plantilla).render(
+        titular=titular, urls=urls, wa=ANTO, wa_texto=f"11 {ANTO[5:9]}-{ANTO[9:]}").strip()
+
+
 def pie(raiz="../"):
-    """La banda «Antes de pedir» y el pie: marca · Explorá · Escribinos · el sello."""
+    """La banda «Antes de pedir» y el pie: marca · Explorá · Escribinos · el
+    sello, y la franja legal (legal/pie.html)."""
     wa_anto = wa("Hola SENTIDA, quiero hacer un pedido.")
     wa_nadia = f"https://wa.me/5491131459646?text={quote('Hola SENTIDA, quiero hacer un pedido.', safe='')}"
     secciones = "\n".join(f'          <li><a href="{raiz}{href}">{texto}</a></li>' for _, texto, href in MENU)
@@ -238,6 +268,7 @@ def pie(raiz="../"):
     </nav>
     <img class="pie-sello" src="{raiz}assets/marca/sello.svg" alt="" width="164" height="164" loading="lazy">
   </div>
+  {legal("pie.html", raiz)}
   <div class="pie-fin envoltorio"><span>© 2026 SENTIDA Pastelería · Hecho a mano</span><span>Diseño TRAMA</span></div>
 </footer>"""
 
@@ -399,12 +430,76 @@ def pagina(clave, datos):
 """
 
 
+def pagina_legal(clave):
+    """privacidad/ o terminos/: el texto de legal/, con la cabecera y el pie
+    del sitio. En noindex, como las demás páginas nuevas."""
+    titulo, descripcion = PAGINAS_LEGALES[clave]
+    return f"""<!doctype html>
+<!-- Generada por herramientas/generar_tienda.py desde legal/{clave}.html: no editar a mano. -->
+<html lang="es-AR" class="sin-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex">
+<title>{titulo} · SENTIDA Pastelería</title>
+<meta name="description" content="{esc(descripcion)}">
+<meta name="theme-color" content="#FCF9F2">
+<link rel="canonical" href="{SITIO}{clave}/">
+<link rel="icon" href="../assets/marca/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preload" href="../assets/fuentes/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fuentes/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../comun/marca.css">
+<link rel="stylesheet" href="../comun/base.css">
+<link rel="stylesheet" href="../comun/ticket.css">
+<script>
+(function (r) {{
+  r.classList.remove('sin-js'); r.classList.add('js');
+  if (!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) r.classList.add('mov');
+}})(document.documentElement);
+</script>
+<script src="../comun/base.js" defer></script>
+<script src="../comun/menu.js" defer></script>
+<script src="../comun/pedido-mensaje.js" defer></script>
+<script src="../comun/carrito.js" data-raiz="../" defer></script>
+</head>
+<body>
+{ICONOS}
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<p id="nueva-pestana" hidden>Se abre WhatsApp o Instagram en otra pestaña.</p>
+
+{cabecera(clave, "../")}
+
+<main id="contenido">
+<article class="legal envoltorio" aria-labelledby="legal-t">
+  <div class="legal-cab">
+    <p class="eti con-linea">Información legal</p>
+    <h1 class="display" id="legal-t">{titulo}.</h1>
+  </div>
+  <div class="legal-texto">
+{legal(f"{clave}.html")}
+  </div>
+</article>
+</main>
+
+{pie("../")}
+</body>
+</html>
+"""
+
+
 def main():
     datos = json.loads((RAIZ / "datos" / "catalogo.json").read_text(encoding="utf-8"))
     for clave in ("tortas", "pasteleria"):
         destino = RAIZ / clave / "index.html"
         destino.parent.mkdir(exist_ok=True)
         destino.write_text(pagina(clave, datos), encoding="utf-8", newline="\n")
+        print(destino.relative_to(RAIZ).as_posix())
+    for clave in PAGINAS_LEGALES:
+        destino = RAIZ / clave / "index.html"
+        destino.parent.mkdir(exist_ok=True)
+        destino.write_text(pagina_legal(clave), encoding="utf-8", newline="\n")
         print(destino.relative_to(RAIZ).as_posix())
     home = RAIZ / "index.html"
     home.write_text(con_destacados(home.read_text(encoding="utf-8"), destacados(datos)), encoding="utf-8", newline="\n")

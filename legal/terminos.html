@@ -1,0 +1,50 @@
+{#- Los términos y condiciones de venta (Ley 24.240 y Código Civil y Comercial,
+    contratos a distancia). Un solo texto para el sitio y la tienda: ver
+    legal/pie.html. Recibe `titular`, `urls`, `wa` (dígitos) y `wa_texto`.
+    Plantilla base: la tienen que revisar las dueñas y, si puede ser, un
+    abogado (sobre todo la excepción de perecederos). -#}
+<p class="legal-fecha">Última actualización: 29 de septiembre de 2026.</p>
+
+<p>Estos términos rigen los pedidos que hacés en el sitio y en la tienda online de SENTIDA Pastelería. Al confirmar un pedido los aceptás, junto con nuestra <a href="{{ urls.privacidad }}">Política de privacidad</a>.</p>
+
+<h2>Quiénes somos</h2>
+<p>SENTIDA Pastelería{% if titular.razon_social %}, de {{ titular.razon_social }}{% endif %}{% if titular.cuit %}, CUIT {{ titular.cuit }}{% endif %}, con domicilio en {{ titular.domicilio or 'Martínez, San Isidro, provincia de Buenos Aires' }}. Nos escribís por <a href="https://wa.me/{{ wa }}">WhatsApp al {{ wa_texto }}</a>{% if titular.email %} o a <a href="mailto:{{ titular.email }}">{{ titular.email }}</a>{% endif %}.</p>
+{%- if not (titular.razon_social and titular.cuit and titular.domicilio and titular.email) %}
+<!-- Pendiente: razón social, CUIT, domicilio y email del titular (legal/titular.json). -->
+{%- endif %}
+
+<h2>Cómo se hace un pedido</h2>
+<p>Trabajamos por encargo y con cupo por día. Podés pedir de dos maneras:</p>
+<ul>
+  <li><strong>En el sitio</strong>: armás el pedido y se manda por WhatsApp. Las tortas decoradas se arman en Armá tu torta y te pasamos el presupuesto.</li>
+  <li><strong>En la tienda online</strong>: reservás lo que querés y elegís el día. Al terminar te damos un número de pedido.</li>
+</ul>
+<p>En los dos casos, el pedido queda confirmado cuando te lo confirmamos nosotras por WhatsApp, con la fecha y el precio.</p>
+<p>La anticipación mínima es de 48 horas para Nuestras tortas y de 4 a 7 días para Pastelería, según el trabajo.</p>
+
+<h2>Precios y pago</h2>
+<p>Los precios están en pesos argentinos y son finales, con impuestos incluidos. Donde el sitio dice «a consultar», te pasamos el precio antes de confirmar el pedido. El costo del envío también te lo informamos antes de confirmar. Respetamos el precio que te confirmamos, aunque después cambie.</p>
+<p>Hoy se paga al retirar o al recibir el pedido. Las tortas decoradas se reservan con una seña, que te informamos junto con el presupuesto.</p>
+<!-- Pendiente: los medios de pago que aceptan (efectivo, transferencia, etc.) y si la seña aplica también a los pedidos de la tienda. -->
+<p>Las fotos son ilustrativas: cada torta se hace a mano y puede variar un poco.</p>
+
+<h2>Retiro y envíos</h2>
+<p>Retirás en Martínez, San Isidro, el día que elegiste, y el horario lo coordinamos por WhatsApp. También hacemos envíos a Vicente López y San Isidro; te pasamos el costo por WhatsApp. Si estás en otra zona, consultanos.</p>
+<!-- Pendiente: Anto y Nadia confirman los horarios de retiro y hasta dónde llega el envío. -->
+
+<h2>Cambios y cancelaciones</h2>
+<p>Si necesitás cambiar la fecha, avisanos con al menos 7 días. La nueva fecha queda sujeta a nuestra disponibilidad y el presupuesto puede actualizarse. Para cancelar, avisanos con al menos 7 días.</p>
+<!-- Provisorio: los plazos de cambios y cancelaciones esperan la confirmación de Anto y Nadia. -->
+
+<h2>Derecho de arrepentimiento</h2>
+<p>Como el pedido se hace a distancia, podés arrepentirte dentro de los 10 días corridos desde que lo confirmamos o desde que lo recibiste, lo que pase último, sin explicar el motivo y sin costo. Se hace desde el <a href="{{ urls.arrepentimiento }}">Botón de arrepentimiento</a>, que está en el pie de todas las páginas. No hace falta tener cuenta ni iniciar sesión: solo te pedimos datos para encontrar tu pedido. Al enviarlo te damos un código de trámite en el momento.</p>
+<p>Nuestras tortas y nuestra pastelería son alimentos perecederos y, muchas veces, hechos a medida de lo que nos pediste. Por eso, según el artículo 1116 del Código Civil y Comercial, una vez que empezamos a prepararlas el arrepentimiento ya no procede. Si te arrepentís antes, te devolvemos todo lo que hayas pagado, seña incluida, por el mismo medio de pago.</p>
+
+<h2>Si algo no salió bien</h2>
+<p>Si el pedido no llegó como lo acordamos, escribinos cuanto antes, con fotos, y lo resolvemos.</p>
+
+<h2>Reclamos</h2>
+<p>Ante cualquier problema, escribinos por WhatsApp{% if titular.email %} o por email{% endif %}. Si no quedás conforme, podés recurrir a la Ventanilla Federal Única de Reclamos de Defensa del Consumidor (argentina.gob.ar/defensadelconsumidor) o a la oficina de defensa del consumidor de tu municipio.</p>
+
+<h2>Ley aplicable</h2>
+<p>Estos términos se rigen por las leyes de la República Argentina. Ante cualquier controversia, son competentes los tribunales del domicilio del consumidor.</p>

@@ -1,0 +1,8 @@
+{
+  "_nota": "Datos del titular del sitio (Ley 24.240 y 25.326). Los completan Anto y Nadia; mientras un dato sea null, no se muestra. data_fiscal_html es el código que da ARCA (Formulario 960 D, «Banner en sitio web»), pegado tal cual. Después de cambiar este archivo: correr herramientas/generar_tienda.py acá y `flask sincronizar-marca` en la tienda.",
+  "razon_social": null,
+  "cuit": null,
+  "domicilio": null,
+  "email": null,
+  "data_fiscal_html": null
+}

@@ -1,0 +1,43 @@
+{#- La política de privacidad (Ley 25.326). Un solo texto para el sitio y la
+    tienda: ver legal/pie.html. Recibe `titular`, `urls`, `wa` (dígitos) y
+    `wa_texto`. Plantilla base: la tienen que revisar las dueñas y, si puede
+    ser, un abogado. -#}
+<p class="legal-fecha">Última actualización: 29 de septiembre de 2026.</p>
+
+<p>Esta política explica cómo SENTIDA Pastelería{% if titular.razon_social %} ({{ titular.razon_social }}){% endif %}{% if titular.cuit %}, CUIT {{ titular.cuit }}{% endif %}, con domicilio en {{ titular.domicilio or 'Martínez, San Isidro, provincia de Buenos Aires' }}, trata los datos personales de quienes usan este sitio y la tienda online, conforme a la Ley 25.326 de Protección de los Datos Personales y su normativa complementaria.</p>
+{%- if not (titular.razon_social and titular.cuit and titular.domicilio) %}
+<!-- Pendiente: razón social, CUIT y domicilio del titular (legal/titular.json). -->
+{%- endif %}
+
+<h2>Qué datos recolectamos</h2>
+<p>Solo los que nos das para hacer tu pedido:</p>
+<ul>
+  <li><strong>Cuando armás un pedido en el sitio</strong> (Nuestras tortas, Pastelería o Armá tu torta): lo que elegís, la fecha, tu nombre, las notas y las fotos de referencia que sumes. El sitio no los manda a ningún servidor: arma un mensaje de WhatsApp y nos llega recién cuando lo enviás vos. Mientras tanto, el pedido se guarda en tu navegador para que no lo pierdas; las fotos, no.</li>
+  <li><strong>Cuando pedís en la tienda online</strong>: tu nombre (si querés darlo), tu teléfono, el día de retiro, las notas del pedido y, si pedís envío, la dirección de entrega.</li>
+  <li><strong>Si creás una cuenta</strong>: nombre, email, teléfono (opcional) y una clave, que guardamos cifrada: nadie puede leerla, ni nosotras.</li>
+  <li><strong>Si usás el Botón de arrepentimiento</strong>: nombre, teléfono, email (opcional), número de pedido y el motivo, si querés contarlo.</li>
+</ul>
+<p><strong>Alergias.</strong> Si nos contás una alergia o una restricción alimentaria, es un dato de salud: no es obligatorio darlo y lo usamos solo para preparar tu pedido de forma segura. No lo usamos para nada más ni lo compartimos.</p>
+<p><strong>Datos técnicos.</strong> La tienda usa una cookie de sesión, necesaria para que funcionen el pedido y la cuenta. Cuenta qué páginas y productos se miran, sin guardar quién los mira. Guarda la dirección IP por 24 horas, solo para frenar intentos de abuso. No usamos Google Analytics, píxeles publicitarios ni otras herramientas de seguimiento.</p>
+<p>No recolectamos datos sensibles, salvo la alergia que decidas contarnos.</p>
+
+<h2>Para qué los usamos</h2>
+<p>Para preparar, confirmar y entregar tus pedidos, coordinar el retiro o el envío por WhatsApp, gestionar tu cuenta, responder tus consultas, tramitar arrepentimientos y reclamos, y cumplir con nuestras obligaciones fiscales. No los usamos para otros fines ni los vendemos.</p>
+
+<h2>Con quién los compartimos</h2>
+<p>Solo con los proveedores que necesitamos para funcionar, que los tratan por cuenta nuestra: WhatsApp (Meta), por donde nos llegan los pedidos y te confirmamos, y el proveedor de hosting donde funciona la web. Algunos guardan datos fuera de Argentina; en esos casos exigimos niveles de protección adecuados, conforme al artículo 12 de la Ley 25.326.</p>
+<!-- Pendiente: nombre y país del hosting definitivo de la tienda (hoy la vista previa está en Render, EE. UU.; el sitio, en GitHub Pages, EE. UU.). -->
+<p>También podemos informar datos cuando lo pida una autoridad competente.</p>
+
+<h2>Cuánto tiempo los guardamos</h2>
+<p>Mientras hagan falta para tu pedido o tu cuenta, y durante los plazos que exigen las normas fiscales y de defensa del consumidor. Después los borramos.</p>
+
+<h2>Cómo los protegemos</h2>
+<p>Usamos conexión cifrada (HTTPS), acceso restringido al panel de la tienda y claves cifradas.</p>
+
+<h2>Tus derechos</h2>
+<p>Podés pedirnos ver tus datos, corregirlos, actualizarlos o borrarlos (también tu cuenta completa), y dejar de recibir mensajes nuestros cuando quieras. Escribinos por <a href="https://wa.me/{{ wa }}">WhatsApp al {{ wa_texto }}</a>{% if titular.email %} o a <a href="mailto:{{ titular.email }}">{{ titular.email }}</a>{% endif %}, con tu nombre y lo que necesitás. Respondemos los pedidos de acceso dentro de los 10 días corridos, y los de corrección o borrado dentro de los 5 días hábiles.</p>
+<p>El titular de los datos personales tiene la facultad de ejercer el derecho de acceso a los mismos en forma gratuita a intervalos no inferiores a seis meses, salvo que se acredite un interés legítimo al efecto conforme lo establecido en el artículo 14, inciso 3 de la Ley N° 25.326. La Agencia de Acceso a la Información Pública, en su carácter de Órgano de Control de la Ley N° 25.326, tiene la atribución de atender las denuncias y reclamos que interpongan quienes resulten afectados en sus derechos por incumplimiento de las normas vigentes en materia de protección de datos personales.</p>
+
+<h2>Cambios en esta política</h2>
+<p>Si la cambiamos, publicamos la versión nueva en esta página, con su fecha. Las condiciones de compra están en los <a href="{{ urls.terminos }}">Términos y condiciones</a>.</p>

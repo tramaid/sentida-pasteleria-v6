@@ -2,7 +2,7 @@ import pytest
 
 from reglas import CEL, CELESTE_EN_TEXTO, CONTRASTE, ITALICAS, TAMANOS, TEXTO_CHICO
 
-PAGINAS = ["", "arma-tu-torta/", "tortas/", "pasteleria/", "nosotras/"]
+PAGINAS = ["", "arma-tu-torta/", "tortas/", "pasteleria/", "nosotras/", "privacidad/", "terminos/"]
 VISIBLE = """(() => {
     const e = document.activeElement;
     if (e === document.body) return null;

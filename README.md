@@ -35,6 +35,18 @@ El prefijo `54 9` es obligatorio para que WhatsApp resuelva móviles argentinos;
 - Varias fotos del banco llevan el sello de la marca anterior y dos tarjetas muestran un producto distinto al de su título (ver `QA.md`).
 - No hay definición sobre precios, detalle por producto ni zona de entrega.
 
+## Legal (29/09/2026)
+
+Resultado de la auditoría legal (`../AUDITORIA-LEGAL.md`).
+
+- `legal/` es la única fuente de lo legal, para el sitio y la tienda:
+  - `pie.html`: la franja del pie con Privacidad, Términos y el «Botón de arrepentimiento» (ese texto, literal), más la leyenda de la AAIP;
+  - `privacidad.html` y `terminos.html`: los textos;
+  - `titular.json`: razón social, CUIT, domicilio, email y el código del Data Fiscal. Hoy está vacío; mientras un dato sea `null`, no se muestra.
+- Son plantillas de Jinja. `herramientas/generar_tienda.py` las usa para el pie de todas las páginas y para generar `privacidad/` y `terminos/` (en `noindex`). Necesita `jinja2`, que viene con Flask.
+- El Botón de arrepentimiento lleva al formulario de la tienda (la constante `TIENDA` del generador), porque el sitio no tiene servidor.
+- Después de tocar `legal/`: correr el generador y, en la tienda, `sincronizar-marca`, que también copia `legal/`.
+
 ## Marca (28/09/2026)
 
 El logo nuevo, el sello y la tipografía Playfair. Spec en

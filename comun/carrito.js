@@ -63,6 +63,7 @@
           '<textarea id="carrito-ademas" name="ademas" rows="2"></textarea></div>' +
         '<p class="carrito-falta" data-falta aria-live="assertive"></p>' +
         '<button class="btn btn-1" type="submit">' + icono('i-whatsapp', 'ico-wa') + 'Mandar pedido por WhatsApp a Anto</button>' +
+        '<p class="acepto">Al mandarlo aceptás la <a href="' + raiz + 'privacidad/">Política de privacidad</a>.</p>' +
         '<a class="carrito-nadia" data-nadia href="#" target="_blank" rel="noopener" aria-describedby="nueva-pestana">¿Preferís escribirle a Nadia? 11&nbsp;3145&#8209;9646</a>' +
       '</form>' +
       '<div class="carrito-listo" data-listo hidden>' +
