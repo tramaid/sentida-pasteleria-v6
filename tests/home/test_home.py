@@ -90,6 +90,7 @@ def test_idea_y_cierre_sin_quienes_somos(abrir):
     assert pg.eval_on_selector_all(".idea-pasos h3", "hs => hs.map(h => h.textContent)") == \
         ["Nos contás", "Te la cotizamos", "La hacemos a mano"]
     assert pg.locator(".anto-nadia").count() == 0          # quiénes somos vive en Nosotras
+    assert pg.locator(".banda").count() == 0               # «Para ese día…» se sacó el 30/09
     assert pg.text_content("#cierre-t") == "¿Qué vamos a crear juntas?"
     wa = pg.get_attribute(".cierre a[href^='https://wa.me/']", "href")
     assert wa.startswith("https://wa.me/5491158300787?text=")

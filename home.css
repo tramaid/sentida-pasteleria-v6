@@ -1,8 +1,7 @@
 /* ============================================================
    SENTIDA Pastelería — home v6 (estilo sentida-v2)
    Hero con un círculo y el sello, «Elegí por dónde empezar», «Lo que más nos
-   piden», «Todo empieza con una idea», Anto y Nadia, la banda
-   celeste y el cierre. Lo común está en comun/base.css.
+   piden», «Todo empieza con una idea» y el cierre. Lo común está en comun/base.css.
    ============================================================ */
 
 /* Hero */
@@ -60,12 +59,6 @@
 
 
 /* Banda celeste */
-.banda{display:grid; grid-template-columns:1fr 1fr; height:490px; background:var(--celeste)}
-.banda-foto{overflow:hidden}
-.banda-foto img{width:100%; height:100%; object-fit:cover; object-position:center}
-.banda-txt{display:flex; flex-direction:column; justify-content:center; padding:8vw}
-.banda-frase{margin:35px 0; font-size:clamp(2.625rem,4.4vw,4.0625rem); line-height:1.13; letter-spacing:-.04em; color:var(--marron)}
-.banda-linea{display:block; width:85px; height:2px; background:var(--celeste-filete)}
 
 /* Cierre */
 .cierre{display:flex; flex-direction:column; align-items:center; text-align:center; padding-block:clamp(95px,15vh,140px)}
@@ -86,9 +79,6 @@
   .idea-txt{padding:0}
   .idea-foto{height:430px; min-height:0; margin-top:42px}
   .idea-pasos{margin:20px 0 0}
-  .banda{grid-template-columns:1fr; height:auto}
-  .banda-foto{height:350px}
-  .banda-txt{padding:70px 25px}
   .hero-in{display:flex; flex-direction:column-reverse; min-height:0; padding-block:25px 55px}
   .hero-arte{position:relative; left:auto; right:auto; width:100%; height:335px}
   /* Una sola torta: el círculo va centrado, con el sello abajo a la derecha. */
