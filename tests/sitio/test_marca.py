@@ -51,6 +51,28 @@ def test_marca_css_tiene_los_colores_del_logo_y_playfair():
     assert "erode" not in css
 
 
+def _token(css, nombre):
+    return re.search(rf"--{nombre}:\s*(#[0-9a-fA-F]{{6}})", css)[1]
+
+
+def _contraste(a, b):
+    def luz(h):
+        canales = [int(h[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+        r, g, b_ = [c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4 for c in canales]
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b_
+    claro, oscuro = sorted((luz(a), luz(b)), reverse=True)
+    return (claro + 0.05) / (oscuro + 0.05)
+
+
+def test_el_color_de_alerta_se_lee_como_texto_sobre_los_fondos_claros():
+    """--alerta es funcional (atrasos, avisos que fallaron, precios sin cargar)
+    y va como TEXTO: necesita AA (4,5:1) sobre todos los fondos claros."""
+    css = _css("comun/marca.css")
+    alerta = _token(css, "alerta")
+    for fondo in ("blanco", "crema", "crema-suave", "alerta-suave"):
+        assert _contraste(alerta, _token(css, fondo)) >= 4.5, fondo
+
+
 def test_ningun_css_declara_colores_fuera_de_marca():
     for nombre in ["comun/base.css", "comun/ticket.css", "comun/tienda.css", "home.css",
                    "nosotras/nosotras.css", "arma-tu-torta/decoradas.css"]:

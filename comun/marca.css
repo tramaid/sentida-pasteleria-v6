@@ -22,6 +22,11 @@
   --marron-medio:#6C4D38;
   --celeste-profundo:#46627A;
   --celeste-filete:#7EAFD6;   /* solo filetes, puntos y aros; nunca texto */
+  /* Funcional, no de marca: lo que pide acción ya (un pedido atrasado, un
+     aviso que no salió, un precio sin cargar). Texto y borde con contraste AA
+     sobre --blanco, --crema, --crema-suave y --alerta-suave (tests/sitio/test_marca.py). */
+  --alerta:#9A3B22;
+  --alerta-suave:#F6DDD2;     /* el fondo de lo que va en --alerta; nunca texto */
   --linea:rgba(207,181,158,.6);
   --sombra:rgba(78,44,30,.28);
   --sombra-suave:rgba(78,44,30,.19);
