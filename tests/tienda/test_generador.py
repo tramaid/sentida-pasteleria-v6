@@ -45,15 +45,21 @@ def test_cada_producto_visible_tiene_descripcion_larga():
     for p in d["productos"]:
         if p.get("visible", True):
             assert len(p.get("descripcion_larga", "")) > 40, p["slug"]
-            assert p.get("texto_provisorio") is True, p["slug"]
+            # Las dueñas corrigieron los textos el 05/10: ya no son provisorios.
+            assert not p.get("texto_provisorio"), p["slug"]
 
 
 def test_los_sabores_son_solo_los_que_se_ven():
     d = json.loads(CATALOGO.read_text(encoding="utf-8"))
     sabores = {p["slug"]: [v["nombre"] for v in p.get("variantes", [])] for p in d["productos"]}
-    assert sabores["shots"] == ["Con flores", "De frutillas", "De maracuyá"]
-    assert sabores["cuadraditos-dulces"] == ["Carrot cake"]
-    assert all(not v for s, v in sabores.items() if s not in ("shots", "cuadraditos-dulces"))
+    assert sabores["shots"] == ["Frutillas con crema", "Chocotorta", "Lemon pie", "Cheesecake", "Havannet"]
+    assert sabores["cupcakes-decorados"] == ["Vainilla", "Chocolate", "Naranja", "Limón"]
+    # Los cuadraditos no tienen sabores para elegir: se piden por docena, con
+    # hasta 2 sabores que se cuentan en el pedido.
+    assert sabores["cuadraditos-dulces"] == []
+    d_cuad = next(p for p in d["productos"] if p["slug"] == "cuadraditos-dulces")
+    assert d_cuad["medidas"] == [{"nombre": "Docena"}]
+    assert all(not v for s, v in sabores.items() if s not in ("shots", "cupcakes-decorados"))
 
 
 def test_las_fotos_extra_existen_y_no_repiten_la_principal():
@@ -76,5 +82,12 @@ def test_las_galletas_son_un_solo_producto():
     assert "galletas-corazon" not in slugs and "galletas-tematicas" not in slugs
     g = next(p for p in d["productos"] if p["slug"] == "galletas-decoradas")
     assert g["foto"] == "galletas-te-amo"
-    assert g["descripcion"] == ("Galletas de manteca decoradas a mano: con mensaje, con la temática del festejo "
-                                "o con el nombre que quieras.")
+    assert g["descripcion"] == "Galletitas de masa sablée decoradas con pasta de goma, con la temática que elijas."
+
+
+def test_los_cupcakes_son_un_solo_producto_y_los_alfajores_son_de_sablee():
+    # 05/10: las dueñas unieron los temáticos a los decorados y renombraron los alfajores.
+    d = json.loads(CATALOGO.read_text(encoding="utf-8"))
+    p = {x["slug"]: x for x in d["productos"]}
+    assert "cupcakes-tematicos" not in p and "cupcakes-tematicos" in p["cupcakes-decorados"]["fotos"]
+    assert "alfajores-maicena" not in p and p["alfajores"]["nombre"] == "Alfajores"

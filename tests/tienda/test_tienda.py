@@ -37,7 +37,9 @@ def test_las_tortas_de_la_casa(abrir):
 def test_la_pasteleria_y_la_mesa_dulce(abrir):
     pg = abrir(pagina="pasteleria/")
     assert pg.text_content("h1") == "Pastelería."
-    assert pg.locator("[data-producto]").count() == 6
+    # Los cupcakes temáticos se unieron a los decorados (05/10): son 5.
+    assert pg.locator("[data-producto]").count() == 5
+    assert pg.locator('[data-producto="cupcakes-decorados"] .galeria-tira img').count() == 2
     # Las tres galletas son un solo producto, con tres fotos.
     for fuera in ("galletas-corazon", "galletas-tematicas"):
         assert pg.locator(f'[data-producto="{fuera}"]').count() == 0, fuera
@@ -90,7 +92,7 @@ def test_el_pedido_pasa_de_tortas_a_pasteleria(abrir, sitio):
     pg.click(KEY + " .producto-agregar")
     pg.goto(sitio + "pasteleria/")
     pg.wait_for_load_state("networkidle")
-    pg.click('[data-producto="alfajores-maicena"] .producto-agregar')
+    pg.click('[data-producto="alfajores"] .producto-agregar')
     assert pg.locator(".tienda-panel .carrito-item").count() == 2
     assert pg.text_content(".cab .mi-pedido-n") == "2"
 
@@ -114,7 +116,7 @@ def test_el_mensaje_sale_como_la_especificacion(abrir, sitio):
     pg.click(KEY + " .producto-agregar")
     pg.goto(sitio + "pasteleria/")
     pg.wait_for_load_state("networkidle")
-    t = '[data-producto="alfajores-maicena"]'
+    t = '[data-producto="alfajores"]'
     pg.click(t + " .producto-agregar")
     for _ in range(11):
         pg.click(t + " [data-mas]")
@@ -131,7 +133,7 @@ def test_el_mensaje_sale_como_la_especificacion(abrir, sitio):
     assert unquote(q) == "\n".join([
         "Hola SENTIDA, quiero hacer este pedido:",
         "• Key Lime Pie × 1",
-        "• Alfajores de maicena × 12",
+        "• Alfajores × 12",
         f"Para: {FUTURA_TEXTO}",
         "Entrega: retiro en Martínez",
         "A nombre de: Laura",
