@@ -175,7 +175,10 @@ input:focus-visible,textarea:focus-visible{outline:2px solid var(--celeste-profu
 .pie-lugar{display:flex; align-items:flex-start; gap:10px; padding-top:12px; line-height:1.9}
 .pie-lugar .ico{margin-top:.25em}
 .pie-sello{width:164px; height:164px; border-radius:50%; background:var(--blanco); transform:rotate(-8deg)}
-.pie-fin{padding-block:24px; border-top:1px solid var(--marron-medio); display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:11px; letter-spacing:.1em}
+.pie-fin{padding-block:24px; border-top:1px solid var(--marron-medio); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; font-size:11px; letter-spacing:.1em}
+/* El crédito del estudio: «Diseño» y el logo de TRAMA, que lleva a su sitio. */
+.pie-trama{display:inline-flex; align-items:center; gap:8px; min-height:44px}
+.pie-trama img{display:block; width:auto; height:15px}
 
 /* ------------------------------------------------------------
    La franja legal del pie (legal/pie.html, la misma en la tienda) y las

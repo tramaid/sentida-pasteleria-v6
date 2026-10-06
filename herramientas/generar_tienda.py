@@ -269,7 +269,7 @@ def pie(raiz="../"):
     <img class="pie-sello" src="{raiz}assets/marca/sello.svg" alt="" width="164" height="164" loading="lazy">
   </div>
   {legal("pie.html", raiz)}
-  <div class="pie-fin envoltorio"><span>© 2026 SENTIDA Pastelería · Hecho a mano</span><span>Diseño TRAMA</span></div>
+  <div class="pie-fin envoltorio"><span>© 2026 SENTIDA Pastelería · Hecho a mano</span><a class="pie-trama" href="https://tramaid.com.ar" {nueva}>Diseño <img src="{raiz}assets/marca/trama.svg" alt="TRAMA" width="78" height="15" loading="lazy"></a></div>
 </footer>"""
 
 
