@@ -45,7 +45,7 @@ def _css(nombre):
 
 def test_marca_css_tiene_los_colores_del_logo_y_playfair():
     css = _css("comun/marca.css").lower()
-    for valor in ("--marron:#4e2c1e", "--celeste-filete:#7eafd6", "--blanco:#fcf9f2",
+    for valor in ("--marron:#4e2c1e", "--celeste-filete:#7eafd6", "--blanco:#f6f3e9",
                   "font-family:playfair", "playfair-latin.woff2"):
         assert valor in css.replace(" ", ""), valor
     assert "erode" not in css

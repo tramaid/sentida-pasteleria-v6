@@ -13,7 +13,7 @@
 @font-face{font-family:"Playfair respaldo"; src:local("Georgia"); size-adjust:103%; ascent-override:92%; descent-override:24%; line-gap-override:0%}
 
 :root{
-  --blanco:#FCF9F2;
+  --blanco:#F6F3E9;           /* el fondo claro de todo el sitio (cambiado el 07/10/2026) */
   --crema:#F8EADE;
   --crema-suave:#F9F3EE;      /* fondos intermedios y hover de tarjetas */
   --beige:#CFB59E;

@@ -373,7 +373,7 @@ def pagina(clave, datos):
 <meta name="robots" content="noindex">
 <title>{esc(sec["title"])}</title>
 <meta name="description" content="{esc(sec["descripcion"])}">
-<meta name="theme-color" content="#FCF9F2">
+<meta name="theme-color" content="#F6F3E9">
 <link rel="canonical" href="{SITIO}{clave}/">
 <link rel="icon" href="../assets/marca/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
@@ -444,7 +444,7 @@ def pagina_legal(clave):
 <meta name="robots" content="noindex">
 <title>{titulo} · SENTIDA Pastelería</title>
 <meta name="description" content="{esc(descripcion)}">
-<meta name="theme-color" content="#FCF9F2">
+<meta name="theme-color" content="#F6F3E9">
 <link rel="canonical" href="{SITIO}{clave}/">
 <link rel="icon" href="../assets/marca/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
