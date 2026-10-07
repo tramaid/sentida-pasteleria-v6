@@ -125,3 +125,12 @@ def test_el_hero_queda_entero(abrir):
         der = pg.evaluate("Math.max(...[...document.querySelectorAll('.hero-sello, .circulo-grande')]"
                           ".map(e => e.getBoundingClientRect().right))")
         assert der <= w, w
+
+
+def test_el_hero_arranca_con_el_logo(abrir):
+    """Sin la bajada «Pastelería artesanal · Martínez» (decisión de las dueñas,
+    07/10/2026): lo primero del hero es el logo, en la compu y en el celular."""
+    for w in (390, 1440):
+        pg = abrir(w, 900)
+        assert pg.locator(".hero-txt .eti").count() == 0
+        assert pg.evaluate("document.querySelector('.hero-txt').firstElementChild.id") == "hero-t"
