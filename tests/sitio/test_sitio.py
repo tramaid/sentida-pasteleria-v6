@@ -175,3 +175,22 @@ def test_el_sello_del_pie_se_ve(abrir, pagina, w, h, kw):
     assert pg.locator(".pie-sello").is_visible()
     assert b["width"] >= (110 if w < 900 else 150)
     assert b["x"] >= 0 and b["x"] + b["width"] <= w
+
+
+@pytest.mark.parametrize("pagina", PAGINAS)
+@pytest.mark.parametrize("w", [360, 390, 768, 1099])
+def test_en_el_celular_el_menu_va_a_la_izquierda_y_el_logo_a_la_derecha(abrir, pagina, w):
+    """Decisión de las dueñas del 07/10/2026, solo para el celular y la tablet:
+    en la compu el logo sigue a la izquierda (test_la_cabecera_no_se_pisa)."""
+    pg = abrir(w, 800, pagina=pagina)
+    r = pg.evaluate("""(() => {
+        const b = s => document.querySelector(s).getBoundingClientRect();
+        const cs = getComputedStyle(document.querySelector('.cab-in')), caja = b('.cab-in');
+        return {menuIzq: b('.menu summary').left, menuDer: b('.menu summary').right,
+                pedidoIzq: b('.cab [data-mi-pedido]').left, pedidoDer: b('.cab [data-mi-pedido]').right,
+                marcaIzq: b('.cab-marca').left, marcaDer: b('.cab-marca').right,
+                inicio: caja.left + parseFloat(cs.paddingLeft), borde: caja.right - parseFloat(cs.paddingRight)};
+    })()""")
+    assert abs(r["menuIzq"] - r["inicio"]) < 1                 # Menú contra el borde izquierdo
+    assert r["menuDer"] < r["pedidoIzq"] and r["pedidoDer"] < r["marcaIzq"]
+    assert abs(r["marcaDer"] - r["borde"]) < 1                 # el logo contra el derecho

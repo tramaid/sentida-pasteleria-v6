@@ -209,10 +209,16 @@ input:focus-visible,textarea:focus-visible{outline:2px solid var(--celeste-profu
 @media (min-width:1280px){
   .cab-nav .solo-ancho{display:inline-flex}
 }
+/* En el celular (y en la tablet, donde aparece «Menú»): Menú y la bolsa a la
+   izquierda, el logo a la derecha. Decisión de las dueñas del 07/10/2026; en
+   la compu queda como estaba, con el logo a la izquierda. El orden del HTML
+   es el de la compu, así que acá se acomoda con la grilla y `order`. */
 @media (max-width:1099px){
-  .cab-in{grid-template-columns:auto 1fr; gap:12px}
+  .cab-in{grid-template-columns:auto minmax(0,1fr) auto; grid-template-areas:"acc . marca"; gap:12px}
+  .cab-marca{grid-area:marca}
+  .cab-acc{grid-area:acc; justify-content:flex-start}
   .cab-nav{display:none}
-  .menu{display:block}
+  .menu{display:block; order:-1}
 }
 @media (max-width:899px){
   :root{--cab:64px}
